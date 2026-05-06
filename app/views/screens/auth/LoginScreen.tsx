@@ -10,10 +10,10 @@ function LoginScreen() {
     const [phoneNumber, setPhoneNumber] = useState('');
 
     return (
-        <BaseView style={styles.container}>
+        <BaseView style={styles.container} gradientBackground gradientColors={['#f8dc6a', '#fceac3', '#fdd3b1']} gradientLocations={[0, 0.5, 1]} gradientStart={{ x: 1, y: 0 }} gradientEnd={{ x: 0, y: 1 }}>
             <TextView variant="title" style={styles.appName}>LaughApp</TextView>
-            <TextView variant="title">Verify your{'\n'}phone number</TextView>
-            <TextView variant="description" style={styles.subtitle}>
+            <TextView variant="title">Verify your phone number</TextView>
+            <TextView variant="description" style={styles.subtitle} align="center">
                 We will send you a verification code to your mobile number.
             </TextView>
 
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
+        alignItems: 'center',
         paddingHorizontal: spacing(24),
     },
     appName: {

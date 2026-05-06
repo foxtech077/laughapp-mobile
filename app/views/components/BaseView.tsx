@@ -20,7 +20,12 @@ interface BaseViewProps extends ViewProps {
   headerTitle?: string;
   headerRight?: React.ReactNode;
   applyTopInset?: boolean;
+  gradientBackground?: boolean;
   applyBottomInset?: boolean;
+  gradientColors?: string[];
+  gradientLocations?: number[];
+  gradientStart?: { x: number; y: number };
+  gradientEnd?: { x: number; y: number };
 }
 
 function BaseView({
@@ -32,6 +37,11 @@ function BaseView({
   applyTopInset = true,
   applyBottomInset = false,
   style,
+  gradientBackground = false,
+  gradientColors = ['red', 'blue'],
+  gradientLocations = [0, 1],
+  gradientStart = { x: 0, y: 0 },
+  gradientEnd = { x: 1, y: 1 },
   ...rest
 }: BaseViewProps) {
   const insets = useSafeAreaInsets();
@@ -39,7 +49,7 @@ function BaseView({
   const { colors } = useTheme();
 
   return (
-    <LinearGradient style={styles.container} colors={['red', 'blue']} locations={[0, 1]}>
+    <LinearGradient style={styles.container} colors={gradientBackground ? gradientColors : [colors.background, colors.background]} locations={gradientLocations} start={gradientStart} end={gradientEnd}>
       <View
       style={[
         styles.container,

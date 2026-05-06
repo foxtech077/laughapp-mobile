@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextProps, StyleSheet } from 'react-native';
+import { Text, TextProps, StyleSheet, TextStyle } from 'react-native';
 import { fontScale } from '../../utils/dimensions';
 import { useTheme } from '@react-navigation/native';
 
@@ -7,6 +7,7 @@ type TextVariant = 'title' | 'subtitle' | 'description' | 'caption';
 
 interface TextViewProps extends TextProps {
   variant?: TextVariant;
+  align?: 'left' | 'center' | 'right';
 }
 
 const variantStyles: Record<TextVariant, object> = {
@@ -36,10 +37,13 @@ const variantStyles: Record<TextVariant, object> = {
   },
 };
 
-function TextView({ variant = 'description', style, children, ...rest }: TextViewProps) {
+function TextView({ variant = 'description', style, children, align = 'left', ...rest }: TextViewProps) {
   const { colors } = useTheme(); 
+  const typography: TextStyle = {
+    textAlign: align,
+  };
   return (
-    <Text style={[ {color: colors.text},styles.base, variantStyles[variant], style]} {...rest}>
+    <Text style={[ {color: colors.text},styles.base, variantStyles[variant], style, typography]} {...rest}>
       {children}
     </Text>
   );
