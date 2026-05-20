@@ -11,7 +11,7 @@ import { useTheme } from '@react-navigation/native';
 import { spacing, fontScale } from '../../utils/dimensions';
 import TextView from './TextView';
 
-type ButtonVariant = 'normal' | 'outline' | 'ghost';
+type ButtonVariant = 'normal' | 'outline' | 'ghost' | 'auth';
 
 interface ButtonViewProps extends TouchableOpacityProps {
   label: string;
@@ -69,21 +69,31 @@ function getContainerStyle(
   fillWidth: boolean,
   disabled?: boolean | null,
 ): ViewStyle {
-  const opacity = disabled ? 0.45 : 1;
-
+  // Use theme colors if they exist, otherwise fallback
+  const enabledColor = colors.buttonEnabled || '#000000';
+  const disabledColor = colors.buttonDisabled || '#9CA3AF';
+  
   const base: ViewStyle = {
     alignSelf: fillWidth ? 'stretch' : 'flex-start',
-    opacity,
   };
 
   switch (variant) {
     case 'outline':
-      return { ...base, backgroundColor: 'transparent', borderWidth: 1.5, borderColor: '#000000' };
+      return { ...base, backgroundColor: 'transparent', borderWidth: 1.5, borderColor: disabled ? disabledColor : enabledColor };
     case 'ghost':
       return { ...base, backgroundColor: 'transparent', borderWidth: 0 };
+    case 'auth':
+      return { 
+        ...base, 
+        backgroundColor: disabled ? '#949494' : '#231F20',
+        borderRadius: 30,
+        height: 54,
+        paddingVertical: 16,
+        paddingHorizontal: 60,
+      };
     case 'normal':
     default:
-      return { ...base, backgroundColor: '#000000' };
+      return { ...base, backgroundColor: disabled ? disabledColor : enabledColor };
   }
 }
 
@@ -96,6 +106,7 @@ function getLabelStyle(
     case 'outline':
     case 'ghost':
       return { color: '#000000' };
+    case 'auth':
     case 'normal':
     default:
       return { color: '#FFFFFF' };
