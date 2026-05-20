@@ -8,7 +8,7 @@ import { routes } from "./routes";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>

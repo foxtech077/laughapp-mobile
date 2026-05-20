@@ -3,8 +3,11 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
   ViewProps,
   StatusBar,
+  Platform,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
@@ -26,6 +29,7 @@ interface BaseViewProps extends ViewProps {
   gradientLocations?: number[];
   gradientStart?: { x: number; y: number };
   gradientEnd?: { x: number; y: number };
+  dismissKeyboardOnTap?: boolean;
 }
 
 function BaseView({
@@ -42,6 +46,7 @@ function BaseView({
   gradientLocations = [0, 1],
   gradientStart = { x: 0, y: 0 },
   gradientEnd = { x: 1, y: 1 },
+  dismissKeyboardOnTap = false,
   ...rest
 }: BaseViewProps) {
   const insets = useSafeAreaInsets();
@@ -49,12 +54,13 @@ function BaseView({
   const { colors } = useTheme();
 
   return (
+    <TouchableWithoutFeedback onPress={dismissKeyboardOnTap ? Keyboard.dismiss : undefined}>
     <LinearGradient style={styles.container} colors={gradientBackground ? gradientColors : [colors.background, colors.background]} locations={gradientLocations} start={gradientStart} end={gradientEnd}>
       <View
       style={[
         styles.container,
         applyTopInset && { paddingTop: insets.top },
-        applyBottomInset && { paddingBottom: insets.bottom },
+        applyBottomInset && { paddingBottom: insets.bottom + (Platform.OS === 'android' ? spacing(10) : 0) },
         style,
       ]}
       {...rest}
@@ -97,6 +103,7 @@ function BaseView({
       {children}
     </View>
     </LinearGradient>
+    </TouchableWithoutFeedback>
   );
 }
 

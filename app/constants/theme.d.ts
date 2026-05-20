@@ -20,6 +20,7 @@ declare module '@react-navigation/native' {
       iconBackground: string;
       buttonDisabled: string;
       buttonEnabled: string;
+      subtitle: string;
     };
   };
 

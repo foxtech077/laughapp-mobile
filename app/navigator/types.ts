@@ -9,6 +9,7 @@ export type RootStackParamList = {
 
 export type AuthStackParamList = {
   [routes.LOGIN_SCREEN]: undefined;
+  [routes.GET_STARTED_SCREEN]: undefined;
 };
 
 export type HomeStackParamList = {
