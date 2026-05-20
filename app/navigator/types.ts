@@ -14,4 +14,5 @@ export type AuthStackParamList = {
 export type HomeStackParamList = {
   [routes.HOME_TABS]: undefined;
   [routes.ONBOARDING_CHOOSE_ROLE_SCREEN]: undefined;
+  [routes.AUTH_CREATE_ACCOUNT_CHOOSE_NAME_SCREEN]: undefined;
 };

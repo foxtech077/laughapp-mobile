@@ -5,4 +5,5 @@ export const routes = {
     HOME_TABS: "HomeTabs",
     LOGIN_SCREEN: "LoginScreen",
     ONBOARDING_CHOOSE_ROLE_SCREEN: "OnboardingChooseRoleScreen",
+    AUTH_CREATE_ACCOUNT_CHOOSE_NAME_SCREEN: "AuthCreateAccountChooseNameScreen",
 }
