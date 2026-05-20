@@ -14,8 +14,10 @@ import TextView from './TextView';
 interface TextInputViewProps extends TextInputProps {
   label: string;
   error?: string;
+  errorAlign?: 'left' | 'center' | 'right';
   rightIcon?: React.ReactNode;
   leftIcon?: React.ReactNode;
+  variant?: 'floating' | 'auth';
 }
 
 const CONTAINER_HEIGHT = spacing(60);
@@ -34,12 +36,14 @@ const DURATION = 150;
 function TextInputView({
   label,
   error,
+  errorAlign = 'left',
   rightIcon,
   leftIcon,
   value,
   onFocus,
   onBlur,
   style,
+  variant = 'floating',
   ...rest
 }: TextInputViewProps) {
   const { colors } = useTheme();
@@ -47,6 +51,7 @@ function TextInputView({
   const [isFocused, setIsFocused] = useState(false);
 
   const isActive = isFocused || Boolean(value);
+  const isAuth = variant === 'auth';
 
   const animTop = useRef(new Animated.Value(isActive ? LABEL_TOP_ACTIVE : LABEL_TOP_INACTIVE)).current;
   const animSize = useRef(new Animated.Value(isActive ? LABEL_SIZE_ACTIVE : LABEL_SIZE_INACTIVE)).current;
@@ -66,7 +71,7 @@ function TextInputView({
     ]).start();
   }, [isActive]);
 
-  const borderColor = error ? '#E53935' : isFocused ? '#000000' : '#DADADA';
+  const borderColor = error ? (isAuth ? '#FF3B30' : '#E53935') : isFocused ? (isAuth ? '#231F20' : '#000000') : (isAuth ? '#C4C4C4' : '#DADADA');
 
   const labelColor = error
     ? '#E53935'
@@ -87,36 +92,50 @@ function TextInputView({
   };
 
   return (
-    <View style={[styles.wrapper, style]}>
+    <View style={[styles.wrapper, style, isAuth && { width: '100%' }]}>
       <TouchableWithoutFeedback onPress={() => inputRef.current?.focus()}>
-        <View style={[styles.container, { borderColor, height: CONTAINER_HEIGHT }]}>
+        <View style={[
+          styles.container, 
+          { borderColor },
+          isAuth ? styles.authContainer : { height: CONTAINER_HEIGHT }
+        ]}>
           {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
 
-          <View style={styles.innerArea}>
+          <View style={[styles.innerArea, isAuth && styles.authInnerArea]}>
             {/* Floating label */}
-            <Animated.Text
-              style={[
-                styles.label,
-                {
-                  top: animTop,
-                  fontSize: animSize,
-                  color: labelColor,
-                },
-              ]}
-              numberOfLines={1}
-            >
-              {label}
-            </Animated.Text>
+            {!isAuth && (
+              <Animated.Text
+                style={[
+                  styles.label,
+                  {
+                    top: animTop,
+                    fontSize: animSize,
+                    color: labelColor,
+                  },
+                ]}
+                numberOfLines={1}
+              >
+                {label}
+              </Animated.Text>
+            )}
+            {isAuth && isActive && (
+              <TextView style={styles.authStaticLabel}>
+                {label}
+              </TextView>
+            )}
 
-            {/* Input sits at bottom half, below the floating label */}
+            {/* Input sits at bottom half, below the floating label, or fully centers in auth mode */}
             <TextInput
               ref={inputRef}
               value={value}
               onFocus={handleFocus}
               onBlur={handleBlur}
-              style={[styles.input, { paddingTop: LABEL_TOP_ACTIVE + LABEL_SIZE_ACTIVE * 1.4 }]}
-              placeholderTextColor="transparent"
-              placeholder=" "
+              style={[
+                styles.input, 
+                isAuth ? styles.authInput : { paddingTop: LABEL_TOP_ACTIVE + LABEL_SIZE_ACTIVE * 1.4 }
+              ]}
+              placeholderTextColor={isAuth ? '#5A5656' : "transparent"}
+              placeholder={isAuth && !isActive ? label : " "}
               {...rest}
             />
           </View>
@@ -126,7 +145,11 @@ function TextInputView({
       </TouchableWithoutFeedback>
 
       {error ? (
-        <TextView variant="caption" style={styles.errorText}>
+        <TextView style={[
+          styles.errorText, 
+          { textAlign: errorAlign },
+          isAuth && styles.authErrorText
+        ]}>
           {error}
         </TextView>
       ) : null}
@@ -175,7 +198,47 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: '#E53935',
-    marginLeft: spacing(4),
+    marginHorizontal: spacing(4),
+  },
+  authContainer: {
+    height: spacing(66),
+    borderRadius: spacing(10),
+    borderWidth: 1,
+    paddingTop: spacing(8),
+    paddingBottom: spacing(8),
+    paddingHorizontal: spacing(16),
+    backgroundColor: '#FFFFFF',
+  },
+  authInnerArea: {
+    justifyContent: 'center',
+    position: 'relative',
+  },
+  authInput: {
+    position: 'relative',
+    fontFamily: 'Inter',
+    fontWeight: '500',
+    fontSize: fontScale(18),
+    color: '#231F20',
+    padding: 0,
+    margin: 0,
+    marginTop: 18,
+  },
+  authStaticLabel: {
+    position: 'absolute',
+    top: 4,
+    left: 0,
+    fontFamily: 'Inter',
+    fontWeight: '400',
+    fontSize: 15,
+    color: '#5A5656',
+  },
+  authErrorText: {
+    fontFamily: 'Inter',
+    fontWeight: '600',
+    fontSize: 16,
+    color: '#F31717',
+    marginTop: 4,
+    width: '100%',
   },
 });
 
