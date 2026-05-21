@@ -8,6 +8,9 @@ import ButtonView from '../../components/ButtonView';
 import BaseView from '../../components/BaseView';
 import TextView from '../../components/TextView';
 import { fontScale, spacing } from '../../../utils/dimensions';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { HomeStackParamList } from '../../../navigator/types';
+import { routes } from '../../../navigator/routes';
 
 const validationSchema = Yup.object({
     firstName: Yup.string()
@@ -25,7 +28,7 @@ const validationSchema = Yup.object({
         .max(30, 'Instagram handle must be 30 characters or less'),
 });
 
-function CreateComedianAccount() {
+function CreateComedianAccount({ navigation }: { navigation: NativeStackNavigationProp<HomeStackParamList> }) {
     const { colors } = useTheme();
 
     const formik = useFormik({
@@ -40,6 +43,7 @@ function CreateComedianAccount() {
         validateOnBlur: true,
         onSubmit: (values) => {
             console.log('Submit:', values);
+            navigation.replace(routes.HOME_TABS);
         },
     });
 
@@ -126,7 +130,7 @@ function CreateComedianAccount() {
                         <TextView size={fontScale(16)} variant="subheading" style={{ color: colors.secondaryText }}>
                             2. Content aligned with our community standards
                         </TextView>
-                        <View style={[styles.descFooterContainer, {backgroundColor: colors.yellow_600, borderColor: colors.yellow_700}]}>
+                        <View style={[styles.descFooterContainer, { backgroundColor: colors.yellow_600, borderColor: colors.yellow_700 }]}>
                             <TextView size={fontScale(15)} variant="subheading" style={{ color: colors.black }}>
                                 Applications reviewed within 3-5 working days
                             </TextView>
@@ -180,10 +184,10 @@ const styles = StyleSheet.create({
         gap: 2
     },
     descFooterContainer: {
-borderWidth: 1,
-borderRadius: 8,
-paddingHorizontal: spacing(10),
-marginTop: spacing(16),
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingHorizontal: spacing(10),
+        marginTop: spacing(16),
     }
 });
 

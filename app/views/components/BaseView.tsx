@@ -11,7 +11,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '@react-navigation/native';
-import { spacing, fontScale } from '../../utils/dimensions';
+import { spacing } from '../../utils/dimensions';
 import TextView from './TextView';
 import LinearGradient from 'react-native-linear-gradient';
 import BackArrow from '../../../assets/images/icons/arrow-left.svg';
@@ -55,7 +55,7 @@ function BaseView({
   const navigation = useNavigation();
   const { colors } = useTheme();
 
-    const handleBack = () => {
+  const handleBack = () => {
     if (navigation.canGoBack()) {
       navigation.goBack();
     }
@@ -64,49 +64,50 @@ function BaseView({
   return (
     <LinearGradient style={styles.container} colors={gradientBackground ? gradientColors : [colors.background, colors.background]} locations={gradientLocations} start={gradientStart} end={gradientEnd}>
       <View
-      style={[
-        styles.container,
-        applyTopInset && { paddingTop: insets.top },
-        applyBottomInset && { paddingBottom: insets.bottom + (Platform.OS === 'android' ? spacing(10) : 0) },
-        style,
-      ]}
-      onStartShouldSetResponder={() => {
-        if (dismissKeyboardOnTap) Keyboard.dismiss();
-        return false;
-      }}
-      {...rest}
-    >
-      <StatusBar
-        barStyle={colors.background === '#FFFFFF' ? 'dark-content' : 'light-content'}
-        backgroundColor={colors.background}
-      />
+        style={[
+          styles.container,
+          applyTopInset && { paddingTop: insets.top },
+          applyBottomInset && { paddingBottom: insets.bottom + (Platform.OS === 'android' ? spacing(10) : 0) },
+          style,
+        ]}
+        onStartShouldSetResponder={() => {
+          if (dismissKeyboardOnTap) Keyboard.dismiss();
+          return false;
+        }}
+        {...rest}
+      >
+        <StatusBar
+          barStyle={colors.background === '#FFFFFF' ? 'dark-content' : 'light-content'}
+          backgroundColor={colors.background}
+        />
 
-      {showHeader && (
-        <View style={[styles.header]}>
-          <View style={styles.headerLeft}>
+        {showHeader && (
+          <View style={[styles.header]}>
             {showBackButton && navigation.canGoBack() && (
-          <TouchableOpacity style={styles.backButton} onPress={handleBack} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
-            <BackArrow width={24} height={24} stroke={colors.primaryText } />
-          </TouchableOpacity>
+              <View style={styles.headerLeft}>
+
+                <TouchableOpacity style={styles.backButton} onPress={handleBack} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
+                  <BackArrow width={24} height={24} stroke={colors.primaryText} />
+                </TouchableOpacity>
+              </View>
             )}
-          </View>
 
-          <View style={styles.headerCenter}>
-            {headerTitle ? (
-              <TextView variant="subtitle" align={titleAlign || 'center'} numberOfLines={1}>
-                {headerTitle}
-              </TextView>
-            ) : null}
-          </View>
+            <View style={styles.headerCenter}>
+              {headerTitle ? (
+                <TextView size={22} weight='800' align={titleAlign || 'center'} numberOfLines={1}>
+                  {headerTitle}
+                </TextView>
+              ) : null}
+            </View>
 
-          <View style={styles.headerRight}>
-            {headerRight ?? null}
+            <View style={styles.headerRight}>
+              {headerRight ?? null}
+            </View>
           </View>
-        </View>
-      )}
+        )}
 
-      {children}
-    </View>
+        {children}
+      </View>
     </LinearGradient>
   );
 }
@@ -116,10 +117,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    height: spacing(56),
+    minHeight: spacing(56),
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: spacing(16),
+    paddingVertical: spacing(8),
   },
   headerLeft: {
     width: spacing(40),
@@ -127,6 +129,7 @@ const styles = StyleSheet.create({
   },
   headerCenter: {
     flex: 1,
+    justifyContent: 'center',
   },
   headerRight: {
     width: spacing(40),
