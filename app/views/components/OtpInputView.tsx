@@ -125,8 +125,8 @@ const OTPInputView = ({
                     : styles.input.marginHorizontal,
               },
               {
-                borderColor: otp[index] ? colors.primary : colors.text,
-                backgroundColor: colors.primary,
+                borderColor: colors.text,
+                backgroundColor: colors.background,
                 color: colors.text,
               },
             ]}

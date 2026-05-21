@@ -19,7 +19,9 @@ export const CustomLightTheme: Theme | any = {
     radioUnselectedBorder: '#D1D5DB',
     iconBackground: '#FFE4B2',
     buttonDisabled: '#9CA3AF',
-    buttonEnabled: '#231F20'
+    buttonEnabled: '#231F20',
+    subtitle: "#5A5656",
+    black: '#000000',
   },
 };
 
@@ -42,6 +44,8 @@ export const CustomDarkTheme: Theme | any = {
     radioUnselectedBorder: '#D1D5DB',
     iconBackground: '#FFE4B2',
     buttonDisabled: '#9CA3AF',
-    buttonEnabled: '#231F20'
+    buttonEnabled: '#231F20',
+    subtitle: "#5A5656",
+    black: '#000000',
   },
 };
