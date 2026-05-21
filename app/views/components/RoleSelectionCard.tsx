@@ -36,8 +36,8 @@ function RoleSelectionCard({
       style={[
         styles.container,
         {
-          backgroundColor: colors.cardBackground || '#FFFFFF',
-          borderColor: selected ? '#231F20' : '#C4C4C4',
+          backgroundColor: colors.cardBackground,
+          borderColor: selected ? colors.primaryText : colors.border,
           borderWidth: 1,
         },
       ]}
@@ -48,16 +48,16 @@ function RoleSelectionCard({
           {selected ? (
             selectedIcon ? selectedIcon : <CheckCircle width={24} height={24} />
           ) : (
-            <View style={styles.radioUnselected} />
+            <View style={[styles.radioUnselected, { borderColor: colors.radioUnselectedBorder }]} />
           )}
         </View>
       </View>
 
       <View style={styles.textContainer}>
-        <TextView variant="subtitle" style={[styles.title, { color: colors.primaryText || '#231F20' }]}>
+        <TextView variant="subtitle" style={[styles.title, { color: colors.primaryText }]}>
           {title}
         </TextView>
-        <TextView variant="description" style={[styles.description, { color: colors.secondaryText || '#687280' }]}>
+        <TextView variant="description" style={[styles.description, { color: colors.secondaryText }]}>
           {description}
         </TextView>
       </View>
@@ -82,12 +82,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   iconContainer: {
-    width: spacing(48),
-    height: spacing(48),
-    borderRadius: spacing(24),
-    backgroundColor: '#FFE4B2', // Soft yellow
+    width: spacing(54),
+    height: spacing(54),
+    borderRadius: spacing(32),
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
   },
   radioContainer: {
     width: spacing(24),
@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
     height: spacing(24),
     borderRadius: spacing(12),
     borderWidth: 1,
-    borderColor: '#D1D5DB',
     backgroundColor: 'transparent',
   },
   textContainer: {
