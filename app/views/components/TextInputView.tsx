@@ -230,16 +230,6 @@ errorContainerCenter: {
     justifyContent: 'center',
     position: 'relative',
   },
-  input: {
-    position: 'relative',
-    fontFamily: 'Inter',
-    fontWeight: '500',
-    fontSize: fontScale(18),
-      letterSpacing: -0.5,
-    padding: 0,
-    margin: 0,
-    marginTop: 4,
-  },
   authErrorText: {
     fontFamily: 'Inter',
     fontWeight: '600',

@@ -30,6 +30,7 @@ interface BaseViewProps extends ViewProps {
   gradientStart?: { x: number; y: number };
   gradientEnd?: { x: number; y: number };
   dismissKeyboardOnTap?: boolean;
+  titleAlign?: 'left' | 'center' | 'right';
 }
 
 function BaseView({
@@ -47,6 +48,7 @@ function BaseView({
   gradientStart = { x: 0, y: 0 },
   gradientEnd = { x: 1, y: 1 },
   dismissKeyboardOnTap = false,
+  titleAlign,
   ...rest
 }: BaseViewProps) {
   const insets = useSafeAreaInsets();
@@ -80,7 +82,7 @@ function BaseView({
       />
 
       {showHeader && (
-        <View style={[styles.header, { borderBottomColor: colors.border }]}>
+        <View style={[styles.header]}>
           <View style={styles.headerLeft}>
             {showBackButton && navigation.canGoBack() && (
           <TouchableOpacity style={styles.backButton} onPress={handleBack} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
@@ -91,7 +93,7 @@ function BaseView({
 
           <View style={styles.headerCenter}>
             {headerTitle ? (
-              <TextView variant="subtitle" numberOfLines={1}>
+              <TextView variant="subtitle" align={titleAlign || 'center'} numberOfLines={1}>
                 {headerTitle}
               </TextView>
             ) : null}
@@ -118,7 +120,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: spacing(16),
-    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   headerLeft: {
     width: spacing(40),
@@ -126,7 +127,6 @@ const styles = StyleSheet.create({
   },
   headerCenter: {
     flex: 1,
-    alignItems: 'center',
   },
   headerRight: {
     width: spacing(40),

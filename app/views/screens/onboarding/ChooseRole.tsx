@@ -6,11 +6,10 @@ import { routes } from '../../../navigator/routes';
 import BaseView from '../../components/BaseView';
 import TextView from '../../components/TextView';
 import ButtonView from '../../components/ButtonView';
-import RoleIcon1 from '../../../../assets/images/icons/role_icon1.svg';
-import RoleIcon2 from '../../../../assets/images/icons/role_icon2.svg';
-import CheckMarkCircle2 from '../../../../assets/images/icons/check-mark-circle2.svg';
-import { MMKV_KEYS, Storage } from '../../../utils/mmkvStorage';
 import RoleSelectionCard from './components/RoleSelectionCard';
+import { images } from '../../../constants/images';
+
+const {RoleIcon1, RoleIcon2, CheckMarkCircle2} = images;
 
 const roles = [
   {

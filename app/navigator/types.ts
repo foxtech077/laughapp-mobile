@@ -13,6 +13,12 @@ export type AuthStackParamList = {
   [routes.OTP_VERIFICATION_SCREEN]: { phoneNumber: string };
 };
 
+export type HomeTabParamList = {
+  [routes.FOLLOWING_SCREEN]: undefined;
+  [routes.TOP_COMEDIANS_SCREEN]: undefined;
+  [routes.PROFILE_SCREEN]: undefined;
+};
+
 export type HomeStackParamList = {
   [routes.HOME_TABS]: undefined;
   [routes.ONBOARDING_CHOOSE_ROLE_SCREEN]: undefined;

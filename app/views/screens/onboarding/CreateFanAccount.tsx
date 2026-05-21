@@ -8,10 +8,13 @@ import ButtonView from '../../components/ButtonView';
 import BaseView from '../../components/BaseView';
 import TextView from '../../components/TextView';
 import { fontScale, spacing } from '../../../utils/dimensions';
+import { routes } from '../../../navigator/routes';
+import { HomeStackParamList } from '../../../navigator/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 function CreateFanAccount() {
   const { colors } = useTheme();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 
   const [displayName, setDisplayName] = useState('Sandee Das');
   const [userName, setUserName] = useState('sandeep.das');
@@ -40,6 +43,7 @@ function CreateFanAccount() {
   const handleContinue = () => {
     if (isContinueEnabled) {
       console.log('Continue with:', { displayName, userName });
+      navigation.replace(routes.HOME_TABS);
     }
   };
 

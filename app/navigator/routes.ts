@@ -9,4 +9,8 @@ export const routes = {
     ONBOARDING_CHOOSE_ROLE_SCREEN: "OnboardingChooseRoleScreen",
     CREATE_FAN_ACCOUNT_SCREEN: "CreateFanAccountScreen",
     CREATE_COMEDIAN_ACCOUNT_SCREEN: "CreateComedianAccountScreen",
+    HOME_TAB: "HomeTab",
+    FOLLOWING_SCREEN: "FollowingScreen",
+    TOP_COMEDIANS_SCREEN: "TopComediansScreen",
+    PROFILE_SCREEN: "ProfileScreen",
 }
