@@ -17,13 +17,13 @@ const roles = [
     id: 'fan',
     title: "I’m here to laugh",
     description: "Watch, support, and share your favourite comedians.",
-    icon: <RoleIcon1 width={24} height={24} />,
+    icon: <RoleIcon1 width={spacing(54)} height={spacing(54)} />,
   },
   {
     id: 'comedian',
     title: "I’m a stand up comedian",
     description: "Request a comedian account to share clips and build your audience.",
-    icon: <RoleIcon2 width={24} height={24} />,
+    icon: <RoleIcon2 width={spacing(54)} height={spacing(54)} />,
   }
 ];
 
@@ -57,10 +57,10 @@ function ChooseRoleScreen() {
     >
       <View style={styles.content}>
         <View style={styles.header}>
-          <TextView variant="authHeading" style={[styles.title, { color: '#231F20' }]}>
+          <TextView variant="authHeading" style={[styles.title, { color: colors.primaryText }]}>
             What brings you to LaughApp?
           </TextView>
-          <TextView variant="authSubheading" style={[styles.subtitle, { color: '#5A5656' }]}>
+          <TextView variant="authSubheading" style={[styles.subtitle, { color: colors.secondaryText }]}>
             Select your role to get the right features and recommendations.
           </TextView>
         </View>
@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: spacing(24),
-    paddingTop: spacing(40),
+    paddingTop: spacing(30),
   },
   header: {
-    marginBottom: spacing(32),
+    marginBottom: spacing(25),
   },
   title: {
-    marginBottom: spacing(12),
+    marginBottom: spacing(24),
   },
   subtitle: {
   },

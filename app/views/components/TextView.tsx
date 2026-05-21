@@ -62,7 +62,7 @@ const variantStyles: Record<TextVariant, object> = {
     fontFamily: 'Inter',
     fontWeight: '700',
     fontSize: fontScale(26),
-    lineHeight: fontScale(26),
+    lineHeight: fontScale(34),
     letterSpacing: -0.5,
   },
   authSubheading: {

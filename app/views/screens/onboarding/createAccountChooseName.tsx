@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, KeyboardAvoidingView, Platform, TouchableOpacity, ScrollView } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
-import { spacing, fontScale } from '../../../../utils/dimensions';
-import BaseView from '../../../components/BaseView';
-import TextView from '../../../components/TextView';
-import ButtonView from '../../../components/ButtonView';
-import TextInputView from '../../../components/TextInputView';
-import BackArrow from '../../../../../assets/images/icons/arrow-left.svg';
-import CloseCircle from '../../../../../assets/images/icons/x-circle-contained.svg';
-import CheckCircle from '../../../../../assets/images/icons/check-contained.svg';
+;
+import BackArrow from '../../../../assets/images/icons/arrow-left.svg';
+import CloseCircle from '../../../../assets/images/icons/x-circle-contained.svg';
+import CheckCircle from '../../../../assets/images/icons/check-contained.svg';
+import TextInputView from '../../components/TextInputView';
+import ButtonView from '../../components/ButtonView';
+import BaseView from '../../components/BaseView';
+import TextView from '../../components/TextView';
+import { fontScale, spacing } from '../../../utils/dimensions';
 
 function CreateAccountChooseName() {
   const { colors } = useTheme();
@@ -16,7 +17,7 @@ function CreateAccountChooseName() {
 
   const [displayName, setDisplayName] = useState('Sandee Das');
   const [userName, setUserName] = useState('sandeep.das');
-  const [usernameError, setUsernameError] = useState<string | null>(null);
+  const [usernameError, setUsernameError] = useState<string >("");
   const [usernameSuggestions, setUsernameSuggestions] = useState<string[]>([]);
 
   useEffect(() => {
@@ -25,7 +26,7 @@ function CreateAccountChooseName() {
       setUsernameError('The user name is not available');
       setUsernameSuggestions(['sandeep.das01', 'sandeep_das01', 'sandeep.das02', 'sandeep_das02']);
     } else {
-      setUsernameError(null);
+      setUsernameError("");
       setUsernameSuggestions([]);
     }
   }, [userName]);
@@ -34,7 +35,7 @@ function CreateAccountChooseName() {
 
   const handleSuggestionPress = (suggestion: string) => {
     setUserName(suggestion);
-    setUsernameError(null);
+    setUsernameError("");
     setUsernameSuggestions([]);
   };
 
@@ -66,14 +67,14 @@ function CreateAccountChooseName() {
       >
         <View style={styles.content}>
           <TouchableOpacity style={styles.backButton} onPress={handleBack} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
-            <BackArrow width={24} height={24} stroke={colors.primaryText || '#231F20'} />
+            <BackArrow width={24} height={24} stroke={colors.primaryText } />
           </TouchableOpacity>
 
           <View style={styles.headerTextContainer}>
-            <TextView variant="authHeading" style={[styles.title, { color: '#231F20' }]}>
+            <TextView variant="authHeading" style={[styles.title, { color: colors.primaryText }]}>
               What should we call you?
             </TextView>
-            <TextView variant="authSubheading" style={[styles.subtitle, { color: '#5A5656' }]}>
+            <TextView variant="authSubheading" style={[styles.subtitle, { color: colors.secondaryText}]}>
               Enter your display name and choose a unique username for your profile.
             </TextView>
           </View>
@@ -81,7 +82,7 @@ function CreateAccountChooseName() {
           <View style={styles.inputsContainer}>
             <TextInputView
               label="Display name"
-              variant="auth"
+            //   variant="auth"
               value={displayName}
               onChangeText={setDisplayName}
               autoCapitalize="words"
@@ -89,30 +90,33 @@ function CreateAccountChooseName() {
             <View style={styles.usernameInputContainer}>
               <TextInputView
                 label="User name"
-                variant="auth"
+                // variant="auth"
                 value={userName}
                 onChangeText={setUserName}
                 autoCapitalize="none"
                 autoCorrect={false}
-                error={usernameError ? ' ' : undefined}
+                error={usernameError}
                 errorAlign="right"
                 rightIcon={
                   usernameError ? (
                     <CloseCircle width={20} height={20} />
                   ) : null
+                  
                 }
+                
               />
-              {usernameError ? (
-                <View style={styles.usernameErrorWrapper}>
-                  <TextView style={styles.customUsernameErrorText}>
-                    {usernameError}
-                  </TextView>
-                </View>
-              ) : null}
+             
             </View>
 
             {usernameSuggestions.length > 0 && (
-              <View style={styles.suggestionsContainer}>
+               <View
+                style={[
+                  styles.suggestionsContainer,
+                  {
+                    backgroundColor: colors.cardBackground,
+                  },
+                ]}
+              >
                 {usernameSuggestions.map((suggestion, index) => (
                   <View key={suggestion} style={styles.suggestionRowWrapper}>
                     <TouchableOpacity
@@ -120,7 +124,14 @@ function CreateAccountChooseName() {
                       onPress={() => handleSuggestionPress(suggestion)}
                       activeOpacity={0.7}
                     >
-                      <TextView style={styles.suggestionText}>{suggestion}</TextView>
+                       <TextView
+                        style={[
+                          styles.suggestionText,
+                          { color: colors.primaryText },
+                        ]}
+                      >
+                        {suggestion}
+                      </TextView>
                       <CheckCircle width={20} height={20} />
                     </TouchableOpacity>
                     {index < usernameSuggestions.length - 1 && <View style={styles.divider} />}
@@ -155,7 +166,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: spacing(24),
-    paddingTop: spacing(24), // Add some top padding after safe area
+    paddingTop: spacing(24),
   },
   backButton: {
     width: spacing(40),
@@ -165,7 +176,7 @@ const styles = StyleSheet.create({
     marginBottom: spacing(16),
   },
   headerTextContainer: {
-    marginBottom: spacing(32),
+    marginBottom: spacing(24),
   },
   title: {
     marginBottom: spacing(12),
@@ -176,27 +187,14 @@ const styles = StyleSheet.create({
     gap: spacing(16),
   },
   usernameInputContainer: {
-    position: 'relative',
-  },
-  usernameErrorWrapper: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    width: '100%',
-    paddingHorizontal: spacing(4),
-  },
-  customUsernameErrorText: {
-    fontFamily: 'Inter',
-    fontWeight: '600',
-    fontSize: 16,
-    color: '#FF3B30',
-    textAlign: 'right',
-  },
+  position: 'relative',
+},
+
+
   suggestionsContainer: {
-    backgroundColor: '#FFFFFF',
     borderRadius: spacing(12),
     paddingHorizontal: spacing(16),
-    marginTop: spacing(-4), // Pull it up slightly closer to the input
+    marginTop: spacing(-4), 
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
@@ -219,8 +217,8 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: 1,
-    backgroundColor: '#EEEEEE',
     width: '100%',
+  backgroundColor: '#C4C4C4',
   },
   footer: {
     paddingHorizontal: spacing(24),

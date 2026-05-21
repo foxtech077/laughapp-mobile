@@ -2,8 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomeStackParamList } from "./types";
 import { routes } from "./routes";
 import ChooseRoleScreen from "../views/screens/onboarding/ChooseRole";
-import CreateAccountChooseName from "../views/screens/auth/CreateAccountChooseName";
-
+import CreateAccountChooseName from "../views/screens/onboarding/createAccountChooseName";
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 
 function HomeNavigator() {
