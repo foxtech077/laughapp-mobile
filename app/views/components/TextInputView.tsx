@@ -14,8 +14,10 @@ import TextView from './TextView';
 interface TextInputViewProps extends TextInputProps {
   label: string;
   error?: string;
+  errorAlign?: 'left' | 'center' | 'right';
   rightIcon?: React.ReactNode;
   leftIcon?: React.ReactNode;
+  variant?: 'floating' | 'auth';
 }
 
 const CONTAINER_HEIGHT = spacing(60);
@@ -34,12 +36,14 @@ const DURATION = 150;
 function TextInputView({
   label,
   error,
+  errorAlign = 'left',
   rightIcon,
   leftIcon,
   value,
   onFocus,
   onBlur,
   style,
+  variant = 'floating',
   ...rest
 }: TextInputViewProps) {
   const { colors } = useTheme();
@@ -47,6 +51,7 @@ function TextInputView({
   const [isFocused, setIsFocused] = useState(false);
 
   const isActive = isFocused || Boolean(value);
+  const isAuth = variant === 'auth';
 
   const animTop = useRef(new Animated.Value(isActive ? LABEL_TOP_ACTIVE : LABEL_TOP_INACTIVE)).current;
   const animSize = useRef(new Animated.Value(isActive ? LABEL_SIZE_ACTIVE : LABEL_SIZE_INACTIVE)).current;
@@ -66,15 +71,15 @@ function TextInputView({
     ]).start();
   }, [isActive]);
 
-  const borderColor = error ? '#E53935' : isFocused ? '#000000' : '#DADADA';
+  const borderColor = error ? colors.error : isFocused ? colors.primaryText : (isAuth ? colors.border : '#DADADA');
 
   const labelColor = error
-    ? '#E53935'
+    ? (isAuth ? colors.error : '#E53935')
     : isActive
-    ? isFocused
-      ? '#000000'
-      : '#888888'
-    : '#AAAAAA';
+      ? isFocused
+        ? (isAuth ? colors.primaryText : '#000000')
+        : (isAuth ? colors.secondaryText : '#888888')
+      : (isAuth ? colors.placeholder : '#AAAAAA');
 
   const handleFocus = (e: any) => {
     setIsFocused(true);
@@ -87,13 +92,17 @@ function TextInputView({
   };
 
   return (
-    <View style={[styles.wrapper, style]}>
+    <View style={[styles.wrapper, style, isAuth && { width: '100%' }]}>
       <TouchableWithoutFeedback onPress={() => inputRef.current?.focus()}>
-        <View style={[styles.container, { borderColor, height: CONTAINER_HEIGHT }]}>
+        <View style={[
+          styles.container,
+          { borderColor, backgroundColor: colors.cardBackground },
+          isAuth ? styles.authContainer : { height: CONTAINER_HEIGHT }
+        ]}>
           {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
 
-          <View style={styles.innerArea}>
-            {/* Floating label */}
+          <View style={[styles.innerArea, isAuth && styles.authInnerArea]}>
+            {/* Floating label reused for both variants */}
             <Animated.Text
               style={[
                 styles.label,
@@ -102,21 +111,26 @@ function TextInputView({
                   fontSize: animSize,
                   color: labelColor,
                 },
+                isAuth && { fontFamily: 'Inter', fontWeight: isActive ? '400' : '500',  letterSpacing: -0.5,
+ }
               ]}
               numberOfLines={1}
             >
               {label}
             </Animated.Text>
 
-            {/* Input sits at bottom half, below the floating label */}
+            {/* Input sits at bottom half, below the floating label, or fully centers in auth mode */}
             <TextInput
               ref={inputRef}
               value={value}
               onFocus={handleFocus}
               onBlur={handleBlur}
-              style={[styles.input, { paddingTop: LABEL_TOP_ACTIVE + LABEL_SIZE_ACTIVE * 1.4 }]}
-              placeholderTextColor="transparent"
-              placeholder=" "
+              style={[
+                styles.input,
+                isAuth ? [styles.authInput, { color: colors.primaryText }] : { paddingTop: LABEL_TOP_ACTIVE + LABEL_SIZE_ACTIVE * 1.4, color: colors.primaryText }
+              ]}
+              placeholderTextColor={isAuth ? colors.placeholder : "transparent"}
+              placeholder={isAuth && !isActive ? label : " "}
               {...rest}
             />
           </View>
@@ -126,10 +140,26 @@ function TextInputView({
       </TouchableWithoutFeedback>
 
       {error ? (
-        <TextView variant="caption" style={styles.errorText}>
-          {error}
-        </TextView>
-      ) : null}
+  <View
+    style={[
+      styles.errorContainer,
+       styles.errorContainerRight,
+    ]}
+  >
+    <TextView
+      style={[
+        styles.errorText,
+        isAuth && styles.authErrorText,
+        {
+          color: isAuth ? colors.error : '#E53935',
+          textAlign: errorAlign,
+        },
+      ]}
+    >
+      {error}
+    </TextView>
+  </View>
+) : null}
     </View>
   );
 }
@@ -144,7 +174,6 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderRadius: spacing(12),
     paddingHorizontal: H_PADDING,
-    backgroundColor: '#FFFFFF',
   },
   innerArea: {
     flex: 1,
@@ -163,7 +192,6 @@ const styles = StyleSheet.create({
     right: 0,
     fontSize: fontScale(15),
     fontWeight: '600',
-    color: '#000000',
     padding: 0,
     margin: 0,
   },
@@ -172,10 +200,52 @@ const styles = StyleSheet.create({
   },
   rightIcon: {
     marginLeft: spacing(8),
+    marginTop: spacing(15)
   },
   errorText: {
     color: '#E53935',
-    marginLeft: spacing(4),
+    marginHorizontal: spacing(4),
+  },
+ errorContainer: {
+  width: '100%',
+},
+
+errorContainerRight: {
+  alignItems: 'flex-end',
+},
+
+errorContainerCenter: {
+  alignItems: 'center',
+},
+  authContainer: {
+    height: spacing(66),
+    borderRadius: spacing(10),
+    borderWidth: 1,
+    paddingTop: spacing(8),
+    paddingBottom: spacing(8),
+    paddingHorizontal: spacing(16),
+
+  },
+  authInnerArea: {
+    justifyContent: 'center',
+    position: 'relative',
+  },
+  authInput: {
+    position: 'relative',
+    fontFamily: 'Inter',
+    fontWeight: '500',
+    fontSize: fontScale(18),
+      letterSpacing: -0.5,
+    padding: 0,
+    margin: 0,
+    marginTop: 4,
+  },
+  authErrorText: {
+    fontFamily: 'Inter',
+    fontWeight: '600',
+    fontSize: 16,
+    marginTop: 4,
+    width: '100%',
   },
 });
 

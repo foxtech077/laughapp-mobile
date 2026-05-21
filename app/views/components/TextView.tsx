@@ -3,7 +3,7 @@ import { Text, TextProps, StyleSheet, TextStyle } from 'react-native';
 import { fontScale } from '../../utils/dimensions';
 import { useTheme } from '@react-navigation/native';
 
-type TextVariant = 'title' | 'subtitle' | 'description' | 'caption';
+type TextVariant = 'title' | 'subtitle' | 'description' | 'caption' | 'authHeading' | 'authSubheading' | 'authInput';
 
 interface TextViewProps extends TextProps {
   variant?: TextVariant;
@@ -34,6 +34,27 @@ const variantStyles: Record<TextVariant, object> = {
     fontWeight: '400',
     letterSpacing: 0.2,
     lineHeight: fontScale(18),
+  },
+  authHeading: {
+    fontFamily: 'Inter',
+    fontWeight: '700',
+    fontSize: fontScale(26),
+    lineHeight: fontScale(34),
+    letterSpacing: -0.5,
+  },
+  authSubheading: {
+    fontFamily: 'Inter',
+    fontWeight: '500',
+    fontSize: fontScale(18),
+    lineHeight: fontScale(26),
+    letterSpacing: -0.5,
+  },
+  authInput: {
+    fontFamily: 'Inter',
+    fontWeight: '500',
+    fontSize: fontScale(18),
+    lineHeight: fontScale(26),
+    letterSpacing: -0.5,
   },
 };
 
