@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View, Image } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { fontScale, spacing } from '../../utils/dimensions';
-import TextView from './TextView';
-import CheckCircle from '../../../assets/images/icons/check-contained.svg';
+import CheckCircle from '../../../../../assets/images/icons/check-contained.svg';
+import { spacing } from '../../../../utils/dimensions';
+import TextView from '../../../components/TextView';
 
 interface RoleSelectionCardProps {
   id: string;

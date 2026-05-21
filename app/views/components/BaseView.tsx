@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   Keyboard,
   ViewProps,
   StatusBar,
@@ -15,6 +14,7 @@ import { useTheme } from '@react-navigation/native';
 import { spacing, fontScale } from '../../utils/dimensions';
 import TextView from './TextView';
 import LinearGradient from 'react-native-linear-gradient';
+import BackArrow from '../../../assets/images/icons/arrow-left.svg';
 
 interface BaseViewProps extends ViewProps {
   children?: React.ReactNode;
@@ -53,8 +53,13 @@ function BaseView({
   const navigation = useNavigation();
   const { colors } = useTheme();
 
+    const handleBack = () => {
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    }
+  };
+
   return (
-    <TouchableWithoutFeedback onPress={dismissKeyboardOnTap ? Keyboard.dismiss : undefined}>
     <LinearGradient style={styles.container} colors={gradientBackground ? gradientColors : [colors.background, colors.background]} locations={gradientLocations} start={gradientStart} end={gradientEnd}>
       <View
       style={[
@@ -63,6 +68,10 @@ function BaseView({
         applyBottomInset && { paddingBottom: insets.bottom + (Platform.OS === 'android' ? spacing(10) : 0) },
         style,
       ]}
+      onStartShouldSetResponder={() => {
+        if (dismissKeyboardOnTap) Keyboard.dismiss();
+        return false;
+      }}
       {...rest}
     >
       <StatusBar
@@ -74,15 +83,9 @@ function BaseView({
         <View style={[styles.header, { borderBottomColor: colors.border }]}>
           <View style={styles.headerLeft}>
             {showBackButton && navigation.canGoBack() && (
-              <TouchableOpacity
-                style={styles.backButton}
-                onPress={() => navigation.goBack()}
-                hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-              >
-                <TextView variant="title" style={{ color: colors.primary }}>
-                  ←
-                </TextView>
-              </TouchableOpacity>
+          <TouchableOpacity style={styles.backButton} onPress={handleBack} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
+            <BackArrow width={24} height={24} stroke={colors.primaryText } />
+          </TouchableOpacity>
             )}
           </View>
 
@@ -103,7 +106,6 @@ function BaseView({
       {children}
     </View>
     </LinearGradient>
-    </TouchableWithoutFeedback>
   );
 }
 

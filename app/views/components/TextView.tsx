@@ -3,13 +3,14 @@ import { Text, TextProps, StyleSheet, TextStyle } from 'react-native';
 import { fontScale } from '../../utils/dimensions';
 import { useTheme } from '@react-navigation/native';
 
-type TextVariant = 'title' | 'subtitle' | 'description' | 'caption' | 'authHeading' | 'authSubheading' | 'authInput' | 'heading' | 'subheading' | 'input';
+type TextVariant = 'title' | 'subtitle' | 'description' | 'caption' | 'heading' | 'subheading' | 'input' | 'heading' | 'subheading' | 'input';
 
 interface TextViewProps extends TextProps {
   variant?: TextVariant;
   align?: 'left' | 'center' | 'right';
   weight?: TextStyle['fontWeight'];
   color?: TextStyle['color'];
+  size?: number;
 }
 
 const variantStyles: Record<TextVariant, object> = {
@@ -58,35 +59,15 @@ const variantStyles: Record<TextVariant, object> = {
     lineHeight: fontScale(26),
     letterSpacing: -0.5,
   },
-  authHeading: {
-    fontFamily: 'Inter',
-    fontWeight: '700',
-    fontSize: fontScale(26),
-    lineHeight: fontScale(34),
-    letterSpacing: -0.5,
-  },
-  authSubheading: {
-    fontFamily: 'Inter',
-    fontWeight: '500',
-    fontSize: fontScale(18),
-    lineHeight: fontScale(26),
-    letterSpacing: -0.5,
-  },
-  authInput: {
-    fontFamily: 'Inter',
-    fontWeight: '500',
-    fontSize: fontScale(18),
-    lineHeight: fontScale(26),
-    letterSpacing: -0.5,
-  },
 };
 
-function TextView({ variant = 'description', style, children, align = 'left', weight, color, ...rest }: TextViewProps) {
+function TextView({ variant = 'description', style, children, align = 'left', weight, color, size, ...rest }: TextViewProps) {
   const { colors } = useTheme();
   const typography: TextStyle = {
     textAlign: align,
     ...(weight && { fontWeight: weight }),
     ...(color && { color }),
+    ...(size !== undefined && { fontSize: fontScale(size) }),
   };
   return (
     <Text style={[{ color: colors.text }, styles.base, variantStyles[variant], style, typography]} {...rest}>

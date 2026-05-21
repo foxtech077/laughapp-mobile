@@ -127,7 +127,7 @@ function TextInputView({
               onBlur={handleBlur}
               style={[
                 styles.input,
-                isAuth ? [styles.authInput, { color: colors.primaryText }] : { paddingTop: LABEL_TOP_ACTIVE + LABEL_SIZE_ACTIVE * 1.4, color: colors.primaryText }
+                isAuth ? [styles.input, { color: colors.primaryText }] : { paddingTop: LABEL_TOP_ACTIVE + LABEL_SIZE_ACTIVE * 1.4, color: colors.primaryText }
               ]}
               placeholderTextColor={isAuth ? colors.placeholder : "transparent"}
               placeholder={isAuth && !isActive ? label : " "}
@@ -230,7 +230,7 @@ errorContainerCenter: {
     justifyContent: 'center',
     position: 'relative',
   },
-  authInput: {
+  input: {
     position: 'relative',
     fontFamily: 'Inter',
     fontWeight: '500',

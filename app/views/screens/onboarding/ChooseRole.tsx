@@ -6,11 +6,11 @@ import { routes } from '../../../navigator/routes';
 import BaseView from '../../components/BaseView';
 import TextView from '../../components/TextView';
 import ButtonView from '../../components/ButtonView';
-import RoleSelectionCard from '../../components/RoleSelectionCard';
 import RoleIcon1 from '../../../../assets/images/icons/role_icon1.svg';
 import RoleIcon2 from '../../../../assets/images/icons/role_icon2.svg';
 import CheckMarkCircle2 from '../../../../assets/images/icons/check-mark-circle2.svg';
 import { MMKV_KEYS, Storage } from '../../../utils/mmkvStorage';
+import RoleSelectionCard from './components/RoleSelectionCard';
 
 const roles = [
   {
@@ -38,10 +38,11 @@ function ChooseRoleScreen() {
 
   const handleContinue = () => {
     if (selectedRoleId) {
-        Storage.set(MMKV_KEYS.AUTH_LOGGED_IN, false)
-      // Navigation will be handled here
-      console.log('Selected role:', selectedRoleId);
-    //   navigation.navigate(routes.AUTH_CREATE_ACCOUNT_CHOOSE_NAME_SCREEN);
+      if (selectedRoleId === 'fan') {
+        navigation.navigate(routes.CREATE_FAN_ACCOUNT_SCREEN);
+      } else if (selectedRoleId === 'comedian') {
+        navigation.navigate(routes.CREATE_COMEDIAN_ACCOUNT_SCREEN);
+      }
     }
   };
 
@@ -57,10 +58,10 @@ function ChooseRoleScreen() {
     >
       <View style={styles.content}>
         <View style={styles.header}>
-          <TextView variant="authHeading" style={[styles.title, { color: colors.primaryText }]}>
+          <TextView variant="heading" style={[styles.title, { color: colors.primaryText }]}>
             What brings you to LaughApp?
           </TextView>
-          <TextView variant="authSubheading" style={[styles.subtitle, { color: colors.secondaryText }]}>
+          <TextView variant="subheading" style={[styles.subtitle, { color: colors.secondaryText }]}>
             Select your role to get the right features and recommendations.
           </TextView>
         </View>

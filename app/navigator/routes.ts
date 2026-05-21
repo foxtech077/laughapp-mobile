@@ -7,5 +7,6 @@ export const routes = {
     LOGIN_SCREEN: "LoginScreen",
     OTP_VERIFICATION_SCREEN: "OtpVerificationScreen",
     ONBOARDING_CHOOSE_ROLE_SCREEN: "OnboardingChooseRoleScreen",
-    AUTH_CREATE_ACCOUNT_CHOOSE_NAME_SCREEN: "AuthCreateAccountChooseNameScreen",
+    CREATE_FAN_ACCOUNT_SCREEN: "CreateFanAccountScreen",
+    CREATE_COMEDIAN_ACCOUNT_SCREEN: "CreateComedianAccountScreen",
 }

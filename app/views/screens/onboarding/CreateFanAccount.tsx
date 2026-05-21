@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, KeyboardAvoidingView, Platform, TouchableOpacity, ScrollView } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
-;
-import BackArrow from '../../../../assets/images/icons/arrow-left.svg';
 import CloseCircle from '../../../../assets/images/icons/x-circle-contained.svg';
 import CheckCircle from '../../../../assets/images/icons/check-contained.svg';
 import TextInputView from '../../components/TextInputView';
@@ -11,13 +9,13 @@ import BaseView from '../../components/BaseView';
 import TextView from '../../components/TextView';
 import { fontScale, spacing } from '../../../utils/dimensions';
 
-function CreateAccountChooseName() {
+function CreateFanAccount() {
   const { colors } = useTheme();
   const navigation = useNavigation();
 
   const [displayName, setDisplayName] = useState('Sandee Das');
   const [userName, setUserName] = useState('sandeep.das');
-  const [usernameError, setUsernameError] = useState<string >("");
+  const [usernameError, setUsernameError] = useState<string>("");
   const [usernameSuggestions, setUsernameSuggestions] = useState<string[]>([]);
 
   useEffect(() => {
@@ -45,36 +43,28 @@ function CreateAccountChooseName() {
     }
   };
 
-  const handleBack = () => {
-    if (navigation.canGoBack()) {
-      navigation.goBack();
-    }
-  };
-
   return (
     <BaseView
       style={styles.container}
       gradientBackground
-      gradientColors={colors.primaryGradient || ['#f8dc6a', '#fceac3', '#fdd3b1']}
+      gradientColors={colors.primaryGradient}
       gradientLocations={[0, 0.5, 1]}
       gradientStart={{ x: 0, y: 0.5 }}
       gradientEnd={{ x: 1, y: 0.5 }}
       applyBottomInset={true}
+      showBackButton
+      showHeader
     >
       <KeyboardAvoidingView
         style={styles.keyboardAvoid}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <View style={styles.content}>
-          <TouchableOpacity style={styles.backButton} onPress={handleBack} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
-            <BackArrow width={24} height={24} stroke={colors.primaryText } />
-          </TouchableOpacity>
-
           <View style={styles.headerTextContainer}>
-            <TextView variant="authHeading" style={[styles.title, { color: colors.primaryText }]}>
+            <TextView variant="heading" style={[styles.title, { color: colors.primaryText }]}>
               What should we call you?
             </TextView>
-            <TextView variant="authSubheading" style={[styles.subtitle, { color: colors.secondaryText}]}>
+            <TextView variant="subheading" style={[styles.subtitle, { color: colors.secondaryText }]}>
               Enter your display name and choose a unique username for your profile.
             </TextView>
           </View>
@@ -82,7 +72,6 @@ function CreateAccountChooseName() {
           <View style={styles.inputsContainer}>
             <TextInputView
               label="Display name"
-            //   variant="auth"
               value={displayName}
               onChangeText={setDisplayName}
               autoCapitalize="words"
@@ -90,7 +79,6 @@ function CreateAccountChooseName() {
             <View style={styles.usernameInputContainer}>
               <TextInputView
                 label="User name"
-                // variant="auth"
                 value={userName}
                 onChangeText={setUserName}
                 autoCapitalize="none"
@@ -101,15 +89,13 @@ function CreateAccountChooseName() {
                   usernameError ? (
                     <CloseCircle width={20} height={20} />
                   ) : null
-                  
                 }
-                
               />
-             
+
             </View>
 
             {usernameSuggestions.length > 0 && (
-               <View
+              <View
                 style={[
                   styles.suggestionsContainer,
                   {
@@ -124,7 +110,7 @@ function CreateAccountChooseName() {
                       onPress={() => handleSuggestionPress(suggestion)}
                       activeOpacity={0.7}
                     >
-                       <TextView
+                      <TextView
                         style={[
                           styles.suggestionText,
                           { color: colors.primaryText },
@@ -187,14 +173,14 @@ const styles = StyleSheet.create({
     gap: spacing(16),
   },
   usernameInputContainer: {
-  position: 'relative',
-},
+    position: 'relative',
+  },
 
 
   suggestionsContainer: {
     borderRadius: spacing(12),
     paddingHorizontal: spacing(16),
-    marginTop: spacing(-4), 
+    marginTop: spacing(-4),
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
@@ -218,7 +204,7 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     width: '100%',
-  backgroundColor: '#C4C4C4',
+    backgroundColor: '#C4C4C4',
   },
   footer: {
     paddingHorizontal: spacing(24),
@@ -226,4 +212,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateAccountChooseName;
+export default CreateFanAccount;
