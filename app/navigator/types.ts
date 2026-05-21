@@ -10,6 +10,7 @@ export type RootStackParamList = {
 export type AuthStackParamList = {
   [routes.LOGIN_SCREEN]: undefined;
   [routes.GET_STARTED_SCREEN]: undefined;
+  [routes.OTP_VERIFICATION_SCREEN]: { phoneNumber: string };
 };
 
 export type HomeStackParamList = {

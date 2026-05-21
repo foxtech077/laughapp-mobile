@@ -10,6 +10,7 @@ import RoleSelectionCard from '../../components/RoleSelectionCard';
 import RoleIcon1 from '../../../../assets/images/icons/role_icon1.svg';
 import RoleIcon2 from '../../../../assets/images/icons/role_icon2.svg';
 import CheckMarkCircle2 from '../../../../assets/images/icons/check-mark-circle2.svg';
+import { MMKV_KEYS, Storage } from '../../../utils/mmkvStorage';
 
 const roles = [
   {
@@ -37,9 +38,10 @@ function ChooseRoleScreen() {
 
   const handleContinue = () => {
     if (selectedRoleId) {
+        Storage.set(MMKV_KEYS.AUTH_LOGGED_IN, false)
       // Navigation will be handled here
       console.log('Selected role:', selectedRoleId);
-      navigation.navigate(routes.AUTH_CREATE_ACCOUNT_CHOOSE_NAME_SCREEN);
+    //   navigation.navigate(routes.AUTH_CREATE_ACCOUNT_CHOOSE_NAME_SCREEN);
     }
   };
 

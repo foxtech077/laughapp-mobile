@@ -1,5 +1,5 @@
 import { View, StyleSheet, Image, FlatList, TouchableOpacity } from "react-native";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import BaseView from "../../components/BaseView";
 import TextView from "../../components/TextView";
 import ButtonView from "../../components/ButtonView";
@@ -9,31 +9,17 @@ import { images } from "../../../constants/images";
 import { useTheme } from "@react-navigation/native";
 import CountryFlag from "react-native-country-flag";
 import { getAllCountries, Country, FlagType } from "react-native-country-picker-modal";
-import { isValidPhoneNumber, ICountry } from 'rn-international-phone-number';
+import { isValidPhoneNumber, getCountryByCca2 } from 'rn-international-phone-number';
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { routes } from "../../../navigator/routes";
 
 const getCountryName = (country: Country): string => {
     if (typeof country.name === 'string') return country.name;
     return (country.name as any)['common'] ?? country.cca2;
 };
 
-const getValidationSchema = (callingCode: string, selectedCountry: Country | null) =>
-    Yup.object({
-        phoneNumber: Yup.string()
-            .required('Phone number is required')
-            .matches(/^\d+$/, 'Phone number must contain only digits')
-            .test('is-valid-phone', 'Invalid phone number for selected country', (value) => {
-                if (!value || !selectedCountry) return false;
-                const rnCountry = {
-                    callingCode: `+${callingCode}`,
-                    cca2: selectedCountry.cca2,
-                } as unknown as ICountry;
-                return isValidPhoneNumber(value, rnCountry);
-            }),
-    });
-
-function LoginScreen() {
+function LoginScreen({navigation}: any) {
     const { colors } = useTheme();
     const [countries, setCountries] = useState<Country[]>([]);
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
@@ -49,35 +35,75 @@ function LoginScreen() {
 
     const callingCode = selectedCountry?.callingCode?.[0] ?? '';
 
-    const formik = useFormik({
-    initialValues: {
-        phoneNumber: '',
-    },
-    validationSchema: getValidationSchema(callingCode, selectedCountry),
-    validateOnChange: true,
-    validateOnBlur: true,
-    onSubmit: (values) => {
-        const fullNumber = `+${callingCode}${values.phoneNumber}`.replace(/\s/g, '');
-        console.log('Full number:', fullNumber);
-        // navigate to OTP screen
-    },
-});
+    const validationSchema = useMemo(() =>
+        Yup.object({
+            phoneNumber: Yup.string()
+                .required('Phone number is required')
+                .matches(/^\d+$/, 'Phone number must contain only digits')
+                .test('is-valid-phone', 'Invalid phone number for selected country', (value) => {
+                    if (!value || !selectedCountry) return false;
+                    const rnCountry = getCountryByCca2(selectedCountry.cca2);
+                    if (!rnCountry) return true;
+                    return isValidPhoneNumber(value, rnCountry);
+                }),
+        }),
+        [selectedCountry, callingCode]
+    );
 
-const handleSelectCountry = (country: Country) => {
-    setSelectedCountry(country);
-    setShowDropdown(false);
-    formik.setFieldValue('phoneNumber', '');
-    formik.setFieldTouched('phoneNumber', false);
-    formik.validateForm();
-};
+    const formik = useFormik({
+        initialValues: {
+            phoneNumber: '',
+        },
+        validationSchema,
+        validateOnChange: true,
+        validateOnBlur: true,
+        onSubmit: (values) => {
+            const fullNumber = `+${callingCode}${values.phoneNumber}`.replace(/\s/g, '');
+            console.log('Full number:', fullNumber);
+            navigation.navigate(routes.OTP_VERIFICATION_SCREEN, { phoneNumber: fullNumber });
+        },
+    });
+
+    useEffect(() => {
+        if (formik.values.phoneNumber) {
+            formik.validateForm();
+        }
+    }, [validationSchema]);
+
+    const handleSelectCountry = (country: Country) => {
+        setSelectedCountry(country);
+        setShowDropdown(false);
+        formik.resetForm();
+    };
+
+    const isButtonDisabled =
+        !formik.values.phoneNumber ||
+        Object.keys(formik.errors).length > 0 ||
+        formik.isSubmitting;
 
     return (
-        <BaseView style={styles.container} gradientBackground gradientColors={['#f8dc6a', '#fceac3', '#fdd3b1']} gradientLocations={[0, 0.5, 1]} gradientStart={{ x: 1, y: 0 }} gradientEnd={{ x: 0, y: 1 }} applyBottomInset={true} dismissKeyboardOnTap>
+        <BaseView
+            style={styles.container}
+            gradientBackground
+            gradientColors={['#f8dc6a', '#fceac3', '#fdd3b1']}
+            gradientLocations={[0, 0.5, 1]}
+            gradientStart={{ x: 1, y: 0 }}
+            gradientEnd={{ x: 0, y: 1 }}
+            applyBottomInset={true}
+            dismissKeyboardOnTap
+        >
             <View style={[styles.topSection, showDropdown && styles.topSectionExpanded]}>
                 <Image source={images.logo} style={styles.logo} resizeMode="contain" />
                 <View style={showDropdown && styles.contentExpanded}>
-                    <TextView variant="heading" align="center">Verify your phone number</TextView>
-                    <TextView variant="subtitle" style={styles.subtitle} align="center" color={colors.subtitle}>
+                    <TextView variant="heading" align="center">
+                        Verify your phone number
+                    </TextView>
+                    <TextView
+                        variant="subtitle"
+                        style={styles.subtitle}
+                        align="center"
+                        color={colors.subtitle}
+                    >
                         We will send you a verification code to your mobile number.
                     </TextView>
 
@@ -95,14 +121,19 @@ const handleSelectCountry = (country: Country) => {
                         <TextInputView
                             label="Phone number"
                             value={formik.values.phoneNumber}
-                            onChangeText={(text) => formik.setFieldValue('phoneNumber', text)}
-                            onBlur={() => {
-                                formik.validateForm();
-                                formik.setFieldTouched('phoneNumber', true)}}
+                            onChangeText={(text) => {
+                                const digits = text.replace(/\D/g, '');
+                                formik.setFieldValue('phoneNumber', digits);
+                            }}
+                            onBlur={() => formik.setFieldTouched('phoneNumber', true)}
                             keyboardType="phone-pad"
                             style={styles.phoneInput}
                             textContentType="telephoneNumber"
-                            error={formik.touched.phoneNumber ? formik.errors.phoneNumber : undefined}
+                            error={
+                                formik.touched.phoneNumber
+                                    ? formik.errors.phoneNumber
+                                    : undefined
+                            }
                         />
                     </View>
 
@@ -136,7 +167,7 @@ const handleSelectCountry = (country: Country) => {
             </View>
 
             <ButtonView
-                disabled={!formik.values.phoneNumber || !formik.isValid || formik.isSubmitting}
+                disabled={isButtonDisabled}
                 label="Send Code"
                 onPress={() => formik.handleSubmit()}
                 fillWidth

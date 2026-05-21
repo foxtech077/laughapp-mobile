@@ -18,6 +18,7 @@ export const CustomLightTheme: Theme | any = {
     buttonDisabled: '#9CA3AF',
     buttonEnabled: '#231F20',
     subtitle: "#5A5656",
+    black: '#000000',
   },
 };
 
@@ -38,6 +39,7 @@ export const CustomDarkTheme: Theme | any = {
     iconBackground: '#FFE4B2',
     buttonDisabled: '#9CA3AF',
     buttonEnabled: '#231F20',
-    subtitle: "#5A5656"
+    subtitle: "#5A5656",
+    black: '#000000',
   },
 };

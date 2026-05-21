@@ -1,7 +1,7 @@
 import { createMMKV } from "react-native-mmkv";
 import { appConfig } from "../constants/config";
 
-export const mmkvStorage = createMMKV({ id: "dpj-mmkv-storage" });
+export const mmkvStorage = createMMKV({ id: "laughApp-mmkv-storage" });
 
 type StorageValue = string | number | boolean | object;
 
@@ -54,7 +54,7 @@ export const Storage = {
 };
 
 export const mmkvSecureStorage = createMMKV({
-  id: "dpj-secure-storage",
+  id: "laughApp-secure-storage",
   encryptionKey: appConfig.LAUGH_APP_SECURE_ENCRYPTION_KEY,
 });
 

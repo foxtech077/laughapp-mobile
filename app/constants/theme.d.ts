@@ -21,6 +21,7 @@ declare module '@react-navigation/native' {
       buttonDisabled: string;
       buttonEnabled: string;
       subtitle: string;
+      black: string;
     };
   };
 
