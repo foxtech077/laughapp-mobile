@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacing(8),
   },
   headerLeft: {
-    width: spacing(40),
+    minWidth: spacing(40),
     alignItems: 'flex-start',
   },
   headerCenter: {
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerRight: {
-    width: spacing(40),
+    minWidth: spacing(40),
     alignItems: 'flex-end',
   },
   backButton: {
