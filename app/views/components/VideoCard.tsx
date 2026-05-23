@@ -6,7 +6,7 @@ import TextView from './TextView';
 import { spacing, fontScale } from '../../utils/dimensions';
 import { images } from '../../constants/images';
 
-const { LaughIcon1, TipIcon } = images;
+const { LaughIcon1, tipIcon } = images;
 
 /**
  * Interface representing the data for a single video card.
@@ -94,13 +94,13 @@ export default function VideoCard({
 
       {/* Top Left laughs badge */}
       <View style={[styles.badgeTopLeft, { backgroundColor: colors.badgeOverlay }]}>
-        <LaughIcon1 width={spacing(12)} height={spacing(12)} />
+        <LaughIcon1 width={spacing(12)} height={spacing(12)} style={{ backgroundColor: colors.white, borderRadius: '50%' }} />
         <TextView style={[styles.badgeText, { color: colors.white }]}>{item.laughs}</TextView>
       </View>
 
       {/* Bottom Left tokens badge */}
       <View style={[styles.badgeBottomLeft, { backgroundColor: colors.badgeOverlay }]}>
-        <TipIcon width={spacing(14)} height={spacing(14)} />
+        <Image source={images.tipIcon} style={{ width: spacing(14), height: spacing(14) }} />
         <TextView style={[styles.badgeTextBottom, { color: colors.white }]}>{item.coins}</TextView>
       </View>
 
@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
   badgeText: {
     fontSize: fontScale(11),
     fontWeight: '600',
+    width: '100%'
   },
   badgeTextBottom: {
     fontSize: fontScale(11),

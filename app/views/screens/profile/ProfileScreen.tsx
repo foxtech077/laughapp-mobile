@@ -20,7 +20,7 @@ import EmptyState from '../../components/EmptyState';
 import VideoCard from '../../components/VideoCard';
 import { images } from '../../../constants/images';
 
-const { LaughIcon1, SupporterIcon, TipIcon, LocationIconSvg, RepostIconSvg } = images;
+const { LaughIcon1, SupporterIcon, LocationIconSvg, RepostIconSvg } = images;
 
 
 
@@ -316,7 +316,6 @@ const styles = StyleSheet.create({
 
   headerContainer: {
     alignItems: 'center',
-    paddingTop: spacing(10),
   },
   avatarSection: {
     alignItems: 'center',
