@@ -36,7 +36,7 @@ function ButtonView({
   const { colors } = useTheme();
 
   const containerStyle = getContainerStyle(variant, colors, fillWidth, disabled);
-  const labelStyle = getLabelStyle(variant, colors, disabled);
+  const labelStyle = getLabelStyle(variant, colors);
 
   return (
     <TouchableOpacity
@@ -47,7 +47,7 @@ function ButtonView({
     >
       {loading ? (
         <ActivityIndicator
-          color={variant === 'normal' ? '#FFFFFF' : '#000000'}
+          color={variant === 'normal' || variant === 'auth' ? colors.white : colors.black}
           size="small"
         />
       ) : (
@@ -69,23 +69,22 @@ function getContainerStyle(
   fillWidth: boolean,
   disabled?: boolean | null,
 ): ViewStyle {
-  // Use theme colors if they exist, otherwise fallback
-  const enabledColor = colors.buttonEnabled || '#000000';
-  const disabledColor = colors.buttonDisabled || '#9CA3AF';
-  
+  const enabledColor = colors.buttonEnabled;
+  const disabledColor = colors.buttonDisabled;
+
   const base: ViewStyle = {
     alignSelf: fillWidth ? 'stretch' : 'flex-start',
   };
 
   switch (variant) {
     case 'outline':
-      return { ...base, backgroundColor: 'transparent', borderWidth: 1.5, borderColor: disabled ? disabledColor : enabledColor };
+      return { ...base, backgroundColor: colors.transparent, borderWidth: 1.5, borderColor: disabled ? disabledColor : enabledColor };
     case 'ghost':
-      return { ...base, backgroundColor: 'transparent', borderWidth: 0 };
+      return { ...base, backgroundColor: colors.transparent, borderWidth: 0 };
     case 'auth':
-      return { 
-        ...base, 
-        backgroundColor: disabled ? '#949494' : '#231F20',
+      return {
+        ...base,
+        backgroundColor: disabled ? colors.placeholder : colors.buttonEnabled,
         borderRadius: 30,
         height: 54,
         paddingVertical: 16,
@@ -100,16 +99,15 @@ function getContainerStyle(
 function getLabelStyle(
   variant: ButtonVariant,
   colors: ReturnType<typeof useTheme>['colors'],
-  disabled?: boolean | null,
 ): TextStyle {
   switch (variant) {
     case 'outline':
     case 'ghost':
-      return { color: '#000000' };
+      return { color: colors.black };
     case 'auth':
     case 'normal':
     default:
-      return { color: '#FFFFFF' };
+      return { color: colors.white };
   }
 }
 

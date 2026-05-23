@@ -71,15 +71,15 @@ function TextInputView({
     ]).start();
   }, [isActive]);
 
-  const borderColor = error ? colors.error : isFocused ? colors.primaryText : (isAuth ? colors.border : '#DADADA');
+  const borderColor = error ? colors.error : isFocused ? colors.primaryText : (isAuth ? colors.border : colors.inputBorder);
 
   const labelColor = error
-    ? (isAuth ? colors.error : '#E53935')
+    ? colors.error
     : isActive
       ? isFocused
-        ? (isAuth ? colors.primaryText : '#000000')
-        : (isAuth ? colors.secondaryText : '#888888')
-      : (isAuth ? colors.placeholder : '#AAAAAA');
+        ? colors.inputLabelFocused
+        : colors.inputLabelBlurred
+      : colors.inputLabelInactive;
 
   const handleFocus = (e: any) => {
     setIsFocused(true);
@@ -151,7 +151,7 @@ function TextInputView({
         styles.errorText,
         isAuth && styles.authErrorText,
         {
-          color: isAuth ? colors.error : '#E53935',
+          color: colors.error,
           textAlign: errorAlign,
         },
       ]}
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     marginTop: spacing(15)
   },
   errorText: {
-    color: '#E53935',
+    color: 'red', // Will be overridden by inline styles
     marginHorizontal: spacing(4),
   },
  errorContainer: {

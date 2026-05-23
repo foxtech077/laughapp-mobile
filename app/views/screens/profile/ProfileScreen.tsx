@@ -14,6 +14,10 @@ import { spacing, fontScale } from '../../../utils/dimensions';
 import BaseView from '../../components/BaseView';
 import TextView from '../../components/TextView';
 import ButtonView from '../../components/ButtonView';
+import GradientBadge from '../../components/GradientBadge';
+import StatsCard from '../../components/StatsCard';
+import EmptyState from '../../components/EmptyState';
+import VideoCard from '../../components/VideoCard';
 import { images } from '../../../constants/images';
 
 const { LaughIcon1, SupporterIcon, TipIcon, LocationIconSvg, RepostIconSvg } = images;
@@ -95,7 +99,13 @@ const numColumns = 3;
 const ITEM_WIDTH = (screenWidth - (gridPadding * 2) - (columnGap * (numColumns - 1))) / numColumns;
 const ITEM_HEIGHT = ITEM_WIDTH * (178 / 131);
 
-function ProfileScreen() {
+/**
+ * Profile screen showing reposted videos,
+ * supporter stats, and user information.
+ *
+ * @returns {JSX.Element} The rendered Profile Screen
+ */
+export default function ProfileScreen() {
   const { colors } = useTheme();
   const [isOldUser, setIsOldUser] = useState(false);
 
@@ -125,34 +135,32 @@ function ProfileScreen() {
           style={styles.avatarWrapper}
         >
           <LinearGradient
-            colors={['#FFE372', '#FEC091']}
+            colors={[colors.supporterGradientStart, colors.supporterGradientEnd]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             style={styles.avatarGradientContainer}
           >
-            <View style={styles.avatarWhiteRing}>
-              <View style={styles.avatarGrayCircle}>
+            <View style={[styles.avatarWhiteRing, { backgroundColor: colors.white }]}>
+              <View style={[styles.avatarGrayCircle, { backgroundColor: colors.avatarInnerCircle }]}>
                 <Image source={images.sandeep} style={styles.avatarImage} />
               </View>
             </View>
           </LinearGradient>
 
           {isOldUser && (
-            <LinearGradient
-              colors={['#FFE372', '#FEC091']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
+            <GradientBadge
+              colors={[colors.supporterGradientStart, colors.supporterGradientEnd]}
               style={styles.supporterBadge}
             >
               <SupporterIcon width={spacing(16)} height={spacing(16)} />
               <TextView
                 size={14}
                 weight="700"
-                style={styles.supporterText}
+                style={{ color: colors.supporterText, fontFamily: 'Inter', letterSpacing: -0.5 }}
               >
                 Supporter
               </TextView>
-            </LinearGradient>
+            </GradientBadge>
           )}
         </TouchableOpacity>
       </View>
@@ -202,25 +210,13 @@ function ProfileScreen() {
 
         <View style={styles.statsCardsRow}>
           {statsData.map((stat) => (
-            <LinearGradient
+            <StatsCard
               key={stat.id}
-              colors={['#FFD837', '#FFC3A0']}
-              start={{ x: 0.34, y: 0 }}
-              end={{ x: 1.49, y: 1 }}
-              style={styles.statsCard}
-            >
-              <View style={styles.statsIconCircle}>
-                <LaughIcon1 width={spacing(24)} height={spacing(24)} />
-              </View>
-              <View style={styles.statsCardContent}>
-                <TextView size={18} weight="800" style={{ color: colors.primaryText }}>
-                  {stat.value}
-                </TextView>
-                <TextView size={13} weight="600" style={{ color: colors.secondaryText, marginTop: spacing(1) }}>
-                  {stat.title}
-                </TextView>
-              </View>
-            </LinearGradient>
+              value={stat.value}
+              title={stat.title}
+              icon={<LaughIcon1 width={spacing(24)} height={spacing(24)} />}
+              colors={[colors.statsGradientStart, colors.statsGradientEnd]}
+            />
           ))}
         </View>
       </View>
@@ -250,85 +246,6 @@ function ProfileScreen() {
       </View>
     </View>
   );
-
-  // Empty State layout (ListEmptyComponent)
-  const EmptyState = () => (
-    <View style={[styles.emptyContainer, { backgroundColor: '#F9F9F9', borderColor: colors.border }]}>
-      <LinearGradient colors={['#FFD837', '#FFC3A0']}
-        start={{ x: 0.34, y: 0 }}
-        end={{ x: 1.49, y: 1 }} style={styles.emptyIconCircle}>
-        <RepostIconSvg width={spacing(28)} height={spacing(28)} />
-      </LinearGradient>
-      <TextView size={24} weight="800" align="center" style={{ color: colors.primaryText, marginBottom: spacing(10), lineHeight: spacing(30), includeFontPadding: false }}>
-        Nothing reposted yet
-      </TextView>
-      <TextView
-        size={17}
-        weight="500"
-        align="center"
-        style={{ color: colors.secondaryText, lineHeight: spacing(22), paddingHorizontal: spacing(16), marginBottom: spacing(24) }}
-      >
-        Repost funny videos to support comedians and spread the joy.
-      </TextView>
-      <ButtonView
-        label="Watch Videos"
-        variant="normal"
-        onPress={() => setIsOldUser(true)}
-        style={styles.watchVideosButton}
-      />
-    </View>
-  );
-
-  // Video Grid Card renderer
-  const renderVideoItem = ({ item, index }: { item: typeof MOCK_VIDEOS[0], index: number }) => {
-    const isLeft = index % 3 === 0;
-    const isRight = index % 3 === 2;
-
-    const isTopRow = index < 3;
-    const isBottomRow = index >= MOCK_VIDEOS.length - 3;
-    return (
-      <View
-        style={[
-          styles.gridItem,
-          {
-            width: ITEM_WIDTH,
-            height: ITEM_HEIGHT,
-            borderTopLeftRadius: isLeft && isTopRow ? spacing(10) : 0,
-            borderTopRightRadius: isRight && isTopRow ? spacing(10) : 0,
-
-            borderBottomLeftRadius: isLeft && isBottomRow ? spacing(10) : 0,
-            borderBottomRightRadius: isRight && isBottomRow ? spacing(10) : 0,
-          },
-        ]}
-      >
-        <Image source={{ uri: item.image }} style={StyleSheet.absoluteFill} resizeMode="cover" />
-
-        <LinearGradient
-          colors={['rgba(0, 0, 0, 0.4)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.7)']}
-          locations={[0, 0.2527, 0.6589, 1]}
-          style={StyleSheet.absoluteFill}
-        />
-
-        {/* Top Left laughs badge */}
-        <View style={styles.badgeTopLeft}>
-          <LaughIcon1 width={spacing(12)} height={spacing(12)} />
-          <TextView style={styles.badgeText}>{item.laughs}</TextView>
-        </View>
-
-        {/* Bottom Left tokens badge */}
-        <View style={styles.badgeBottomLeft}>
-          <TipIcon width={spacing(14)} height={spacing(14)} />
-          <TextView style={styles.badgeTextBottom}>{item.coins}</TextView>
-        </View>
-
-        {/* Bottom Right duration badge */}
-        <View style={styles.badgeBottomRight}>
-          <TextView style={styles.durationText}>{item.duration}</TextView>
-        </View>
-      </View>
-    );
-  };
-
   return (
     <BaseView
       showHeader
@@ -336,18 +253,47 @@ function ProfileScreen() {
       headerTitle="Profile"
       titleAlign="left"
       headerRight={<View />}
-      style={[styles.container, { backgroundColor: '#FFFFFF' }]}
+      style={[styles.container, { backgroundColor: colors.white }]}
     >
       <FlatList
         data={isOldUser ? MOCK_VIDEOS : []}
-        renderItem={renderVideoItem}
+        renderItem={({ item, index }) => {
+          const isLeft = index % 3 === 0;
+          const isRight = index % 3 === 2;
+          const isTopRow = index < 3;
+          const isBottomRow = index >= MOCK_VIDEOS.length - 3;
+
+          return (
+            <VideoCard
+              item={item}
+              width={ITEM_WIDTH}
+              height={ITEM_HEIGHT}
+              borderRadii={{
+                borderTopLeftRadius: isLeft && isTopRow ? spacing(10) : 0,
+                borderTopRightRadius: isRight && isTopRow ? spacing(10) : 0,
+                borderBottomLeftRadius: isLeft && isBottomRow ? spacing(10) : 0,
+                borderBottomRightRadius: isRight && isBottomRow ? spacing(10) : 0,
+              }}
+            />
+          );
+        }}
         keyExtractor={(item) => item.id}
         numColumns={3}
         columnWrapperStyle={{
           justifyContent: 'space-around',
           marginBottom: spacing(2),
-        }} ListHeaderComponent={<ProfileHeader />}
-        ListEmptyComponent={<EmptyState />}
+        }}
+        ListHeaderComponent={<ProfileHeader />}
+        ListEmptyComponent={
+          <EmptyState
+            title="Nothing reposted yet"
+            description="Repost funny videos to support comedians and spread the joy."
+            icon={<RepostIconSvg width={spacing(28)} height={spacing(28)} />}
+            iconGradientColors={[colors.statsGradientStart, colors.statsGradientEnd]}
+            buttonLabel="Watch Videos"
+            onButtonPress={() => setIsOldUser(true)}
+          />
+        }
         ListFooterComponent={<View style={styles.footerSpacing} />}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.flatListContent}
@@ -381,17 +327,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   avatarGradientContainer: {
-    width: spacing(106),
-    height: spacing(106),
+    width: spacing(102),
+    height: spacing(102),
     borderRadius: spacing(53),
     justifyContent: 'center',
     alignItems: 'center',
   },
   avatarWhiteRing: {
-    width: spacing(98),
-    height: spacing(98),
+    width: spacing(96),
+    height: spacing(96),
     borderRadius: spacing(49),
-    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -461,28 +406,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
-  statsCard: {
-    width: spacing(155),
-    height: spacing(48),
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: spacing(4),
-    borderRadius: spacing(30),
-    marginHorizontal: spacing(2),
-    gap: spacing(4),
-  },
-  statsIconCircle: {
-    width: spacing(40),
-    height: spacing(40),
-    borderRadius: spacing(20),
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  statsCardContent: {
-    flex: 1,
-    justifyContent: 'center',
-  },
   followingSection: {
     alignItems: 'center',
     marginBottom: spacing(22),
@@ -494,85 +417,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: spacing(10),
   },
-  emptyContainer: {
-    paddingVertical: spacing(36),
-    paddingHorizontal: spacing(20),
-    borderRadius: spacing(10),
-    borderWidth: 1.2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: spacing(4),
-  },
-  emptyIconCircle: {
-    width: spacing(52),
-    height: spacing(52),
-    borderRadius: spacing(26),
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: spacing(16),
-  },
-  watchVideosButton: {
-    borderRadius: spacing(30),
-    paddingVertical: spacing(12),
-    paddingHorizontal: spacing(30),
-    alignSelf: 'center',
-  },
-  gridItem: {
-    overflow: 'hidden',
-    backgroundColor: '#EEEEEE',
-
-  },
-  badgeTopLeft: {
-    position: 'absolute',
-    width: spacing(56),
-    height: spacing(22),
-    top: spacing(8),
-    left: spacing(8),
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#0000005C',
-    paddingHorizontal: spacing(6),
-    paddingVertical: spacing(2),
-    borderRadius: spacing(12),
-    gap: spacing(4),
-  },
-  badgeBottomLeft: {
-    position: 'absolute',
-    bottom: spacing(8),
-    left: spacing(8),
-    width: spacing(58),
-    height: spacing(22),
-    paddingHorizontal: spacing(6),
-    paddingVertical: spacing(2),
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: spacing(12),
-    backgroundColor: '#0000005C',
-    gap: spacing(4),
-  },
-  badgeBottomRight: {
-    position: 'absolute',
-    bottom: spacing(8),
-    right: spacing(8),
-  },
-  badgeText: {
-    color: '#FFFFFF',
-    fontSize: fontScale(11),
-    fontWeight: '600',
-  },
-  badgeTextBottom: {
-    color: '#FFFFFF',
-    fontSize: fontScale(11),
-    fontWeight: '600',
-  },
-  durationText: {
-    color: '#FFFFFF',
-    fontSize: fontScale(11),
-    fontWeight: '600',
-  },
   footerSpacing: {
     height: spacing(34),
   },
 });
-
-export default ProfileScreen;
