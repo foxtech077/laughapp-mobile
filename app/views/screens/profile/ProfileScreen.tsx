@@ -15,11 +15,12 @@ import { spacing, fontScale } from '../../../utils/dimensions';
 import BaseView from '../../components/BaseView';
 import TextView from '../../components/TextView';
 import ButtonView from '../../components/ButtonView';
-import GradientBadge from '../../components/GradientBadge';
-import StatsCard from '../../components/StatsCard';
-import EmptyState from '../../components/EmptyState';
-import VideoCard from '../../components/VideoCard';
+
 import { images } from '../../../constants/images';
+import GradientBadge from './components/GradientBadge';
+import StatsCard from './components/StatsCard';
+import VideoCard from './components/VideoCard';
+import EmptyState from './components/EmptyState';
 
 const { LaughIcon1, SupporterIcon, LocationIconSvg, RepostIconSvg } = images;
 

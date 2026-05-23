@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   subtitle: {
   },
   cardsContainer: {
-    // RoleSelectionCard already has marginBottom, so we don't need gap here
+    // RoleSelectionCard already has marginBottom
   },
   footer: {
     paddingHorizontal: spacing(24),
