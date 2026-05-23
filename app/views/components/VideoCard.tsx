@@ -94,7 +94,7 @@ export default function VideoCard({
 
       {/* Top Left laughs badge */}
       <View style={[styles.badgeTopLeft, { backgroundColor: colors.badgeOverlay }]}>
-        <LaughIcon1 width={spacing(12)} height={spacing(12)} style={{ backgroundColor: colors.white, borderRadius: '50%' }} />
+        <LaughIcon1 width={spacing(12)} height={spacing(12)} style={{ backgroundColor: colors.white, borderRadius: spacing(6) }} />
         <TextView style={[styles.badgeText, { color: colors.white }]}>{item.laughs}</TextView>
       </View>
 

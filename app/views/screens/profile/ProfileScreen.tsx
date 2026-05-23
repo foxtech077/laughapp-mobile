@@ -8,7 +8,8 @@ import {
   Dimensions,
   Alert,
 } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import { useTheme, ThemeProvider } from '@react-navigation/native';
+import { CustomLightTheme } from '../../../constants/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import { spacing, fontScale } from '../../../utils/dimensions';
 import BaseView from '../../components/BaseView';
@@ -100,12 +101,9 @@ const ITEM_WIDTH = (screenWidth - (gridPadding * 2) - (columnGap * (numColumns -
 const ITEM_HEIGHT = ITEM_WIDTH * (178 / 131);
 
 /**
- * Profile screen showing reposted videos,
- * supporter stats, and user information.
- *
- * @returns {JSX.Element} The rendered Profile Screen
+ * Profile screen content wrapped inside a strict Light Theme Provider.
  */
-export default function ProfileScreen() {
+function ProfileScreenContent() {
   const { colors } = useTheme();
   const [isOldUser, setIsOldUser] = useState(false);
 
@@ -250,7 +248,7 @@ export default function ProfileScreen() {
     <BaseView
       showHeader
       showBackButton
-      headerTitle="Profile"
+      // headerTitle="Profile"
       titleAlign="left"
       headerRight={<View />}
       style={[styles.container, { backgroundColor: colors.white }]}
@@ -302,6 +300,18 @@ export default function ProfileScreen() {
         windowSize={5}
       />
     </BaseView>
+  );
+}
+
+/**
+ * Profile screen showing reposted videos,
+ * supporter stats, and user information.
+ *
+ * @returns {JSX.Element} The rendered Profile Screen
+ */
+export default function ProfileScreen() {
+  return (
+    <ProfileScreenContent />
   );
 }
 
