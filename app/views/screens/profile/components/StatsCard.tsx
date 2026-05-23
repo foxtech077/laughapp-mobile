@@ -48,16 +48,18 @@ export default function StatsCard({
             end={{ x: 1.49, y: 1 }}
             style={[styles.cardContainer, style]}
         >
-            <View style={[styles.iconCircle, { backgroundColor: themeColors.white }]}>
-                {icon}
-            </View>
-            <View style={styles.textContent}>
-                <TextView size={18} weight="800" style={{ color: themeColors.primaryText }}>
-                    {value}
-                </TextView>
-                <TextView size={13} weight="600" style={{ color: themeColors.secondaryText, marginTop: spacing(1) }}>
-                    {title}
-                </TextView>
+            <View style={styles.cardContent}>
+                <View style={[styles.iconCircle, { backgroundColor: themeColors.white }]}>
+                    {icon}
+                </View>
+                <View style={styles.textContent}>
+                    <TextView size={18} weight="800" style={{ color: themeColors.primaryText }}>
+                        {value}
+                    </TextView>
+                    <TextView size={13} weight="600" style={{ color: themeColors.secondaryText, marginTop: spacing(1) }}>
+                        {title}
+                    </TextView>
+                </View>
             </View>
         </LinearGradient>
     );
@@ -67,11 +69,15 @@ const styles = StyleSheet.create({
     cardContainer: {
         width: spacing(155),
         height: spacing(48),
+        borderRadius: spacing(30),
+        marginHorizontal: spacing(2),
+        overflow: 'hidden',
+    },
+    cardContent: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         padding: spacing(4),
-        borderRadius: spacing(30),
-        marginHorizontal: spacing(2),
         gap: spacing(4),
     },
     iconCircle: {

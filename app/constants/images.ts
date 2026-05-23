@@ -5,6 +5,12 @@ import LaughIcon1 from '../../assets/images/icons/laugh-icon1.svg';
 import SupporterIcon from '../../assets/images/icons/supporter_icon.svg';
 import LocationIconSvg from '../../assets/images/icons/location-icon.svg';
 import RepostIconSvg from '../../assets/images/icons/repost-icon.svg';
+import FollowingActiveIcon from '../../assets/images/icons/followingActive.svg';
+import FollowingInactiveIcon from '../../assets/images/icons/followingInactive.svg';
+import TopActiveIcon from '../../assets/images/icons/topActive.svg';
+import TopInactiveIcon from '../../assets/images/icons/topInactive.svg';
+import ProfileActiveIcon from '../../assets/images/icons/profileActive.svg';
+import ProfileInactiveIcon from '../../assets/images/icons/profileInactive.svg';
 
 export const images = {
     //PNG's
@@ -21,4 +27,10 @@ export const images = {
     SupporterIcon,
     LocationIconSvg,
     RepostIconSvg,
+    FollowingActiveIcon,
+    FollowingInactiveIcon,
+    TopActiveIcon,
+    TopInactiveIcon,
+    ProfileActiveIcon,
+    ProfileInactiveIcon,
 }

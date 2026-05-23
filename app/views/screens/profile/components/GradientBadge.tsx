@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { ViewStyle, StyleSheet } from 'react-native';
+import { View, ViewStyle, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 /**
@@ -16,6 +16,8 @@ interface GradientBadgeProps {
     end?: { x: number; y: number };
     /** Optional custom styles to apply to the badge container */
     style?: ViewStyle;
+    /** Optional custom styles for the inner content wrapper (use for padding) */
+    contentStyle?: ViewStyle;
 }
 
 /**
@@ -35,6 +37,7 @@ export default function GradientBadge({
     start = { x: 0, y: 0 },
     end = { x: 1, y: 1 },
     style,
+    contentStyle,
 }: GradientBadgeProps) {
     return (
         <LinearGradient
@@ -43,16 +46,19 @@ export default function GradientBadge({
             end={end}
             style={[styles.badgeContainer, style]}
         >
-            {children}
+            <View style={[styles.content, contentStyle]}>{children}</View>
         </LinearGradient>
     );
 }
 
 const styles = StyleSheet.create({
     badgeContainer: {
+        borderRadius: 9999,
+        overflow: 'hidden',
+    },
+    content: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 9999, // Pill shape
     },
 });

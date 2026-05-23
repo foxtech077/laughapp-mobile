@@ -150,6 +150,7 @@ function ProfileScreenContent() {
             <GradientBadge
               colors={[colors.supporterGradientStart, colors.supporterGradientEnd]}
               style={styles.supporterBadge}
+              contentStyle={styles.supporterBadgeContent}
             >
               <SupporterIcon width={spacing(16)} height={spacing(16)} />
               <TextView
@@ -248,8 +249,8 @@ function ProfileScreenContent() {
   return (
     <BaseView
       showHeader
-      showBackButton
-      // headerTitle="Profile"
+      // showBackButton
+      headerTitle="Profile"
       titleAlign="left"
       headerRight={<View />}
       style={[styles.container, { backgroundColor: colors.white }]}
@@ -365,19 +366,14 @@ const styles = StyleSheet.create({
     borderRadius: spacing(45),
   },
   supporterBadge: {
-    position: 'absolute',
-    bottom: -spacing(6),
+    marginTop: -spacing(23),
     width: spacing(113.3),
-    height: spacing(29),
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: spacing(3),
-    paddingTop: spacing(5),
-    paddingBottom: spacing(5),
-    paddingLeft: spacing(9),
-    paddingRight: spacing(9),
     borderRadius: spacing(20),
+  },
+  supporterBadgeContent: {
+    gap: spacing(3),
+    paddingVertical: spacing(5),
+    paddingHorizontal: spacing(9),
   },
   supporterText: {
     color: '#2B1E12',
