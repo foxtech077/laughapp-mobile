@@ -9,7 +9,7 @@ import ButtonView from '../../components/ButtonView';
 import RoleSelectionCard from './components/RoleSelectionCard';
 import { images } from '../../../constants/images';
 
-const {RoleIcon1, RoleIcon2, CheckMarkCircle2} = images;
+const { RoleIcon1, RoleIcon2, CheckMarkCircle2 } = images;
 
 const roles = [
   {
@@ -46,21 +46,21 @@ function ChooseRoleScreen() {
   };
 
   return (
-    <BaseView 
-      style={styles.container} 
-      gradientBackground 
-      gradientColors={colors.primaryGradient} 
-      gradientLocations={[0, 0.5, 1]} 
-      gradientStart={{ x: 0, y: 0 }} 
+    <BaseView
+      style={styles.container}
+      gradientBackground
+      gradientColors={colors.primaryGradient}
+      gradientLocations={[0, 0.5, 1]}
+      gradientStart={{ x: 0, y: 0 }}
       gradientEnd={{ x: 1, y: 1 }}
       applyBottomInset={true}
     >
       <View style={styles.content}>
         <View style={styles.header}>
-          <TextView variant="heading" style={[styles.title, { color: colors.primaryText }]}>
+          <TextView variant="heading" style={[styles.title, { color: colors.primaryText, lineHeight: spacing(30), includeFontPadding: false, }]}>
             What brings you to LaughApp?
           </TextView>
-          <TextView variant="subheading" style={[styles.subtitle, { color: colors.secondaryText }]}>
+          <TextView variant="subheading" style={[styles.subtitle, { color: colors.secondaryText, lineHeight: spacing(24), includeFontPadding: false }]}>
             Select your role to get the right features and recommendations.
           </TextView>
         </View>
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   subtitle: {
   },
   cardsContainer: {
-    // RoleSelectionCard already has marginBottom, so we don't need gap here
+    // RoleSelectionCard already has marginBottom
   },
   footer: {
     paddingHorizontal: spacing(24),
