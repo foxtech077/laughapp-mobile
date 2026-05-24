@@ -94,7 +94,7 @@ function BaseView({
 
             <View style={styles.headerCenter}>
               {headerTitle ? (
-                <TextView size={spacing(22)} weight='800' align={titleAlign || 'center'} numberOfLines={1}>
+                <TextView size={spacing(20)} weight='800' align={titleAlign || 'center'} numberOfLines={1}>
                   {headerTitle}
                 </TextView>
               ) : null}
@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: spacing(16),
     paddingVertical: spacing(8),
+    // backgroundColor: 'red'
   },
   headerLeft: {
     minWidth: spacing(40),

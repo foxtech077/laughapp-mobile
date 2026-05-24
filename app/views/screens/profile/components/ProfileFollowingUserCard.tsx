@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Image, ViewStyle, TouchableOpacity } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import TextView from '../../../components/TextView';
-import { spacing } from '../../../../utils/dimensions';
+import { fontScale, moderateScale, spacing, verticalScale } from '../../../../utils/dimensions';
 
 export interface ProfileFollowingUserData {
   id: string;
@@ -50,10 +50,10 @@ export default function ProfileFollowingUserCard({
           fadeDuration={200}
         />
         <View style={styles.textContainer}>
-          <TextView size={spacing(18)} weight="700" style={{ color: colors.primaryText }}>
+          <TextView size={fontScale(18)} weight="700" style={{ color: colors.primaryText }}>
             {user.fullName}
           </TextView>
-          <TextView size={spacing(15)} weight="600" style={{ color: colors.placeholder, marginTop: spacing(4) }}>
+          <TextView size={fontScale(15)} weight="600" style={{ color: colors.placeholder, marginTop: spacing(4) }}>
             {user.username}
           </TextView>
         </View>
@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
   },
   actionButton: {
     width: spacing(90),
-    height: spacing(31),
-    borderRadius: spacing(6),
+    height: verticalScale(31),
+    borderRadius: moderateScale(6),
     paddingTop: spacing(6),
     paddingBottom: spacing(6),
     paddingLeft: spacing(10),
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   actionButtonText: {
     fontWeight: '600',
-    fontSize: spacing(16),
+    fontSize: fontScale(16),
     letterSpacing: -0.5,
   },
 });
