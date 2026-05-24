@@ -8,7 +8,7 @@ import {
   Dimensions,
   Alert,
 } from 'react-native';
-import { useTheme, ThemeProvider } from '@react-navigation/native';
+import { useTheme, ThemeProvider, useNavigation } from '@react-navigation/native';
 import { CustomLightTheme } from '../../../constants/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import { spacing, fontScale } from '../../../utils/dimensions';
@@ -106,6 +106,7 @@ const ITEM_HEIGHT = ITEM_WIDTH * (178 / 131);
  */
 function ProfileScreenContent() {
   const { colors } = useTheme();
+  const navigation = useNavigation();
   const [isOldUser, setIsOldUser] = useState(false);
 
   const statsData = [
@@ -222,14 +223,18 @@ function ProfileScreenContent() {
       </View>
 
       {/* Following Stats */}
-      <View style={styles.followingSection}>
+      <TouchableOpacity 
+        style={styles.followingSection} 
+        activeOpacity={0.7} 
+        onPress={() => navigation.navigate('ProfileFollowingScreen' as never)}
+      >
         <TextView size={22} weight="800" align="center" style={{ color: colors.primaryText }}>
           {isOldUser ? '739' : '0'}
         </TextView>
         <TextView size={14} weight="500" align="center" style={{ color: colors.secondaryText, marginTop: spacing(2) }}>
           Following
         </TextView>
-      </View>
+      </TouchableOpacity>
 
       {/* Section Title */}
       <View style={styles.sectionTitleRow}>

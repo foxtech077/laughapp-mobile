@@ -13,4 +13,6 @@ export const routes = {
     FOLLOWING_SCREEN: "FollowingScreen",
     TOP_COMEDIANS_SCREEN: "TopComediansScreen",
     PROFILE_SCREEN: "ProfileScreen",
+    PROFILE_SCREEN_MAIN: "ProfileScreenMain",
+    PROFILE_FOLLOWING_SCREEN: "ProfileFollowingScreen",
 }
