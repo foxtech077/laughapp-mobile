@@ -83,7 +83,7 @@ function BaseView({
 
         {showHeader && (
           <View style={[styles.header]}>
-            {showBackButton && navigation.canGoBack() && (
+            {showBackButton && (
               <View style={styles.headerLeft}>
 
                 <TouchableOpacity style={styles.backButton} onPress={handleBack} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
@@ -94,7 +94,7 @@ function BaseView({
 
             <View style={styles.headerCenter}>
               {headerTitle ? (
-                <TextView size={22} weight='800' align={titleAlign || 'center'} numberOfLines={1}>
+                <TextView size={spacing(22)} weight='800' align={titleAlign || 'center'} numberOfLines={1}>
                   {headerTitle}
                 </TextView>
               ) : null}

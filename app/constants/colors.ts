@@ -12,6 +12,7 @@ export const CustomLightTheme: Theme | any = {
     secondaryText: '#5A5656',
     placeholder: '#949494',
     border: '#C4C4C4',
+    borderLight: '#D9D6D6',
     error: '#FF3B30',
     cardBackground: '#FFFFFF',
     cardBorder: '#E5E5E5',
@@ -42,6 +43,7 @@ export const CustomLightTheme: Theme | any = {
     inputLabelInactive: '#AAAAAA',
     yellow_700: "#E89700",
     yellow_600: "#FFF3D0",
+    gray100: "#F2F2F2",
   },
 };
 
@@ -57,6 +59,7 @@ export const CustomDarkTheme: Theme | any = {
     secondaryText: '#5A5656',
     placeholder: '#949494',
     border: '#C4C4C4',
+    borderLight: '#D9D6D6',
     error: '#FF3B30',
     cardBackground: '#FFFFFF',
     cardBorder: '#E5E5E5',
@@ -87,5 +90,6 @@ export const CustomDarkTheme: Theme | any = {
     inputLabelInactive: '#AAAAAA',
     yellow_700: "#E89700",
     yellow_600: "#FFF3D0",
+    gray100: "#F2F2F2",
   },
 };

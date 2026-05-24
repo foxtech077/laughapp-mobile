@@ -15,6 +15,7 @@ declare module '@react-navigation/native' {
       secondaryText: string;
       placeholder: string;
       border: string;
+      borderLight: string;
       error: string;
       cardBackground: string;
       cardBorder: string;
@@ -45,6 +46,7 @@ declare module '@react-navigation/native' {
       inputLabelInactive: string;
       yellow_700: string;
       yellow_600: string;
+      gray100: string;
     };
   };
 
