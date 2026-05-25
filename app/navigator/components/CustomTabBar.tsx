@@ -3,7 +3,7 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@react-navigation/native';
-import { spacing } from '../../utils/dimensions';
+import { spacing, fontScale, moderateScale } from '../../utils/dimensions';
 import TextView from '../../views/components/TextView';
 import { images } from '../../constants/images';
 import { routes } from '../routes';
@@ -95,7 +95,7 @@ export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
                             <Icon width={iconWidth} height={iconHeight} />
                         </View>
                         <TextView
-                            size={13}
+                            size={fontScale(13)}
                             weight={isFocused ? '700' : '500'}
                             align="center"
                             style={{
@@ -115,8 +115,8 @@ export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        borderTopLeftRadius: spacing(20),
-        borderTopRightRadius: spacing(20),
+        borderTopLeftRadius: moderateScale(20),
+        borderTopRightRadius: moderateScale(20),
         paddingTop: spacing(8),
         borderTopWidth: 1,
         borderTopColor: "#C4C4C4",

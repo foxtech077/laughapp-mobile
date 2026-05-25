@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { View, ViewStyle, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { moderateScale } from '../../../../utils/dimensions';
 
 /**
  * Props for the GradientBadge component.
@@ -53,7 +54,7 @@ export default function GradientBadge({
 
 const styles = StyleSheet.create({
     badgeContainer: {
-        borderRadius: 9999,
+        borderRadius: moderateScale(9999),
         overflow: 'hidden',
     },
     content: {

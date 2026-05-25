@@ -11,7 +11,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '@react-navigation/native';
-import { spacing } from '../../utils/dimensions';
+import { fontScale, spacing } from '../../utils/dimensions';
 import TextView from './TextView';
 import LinearGradient from 'react-native-linear-gradient';
 import BackArrow from '../../../assets/images/icons/arrow-left.svg';
@@ -94,7 +94,7 @@ function BaseView({
 
             <View style={styles.headerCenter}>
               {headerTitle ? (
-                <TextView size={spacing(20)} weight='800' align={titleAlign || 'center'} numberOfLines={1}>
+                <TextView size={fontScale(20)} weight='800' align={titleAlign || 'center'} numberOfLines={1}>
                   {headerTitle}
                 </TextView>
               ) : null}

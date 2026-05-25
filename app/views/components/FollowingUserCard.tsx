@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, ViewStyle } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import TextView from './TextView';
 import ButtonView from './ButtonView';
-import { spacing } from '../../utils/dimensions';
+import { spacing, fontScale, moderateScale } from '../../utils/dimensions';
 
 export interface FollowingUserData {
   id: string;
@@ -39,7 +39,7 @@ export default function FollowingUserCard({
   const { colors } = useTheme();
 
   return (
-    <View style={[styles.container, { borderBottomColor: colors.border }, style]}>
+    <View style={[styles.container, { borderBottomColor: colors.border + '50' }, style]}>
       <View style={styles.leftContent}>
         <Image
           source={{ uri: user.avatar }}
@@ -48,10 +48,10 @@ export default function FollowingUserCard({
           fadeDuration={200}
         />
         <View style={styles.textContainer}>
-          <TextView size={15} weight="700" style={{ color: colors.primaryText }}>
+          <TextView size={fontScale(15)} weight="700" style={{ color: colors.primaryText }}>
             {user.fullName}
           </TextView>
-          <TextView size={13} weight="500" style={{ color: colors.secondaryText, marginTop: spacing(2) }}>
+          <TextView size={fontScale(13)} weight="500" style={{ color: colors.secondaryText, marginTop: spacing(2) }}>
             {user.username}
           </TextView>
         </View>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   avatar: {
     width: spacing(52),
     height: spacing(52),
-    borderRadius: spacing(26),
+    borderRadius: moderateScale(26),
   },
   textContainer: {
     marginLeft: spacing(12),

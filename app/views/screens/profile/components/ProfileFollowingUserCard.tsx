@@ -41,7 +41,7 @@ export default function ProfileFollowingUserCard({
   const { colors } = useTheme();
 
   return (
-    <View style={[styles.container, { borderBottomColor: colors.borderLight, borderBottomWidth: hideDivider ? 0 : 1 }, style]}>
+    <View style={[styles.container, { borderBottomColor: colors.borderLight + '50', borderBottomWidth: hideDivider ? 0 : 1 }, style]}>
       <View style={styles.leftContent}>
         <Image
           source={{ uri: user.avatar }}
@@ -82,11 +82,10 @@ export default function ProfileFollowingUserCard({
 
 const styles = StyleSheet.create({
   container: {
-
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: spacing(7),
+    paddingVertical: spacing(12),
     borderBottomWidth: 1,
   },
   leftContent: {
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
   },
   avatar: {
     width: spacing(60),
-    height: spacing(60),
+    height: verticalScale(60),
     borderRadius: spacing(30),
   },
   textContainer: {
@@ -105,20 +104,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   actionButton: {
-    width: spacing(90),
-    height: verticalScale(31),
-    borderRadius: moderateScale(6),
-    paddingTop: spacing(6),
-    paddingBottom: spacing(6),
-    paddingLeft: spacing(10),
-    paddingRight: spacing(10),
+    width: spacing(100),
+    height: verticalScale(36),
+    borderRadius: moderateScale(8),
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 3,
   },
   actionButtonText: {
     fontWeight: '600',
-    fontSize: fontScale(16),
-    letterSpacing: -0.5,
+    fontSize: fontScale(14),
+    letterSpacing: -0.2,
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
 });

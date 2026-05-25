@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { spacing, fontScale } from '../../utils/dimensions';
+import { spacing, fontScale, moderateScale, verticalScale } from '../../utils/dimensions';
 import TextView from './TextView';
 
 interface TextInputViewProps extends TextInputProps {
@@ -20,7 +20,7 @@ interface TextInputViewProps extends TextInputProps {
   variant?: 'floating' | 'auth';
 }
 
-const CONTAINER_HEIGHT = spacing(60);
+const CONTAINER_HEIGHT = verticalScale(60);
 const H_PADDING = spacing(16);
 
 // Active = label floated to top
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1.5,
-    borderRadius: spacing(12),
+    borderRadius: moderateScale(12),
     paddingHorizontal: H_PADDING,
   },
   innerArea: {
@@ -218,8 +218,8 @@ errorContainerCenter: {
   alignItems: 'center',
 },
   authContainer: {
-    height: spacing(66),
-    borderRadius: spacing(10),
+    height: verticalScale(66),
+    borderRadius: moderateScale(10),
     borderWidth: 1,
     paddingTop: spacing(8),
     paddingBottom: spacing(8),
@@ -233,8 +233,8 @@ errorContainerCenter: {
   authErrorText: {
     fontFamily: 'Inter',
     fontWeight: '600',
-    fontSize: 16,
-    marginTop: 4,
+    fontSize: fontScale(16),
+    marginTop: spacing(4),
     width: '100%',
   },
 });

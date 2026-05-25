@@ -4,7 +4,7 @@ import { useTheme } from '@react-navigation/native';
 
 import LinearGradient from 'react-native-linear-gradient';
 import IconCircle from './IconCircle';
-import { spacing } from '../../../../utils/dimensions';
+import { spacing, verticalScale, fontScale, moderateScale } from '../../../../utils/dimensions';
 import TextView from '../../../components/TextView';
 import ButtonView from '../../../components/ButtonView';
 
@@ -76,7 +76,7 @@ export default function EmptyState({
             )}
 
             <TextView
-                size={24}
+                size={fontScale(24)}
                 weight="800"
                 align="center"
                 style={[
@@ -87,7 +87,7 @@ export default function EmptyState({
                 {title}
             </TextView>
             <TextView
-                size={17}
+                size={fontScale(17)}
                 weight="500"
                 align="center"
                 style={[
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     container: {
         paddingVertical: spacing(36),
         paddingHorizontal: spacing(20),
-        borderRadius: spacing(10),
+        borderRadius: moderateScale(10),
         borderWidth: 1.2,
         alignItems: 'center',
         justifyContent: 'center',
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     iconCircle: {
         width: spacing(52),
         height: spacing(52),
-        borderRadius: spacing(26),
+        borderRadius: moderateScale(26),
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: spacing(16),
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         marginBottom: spacing(24),
     },
     button: {
-        borderRadius: spacing(30),
+        borderRadius: moderateScale(30),
         paddingVertical: spacing(12),
         paddingHorizontal: spacing(30),
         alignSelf: 'center',

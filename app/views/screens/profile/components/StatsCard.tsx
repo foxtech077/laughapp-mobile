@@ -3,7 +3,7 @@ import { View, StyleSheet, ViewStyle } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useTheme } from '@react-navigation/native';
 import TextView from '../../../components/TextView';
-import { spacing } from '../../../../utils/dimensions';
+import { spacing, fontScale, moderateScale, verticalScale } from '../../../../utils/dimensions';
 
 /**
  * Props for the StatsCard component.
@@ -53,10 +53,10 @@ export default function StatsCard({
                     {icon}
                 </View>
                 <View style={styles.textContent}>
-                    <TextView size={18} weight="800" style={{ color: themeColors.primaryText }}>
+                    <TextView size={fontScale(18)} weight="800" numberOfLines={1} ellipsizeMode="tail" style={{ color: themeColors.primaryText }}>
                         {value}
                     </TextView>
-                    <TextView size={13} weight="600" style={{ color: themeColors.secondaryText, marginTop: spacing(1) }}>
+                    <TextView size={fontScale(13)} weight="600" numberOfLines={1} ellipsizeMode="tail" style={{ color: themeColors.secondaryText, marginTop: spacing(1) }}>
                         {title}
                     </TextView>
                 </View>
@@ -67,10 +67,9 @@ export default function StatsCard({
 
 const styles = StyleSheet.create({
     cardContainer: {
-        width: spacing(155),
-        height: spacing(48),
-        borderRadius: spacing(30),
-        marginHorizontal: spacing(2),
+        flex: 1,
+        minHeight: verticalScale(48),
+        borderRadius: moderateScale(30),
         overflow: 'hidden',
     },
     cardContent: {
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
     iconCircle: {
         width: spacing(40),
         height: spacing(40),
-        borderRadius: spacing(20),
+        borderRadius: moderateScale(20),
         justifyContent: 'center',
         alignItems: 'center',
     },
