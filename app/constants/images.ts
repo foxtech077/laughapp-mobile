@@ -11,6 +11,12 @@ import TopActiveIcon from '../../assets/images/icons/topActive.svg';
 import TopInactiveIcon from '../../assets/images/icons/topInactive.svg';
 import ProfileActiveIcon from '../../assets/images/icons/profileActive.svg';
 import ProfileInactiveIcon from '../../assets/images/icons/profileInactive.svg';
+import BellIcon from '../../assets/images/icons/bell.svg';
+import FilterIcon from '../../assets/images/icons/filter.svg';
+import ClockIcon from '../../assets/images/icons/clock.svg';
+import InfoIcon from '../../assets/images/icons/info.svg';
+import TrendUpIcon from '../../assets/images/icons/trend-up.svg';
+import TrendDownIcon from '../../assets/images/icons/trend-down.svg';
 
 export const images = {
     //PNG's
@@ -33,4 +39,10 @@ export const images = {
     TopInactiveIcon,
     ProfileActiveIcon,
     ProfileInactiveIcon,
+    BellIcon,
+    FilterIcon,
+    ClockIcon,
+    InfoIcon,
+    TrendUpIcon,
+    TrendDownIcon
 }
