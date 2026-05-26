@@ -48,6 +48,7 @@ declare module '@react-navigation/native' {
       yellow_600: string;
       gray100: string;
       primaryYellow: string;
+      cardShadow: string;
     };
   };
 
