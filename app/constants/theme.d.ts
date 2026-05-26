@@ -35,6 +35,8 @@ declare module '@react-navigation/native' {
       supporterText: string;
       supporterGradientStart: string;
       supporterGradientEnd: string;
+      onboardingGradientStart: string;
+      onboardingGradientEnd: string;
       statsGradientStart: string;
       statsGradientEnd: string;
       emptyStateBackground: string;
