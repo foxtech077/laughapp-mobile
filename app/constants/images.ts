@@ -11,6 +11,12 @@ import TopActiveIcon from '../../assets/images/icons/topActive.svg';
 import TopInactiveIcon from '../../assets/images/icons/topInactive.svg';
 import ProfileActiveIcon from '../../assets/images/icons/profileActive.svg';
 import ProfileInactiveIcon from '../../assets/images/icons/profileInactive.svg';
+import OnboardingFeedIntro from '../../assets/images/icons/onboarding-feed-intro.svg';
+import OnboardingCoin from '../../assets/images/icons/onboarding-coin.svg';
+import OnboardingWatch from '../../assets/images/icons/onboarding-watch.svg';
+import SupporterHelp from '../../assets/images/icons/supporter-help.svg';
+import SupporterPremium from '../../assets/images/icons/supporter-premium.svg';
+import SupporterLaughs from '../../assets/images/icons/supporter-laughs.svg';
 
 export const images = {
     //PNG's
@@ -33,4 +39,11 @@ export const images = {
     TopInactiveIcon,
     ProfileActiveIcon,
     ProfileInactiveIcon,
+    OnboardingFeedIntro,
+    OnboardingCoin,
+    OnboardingWatch,
+    SupporterHelp,
+    SupporterPremium,
+    SupporterLaughs,
+
 }

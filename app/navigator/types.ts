@@ -26,6 +26,7 @@ export type HomeTabParamList = {
 
 export type HomeStackParamList = {
   [routes.HOME_TABS]: undefined;
+  [routes.ONBOARDING_FEED_INTRO_SCREEN]: undefined;
   [routes.ONBOARDING_CHOOSE_ROLE_SCREEN]: undefined;
   [routes.CREATE_FAN_ACCOUNT_SCREEN]: undefined;
   [routes.CREATE_COMEDIAN_ACCOUNT_SCREEN]: undefined;

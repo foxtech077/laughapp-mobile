@@ -1,0 +1,7 @@
+<svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="27" cy="27" r="25.5" fill="#FEDF6F" stroke="#231F20" stroke-width="3"/>
+  <rect x="18" y="12" width="18" height="30" rx="5" fill="#FFFFFF" stroke="#231F20" stroke-width="2.5"/>
+  <circle cx="27" cy="16" r="1.5" fill="#231F20"/>
+  <!-- Star shape in center of phone screen -->
+  <path d="M27 21.5l1.5 3.5 3.5.5-2.5 2.5 1 3.5-3.5-2-3.5 2 1-3.5-2.5-2.5 3.5-.5z" fill="#231F20"/>
+</svg>

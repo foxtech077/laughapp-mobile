@@ -1,0 +1,13 @@
+<svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Globe Base Outline -->
+  <circle cx="24" cy="24" r="18" fill="#FFFFFF" stroke="#231F20" stroke-width="2.5"/>
+  <!-- Latitude / Longitude lines -->
+  <path d="M24 6c4 6 5 12 5 18s-1 12-5 18M24 6c-4 6-5 12-5 18s1 12 5 18" stroke="#231F20" stroke-width="2" stroke-linecap="round"/>
+  <path d="M6.5 24h35M10.5 15h27M10.5 33h27" stroke="#231F20" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Tiny Yellow Laughing emoji in lower-right -->
+  <circle cx="38" cy="38" r="11" fill="#FEDF6F" stroke="#231F20" stroke-width="2.2"/>
+  <path d="M34 36.5c1 1.5 2.5 1.5 3 0" stroke="#231F20" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  <path d="M42 36.5c-1 1.5-2.5 1.5-3 0" stroke="#231F20" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  <path d="M35 41c1 3.5 5 3.5 6 0h-6z" fill="#231F20"/>
+</svg>

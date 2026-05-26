@@ -1,0 +1,15 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Coin outer border -->
+  <circle cx="60" cy="60" r="56" fill="#FEDF6F" stroke="#231F20" stroke-width="5"/>
+  <!-- Coin inner ring -->
+  <circle cx="60" cy="60" r="46" fill="#FCEAC3" stroke="#231F20" stroke-width="3" stroke-dasharray="6 6"/>
+  <!-- Coin inner solid ring -->
+  <circle cx="60" cy="60" r="38" fill="#FEDF6F" stroke="#231F20" stroke-width="2.5"/>
+  
+  <!-- Number "15" in the center -->
+  <text x="60" y="70" font-family="Inter, sans-serif" font-weight="900" font-size="34" fill="#231F20" text-anchor="middle">15</text>
+  
+  <!-- Sparkles -->
+  <path d="M102 26q3 0 3-3q0 3 3 0q-3 0-3 3q0-3-3 0" fill="#231F20"/>
+  <path d="M16 94q3 0 3-3q0 3 3 0q-3 0-3 3q0-3-3 0" fill="#231F20"/>
+</svg>
