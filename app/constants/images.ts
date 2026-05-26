@@ -17,6 +17,12 @@ import OnboardingWatch from '../../assets/images/icons/onboarding-watch.svg';
 import SupporterHelp from '../../assets/images/icons/supporter-help.svg';
 import SupporterPremium from '../../assets/images/icons/supporter-premium.svg';
 import SupporterLaughs from '../../assets/images/icons/supporter-laughs.svg';
+import BellIcon from '../../assets/images/icons/bell.svg';
+import FilterIcon from '../../assets/images/icons/filter.svg';
+import ClockIcon from '../../assets/images/icons/clock.svg';
+import InfoIcon from '../../assets/images/icons/info.svg';
+import TrendUpIcon from '../../assets/images/icons/trend-up.svg';
+import TrendDownIcon from '../../assets/images/icons/trend-down.svg';
 
 export const images = {
     //PNG's
@@ -46,4 +52,10 @@ export const images = {
     SupporterPremium,
     SupporterLaughs,
 
+    BellIcon,
+    FilterIcon,
+    ClockIcon,
+    InfoIcon,
+    TrendUpIcon,
+    TrendDownIcon
 }

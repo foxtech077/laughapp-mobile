@@ -44,6 +44,7 @@ export const CustomLightTheme: Theme | any = {
     yellow_700: "#E89700",
     yellow_600: "#FFF3D0",
     gray100: "#F2F2F2",
+    primaryYellow: "#FDD940",
   },
 };
 
@@ -91,5 +92,6 @@ export const CustomDarkTheme: Theme | any = {
     yellow_700: "#E89700",
     yellow_600: "#FFF3D0",
     gray100: "#F2F2F2",
+    primaryYellow: "#FDD940",
   },
 };

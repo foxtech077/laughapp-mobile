@@ -3,7 +3,7 @@ import { Text, TextProps, StyleSheet, TextStyle } from 'react-native';
 import { fontScale } from '../../utils/dimensions';
 import { useTheme } from '@react-navigation/native';
 
-type TextVariant = 'title' | 'subtitle' | 'description' | 'caption' | 'heading' | 'subheading' | 'input' | 'heading' | 'subheading' | 'input';
+type TextVariant = 'title' | 'subtitle' | 'description' | 'caption' | 'heading' | 'subheading' | 'input' | 'info';
 
 interface TextViewProps extends TextProps {
   variant?: TextVariant;
@@ -25,6 +25,10 @@ const variantStyles: Record<TextVariant, object> = {
     fontWeight: '500',
     letterSpacing: -0.5,
     lineHeight: fontScale(26),
+  },
+  info: {
+    fontSize: fontScale(16),
+    fontWeight: '500',
   },
   description: {
     fontSize: fontScale(14),
