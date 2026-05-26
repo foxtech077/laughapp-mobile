@@ -2,20 +2,26 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { SvgProps } from 'react-native-svg';
-import { spacing, fontScale, moderateScale } from '../../../../../utils/dimensions';
+import { spacing, fontScale, moderateScale, verticalScale } from '../../../../../utils/dimensions';
 import TextView from '../../../../components/TextView';
+import OnboardingGradientCircle from './OnboardingGradientCircle';
 
 interface OnboardingFeatureItemProps {
   Icon: React.FC<SvgProps>;
   title: string;
   description?: string;
+  hasCircleBackground?: boolean;
+  iconWidth?: number;
+  iconHeight?: number;
 }
-
 
 export default function OnboardingFeatureItem({
   Icon,
   title,
   description,
+  hasCircleBackground = true,
+  iconWidth,
+  iconHeight,
 }: OnboardingFeatureItemProps) {
   const { colors } = useTheme();
 
@@ -23,16 +29,30 @@ export default function OnboardingFeatureItem({
     <View style={styles.container}>
       {/* Icon Wrapper */}
       <View style={styles.iconContainer}>
-        <Icon width={moderateScale(54)} height={moderateScale(54)} />
+        {hasCircleBackground ? (
+          <OnboardingGradientCircle size={moderateScale(80)}>
+            <Icon
+              width={iconWidth ?? moderateScale(55)}
+              height={iconHeight ?? moderateScale(56)}
+            />
+          </OnboardingGradientCircle>
+        ) : (
+          <View style={styles.directIconWrapper}>
+            <Icon
+              width={iconWidth ?? moderateScale(75)}
+              height={iconHeight ?? moderateScale(75)}
+            />
+          </View>
+        )}
       </View>
 
       {/* Text Container */}
       <View style={styles.textContainer}>
         <TextView
           variant="description"
-          size={16}
+          size={fontScale(26)}
           weight="700"
-          style={{ color: colors.primaryText, marginBottom: description ? spacing(2) : 0 }}
+          style={{ color: colors.primaryText, marginBottom: description ? spacing(2) : 0, lineHeight: verticalScale(32) }}
         >
           {title}
         </TextView>
@@ -40,9 +60,9 @@ export default function OnboardingFeatureItem({
         {description ? (
           <TextView
             variant="caption"
-            size={14}
-            weight="400"
-            style={{ color: colors.secondaryText, lineHeight: spacing(18) }}
+            size={fontScale(21)}
+            weight="500"
+            style={{ color: colors.secondaryText, lineHeight: verticalScale(32), marginTop: spacing(2) }}
           >
             {description}
           </TextView>
@@ -57,16 +77,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
-    paddingVertical: spacing(8),
-    marginBottom: spacing(16),
+    paddingVertical: spacing(2),
+    marginBottom: spacing(30),
   },
   iconContainer: {
     marginRight: spacing(16),
     justifyContent: 'center',
     alignItems: 'center',
   },
+  directIconWrapper: {
+    width: moderateScale(80),
+    height: moderateScale(80),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   textContainer: {
     flex: 1,
     justifyContent: 'center',
+    paddingRight: spacing(4),
   },
 });

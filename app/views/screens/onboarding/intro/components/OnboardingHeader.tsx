@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { spacing } from '../../../../../utils/dimensions';
+import { fontScale, spacing, verticalScale } from '../../../../../utils/dimensions';
 import TextView from '../../../../components/TextView';
 
 interface OnboardingHeaderProps {
@@ -22,8 +22,8 @@ export default function OnboardingHeader({ onSkip, showSkip = true }: Onboarding
         >
           <TextView
             weight="600"
-            size={16}
-            style={{ color: colors.secondaryText }}
+            size={fontScale(18)}
+            style={{ color: colors.primaryText }}
           >
             Skip
           </TextView>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingHorizontal: spacing(24),
-    paddingTop: spacing(12),
-    paddingBottom: spacing(8),
+    paddingTop: verticalScale(30),
+    paddingBottom: verticalScale(8),
   },
 });

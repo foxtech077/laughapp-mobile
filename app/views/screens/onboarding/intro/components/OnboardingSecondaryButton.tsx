@@ -29,7 +29,7 @@ export default function OnboardingSecondaryButton({
     >
       <TextView
         variant="description"
-        size={16}
+        size={fontScale(18)}
         weight="600"
         style={[styles.label, { color: colors.primaryText }]}
       >

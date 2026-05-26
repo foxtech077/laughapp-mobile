@@ -29,8 +29,8 @@ export default function OnboardingPrimaryButton({
       ) : (
         <TextView
           variant="description"
-          size={16}
-          weight="700"
+          size={fontScale(18)}
+          weight="600"
           style={[styles.label, { color: colors.white }]}
         >
           {label}
@@ -43,9 +43,9 @@ export default function OnboardingPrimaryButton({
 const styles = StyleSheet.create({
   button: {
     width: '100%',
-    maxWidth: spacing(340),
+    maxWidth: spacing(398),
     height: verticalScale(54),
-    borderRadius: moderateScale(27),
+    borderRadius: moderateScale(30),
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: spacing(24),
