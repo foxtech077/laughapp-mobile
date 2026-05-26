@@ -18,7 +18,7 @@ export default function IntroSlide({ width }: IntroSlideProps) {
   const content = (
     <View style={styles.innerContainer}>
       <View style={styles.illustrationContainer}>
-        <OnboardingFeedIntro width="100%" height="100%" />
+        <OnboardingFeedIntro width={moderateScale(250)} height={verticalScale(285)} />
       </View>
 
       <View style={styles.contentContainer}>
@@ -36,7 +36,7 @@ export default function IntroSlide({ width }: IntroSlideProps) {
             },
           ]}
         >
-          The funniest feed on the internet
+          {"The funniest feed\non the internet"}
         </TextView>
 
         <TextView
@@ -50,7 +50,7 @@ export default function IntroSlide({ width }: IntroSlideProps) {
             fontWeight: '500',
           }}
         >
-          Built to bring more laughter into your day
+          {"Built to bring more laughter into\nyour day"}
         </TextView>
       </View>
     </View>
@@ -79,36 +79,38 @@ export default function IntroSlide({ width }: IntroSlideProps) {
 const styles = StyleSheet.create({
   slide: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: spacing(16),
   },
   scrollContent: {
     flexGrow: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: spacing(16),
     paddingBottom: verticalScale(20),
   },
   innerContainer: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: '100%',
   },
   illustrationContainer: {
-    flex: 1.5,
     width: '100%',
-    maxWidth: spacing(320),
-    aspectRatio: 320 / 260,
+    maxWidth: spacing(328),
+    height: verticalScale(285),
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    paddingHorizontal: spacing(16),
+    marginBottom: verticalScale(24),
   },
   contentContainer: {
-    flex: 1,
     width: '100%',
-    paddingBottom: verticalScale(40),
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: spacing(-18),
     paddingHorizontal: spacing(16),
+    marginBottom: verticalScale(40),
   },
   title: {
     marginBottom: spacing(12),

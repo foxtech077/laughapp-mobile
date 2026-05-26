@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   coinTextContainer: {
     alignItems: 'center',
-    paddingHorizontal: spacing(22),
+    paddingHorizontal: spacing(28),
     marginBottom: spacing(40),
   },
   coinTitle: {
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   coinButtonContainer: {
     width: '100%',
-    paddingHorizontal: spacing(32),
-    marginBottom: verticalScale(48),
+    paddingHorizontal: spacing(16),
+    marginBottom: verticalScale(30),
   },
 });

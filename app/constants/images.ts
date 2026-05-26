@@ -15,7 +15,6 @@ import OnboardingFeedIntro from '../../assets/images/icons/onboarding-feed-intro
 import OnboardingWatch from '../../assets/images/icons/onboarding-watch.svg';
 import SupporterHelp from '../../assets/images/icons/supporter-help.svg';
 import SupporterPremium from '../../assets/images/icons/supporter-premium.svg';
-import SupporterLaughs from '../../assets/images/icons/supporter-laughs.svg';
 import BellIcon from '../../assets/images/icons/bell.svg';
 import FilterIcon from '../../assets/images/icons/filter.svg';
 import ClockIcon from '../../assets/images/icons/clock.svg';
@@ -32,6 +31,7 @@ export const images = {
     sandeep: require('../../assets/images/png/sandeep.png'),
     tipIcon: require('../../assets/images/png/tip-icon.png'),
     tipCoin2: require('../../assets/images/png/tipcoin2.png'),
+    supporterLaughs: require('../../assets/images/png/supporter-laugh.png'),
 
     //SVG's
     RoleIcon1,
@@ -51,7 +51,6 @@ export const images = {
     OnboardingWatch,
     SupporterHelp,
     SupporterPremium,
-    SupporterLaughs,
     SupporterOnboarding,
     LaughAppLogo,
 

@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    paddingHorizontal: spacing(24),
+    paddingHorizontal: spacing(16),
     paddingTop: verticalScale(30),
     paddingBottom: verticalScale(8),
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { spacing, fontScale, moderateScale } from '../../../../../utils/dimensions';
+import { spacing, fontScale, moderateScale, verticalScale } from '../../../../../utils/dimensions';
 import TextView from '../../../../components/TextView';
 import OnboardingFeatureItem from '../../intro/components/OnboardingFeatureItem';
 import { images } from '../../../../../constants/images';
@@ -39,8 +39,8 @@ export default function FeaturesSlide({ width }: FeaturesSlideProps) {
           Icon={LaughAppLogo}
           title="Laugh"
           description="React when it hits"
-          iconWidth={moderateScale(80)}
-          iconHeight={moderateScale(80)}
+          iconWidth={moderateScale(65)}
+          iconHeight={moderateScale(65)}
         />
         <OnboardingFeatureItem
           Icon={SupporterOnboarding}
@@ -59,16 +59,17 @@ const styles = StyleSheet.create({
   },
   featuresHeader: {
     width: '100%',
-    paddingHorizontal: spacing(32),
-    paddingTop: spacing(124),
-    marginBottom: spacing(32),
+    paddingHorizontal: spacing(16),
+    paddingTop: verticalScale(30),
+    marginBottom: verticalScale(20),
   },
   featuresTitle: {
-    lineHeight: spacing(34),
+    lineHeight: verticalScale(50),
+    marginTop: spacing(80),
   },
   featuresList: {
     width: '100%',
-    paddingHorizontal: spacing(32),
+    paddingHorizontal: spacing(16),
     flex: 1,
     justifyContent: 'center',
   },

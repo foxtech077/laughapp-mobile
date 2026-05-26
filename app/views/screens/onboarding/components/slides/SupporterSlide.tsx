@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { spacing, fontScale, moderateScale } from '../../../../../utils/dimensions';
+import { spacing, fontScale, moderateScale, verticalScale } from '../../../../../utils/dimensions';
 import TextView from '../../../../components/TextView';
 import OnboardingFeatureItem from '../../intro/components/OnboardingFeatureItem';
 import { images } from '../../../../../constants/images';
 
-const { SupporterHelp, SupporterPremium, SupporterLaughs } = images;
+const { SupporterHelp, SupporterPremium, supporterLaughs } = images;
 
 interface SupporterSlideProps {
   width: number;
@@ -31,20 +31,27 @@ export default function SupporterSlide({ width }: SupporterSlideProps) {
       <View style={styles.featuresList}>
         <OnboardingFeatureItem
           Icon={SupporterHelp}
-          title="Help comedians to win"
+          title={"Help comedians\nto win"}
           hasCircleBackground={false}
+          iconWidth={moderateScale(60)}
+          iconHeight={moderateScale(60)}
+          titleStyle={styles.supporterTitle}
         />
         <OnboardingFeatureItem
           Icon={SupporterPremium}
           title="Get premium features"
           hasCircleBackground={false}
+          iconWidth={moderateScale(60)}
+          iconHeight={moderateScale(60)}
+          titleStyle={styles.supporterTitle}
         />
         <OnboardingFeatureItem
-          Icon={SupporterLaughs}
-          title="Bring more laughs into the world"
+          Icon={supporterLaughs}
+          title={"Bring more laughs into\nthe world"}
           hasCircleBackground={false}
-          iconWidth={moderateScale(77)}
-          iconHeight={moderateScale(76)}
+          iconWidth={moderateScale(60)}
+          iconHeight={moderateScale(60)}
+          titleStyle={styles.supporterTitle}
         />
       </View>
     </View>
@@ -58,17 +65,26 @@ const styles = StyleSheet.create({
   },
   featuresHeader: {
     width: '100%',
-    paddingHorizontal: spacing(32),
-    paddingTop: spacing(124),
-    marginBottom: spacing(32),
+    paddingHorizontal: spacing(16),
+    paddingTop: verticalScale(30),
+    marginBottom: verticalScale(20),
   },
   featuresTitle: {
-    lineHeight: spacing(34),
+    lineHeight: verticalScale(38),
+    marginTop: verticalScale(80),
   },
   featuresList: {
     width: '100%',
-    paddingHorizontal: spacing(32),
+    marginBottom: verticalScale(20),
+    paddingHorizontal: spacing(16),
     flex: 1,
     justifyContent: 'center',
+  },
+  supporterTitle: {
+    fontSize: fontScale(26),
+    fontWeight: '700',
+    lineHeight: fontScale(26),
+    letterSpacing: -0.5,
+    paddingVertical: spacing(5)
   },
 });

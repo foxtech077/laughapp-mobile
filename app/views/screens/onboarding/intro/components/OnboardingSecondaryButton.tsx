@@ -23,7 +23,7 @@ export default function OnboardingSecondaryButton({
         styles.button,
         {
           backgroundColor: colors.transparent,
-          borderColor: colors.borderLight || '#D9D6D6',
+          borderColor: colors.cardSelectedBorder,
         },
       ]}
     >
@@ -42,7 +42,7 @@ export default function OnboardingSecondaryButton({
 const styles = StyleSheet.create({
   button: {
     width: '100%',
-    maxWidth: spacing(340),
+    maxWidth: spacing(398),
     height: verticalScale(54),
     borderRadius: moderateScale(27),
     borderWidth: 1.5,

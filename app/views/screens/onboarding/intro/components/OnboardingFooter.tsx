@@ -34,7 +34,7 @@ export default function OnboardingFooter({
             height={24}
             viewBox="0 0 24 24"
             fill="none"
-            stroke={colors.primaryText || '#231F20'}
+            stroke={colors.primaryText}
             strokeWidth={2.5}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -82,16 +82,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: spacing(24),
+    paddingHorizontal: spacing(16),
     paddingBottom: spacing(24),
   },
   spacer: {
-    width: spacing(56),
-    height: spacing(56),
+    width: verticalScale(68),
+    height: verticalScale(68),
   },
   backButton: {
-    width: spacing(56),
-    height: spacing(56),
+    width: verticalScale(68),
+    height: verticalScale(68),
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   nextButton: {
     width: verticalScale(68),
     height: verticalScale(68),
-    borderRadius: moderateScale(34),
+    borderRadius: verticalScale(34),
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,

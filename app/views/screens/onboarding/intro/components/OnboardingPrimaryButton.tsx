@@ -22,7 +22,7 @@ export default function OnboardingPrimaryButton({
       activeOpacity={0.8}
       onPress={onPress}
       disabled={loading}
-      style={[styles.button, { backgroundColor: colors.buttonEnabled }]}
+      style={[styles.button, { backgroundColor: colors.buttonEnabled, shadowColor: colors.black || '#000000' }]}
     >
       {loading ? (
         <ActivityIndicator color={colors.white} size="small" />
@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: spacing(24),
-    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
