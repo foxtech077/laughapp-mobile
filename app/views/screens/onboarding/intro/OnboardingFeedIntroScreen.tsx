@@ -1,18 +1,20 @@
 import React, { useRef, useState, useCallback } from 'react';
-import { View, StyleSheet, FlatList, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
+import { StyleSheet, FlatList, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
-import { spacing, getScreenWidth, moderateScale, verticalScale } from '../../../../utils/dimensions';
+import { getScreenWidth } from '../../../../utils/dimensions';
 import { routes } from '../../../../navigator/routes';
 import BaseView from '../../../components/BaseView';
-import TextView from '../../../components/TextView';
+
+// Components
 import OnboardingHeader from './components/OnboardingHeader';
 import OnboardingFooter from './components/OnboardingFooter';
-import OnboardingFeatureItem from './components/OnboardingFeatureItem';
-import OnboardingPrimaryButton from './components/OnboardingPrimaryButton';
-import OnboardingSecondaryButton from './components/OnboardingSecondaryButton';
-import { images } from '../../../../constants/images';
 
-const { OnboardingFeedIntro, OnboardingCoin, LaughIcon1, SupporterIcon, OnboardingWatch, SupporterHelp, SupporterPremium, SupporterLaughs } = images;
+// Slides
+import IntroSlide from '../components/slides/IntroSlide';
+import FeaturesSlide from '../components/slides/FeaturesSlide';
+import SupporterSlide from '../components/slides/SupporterSlide';
+import CoinSlide from '../components/slides/CoinSlide';
+
 interface Slide {
   id: string;
   type: 'intro' | 'features' | 'supporter' | 'coin';
@@ -25,6 +27,12 @@ const SLIDES: Slide[] = [
   { id: '4', type: 'coin' },
 ];
 
+/**
+ * OnboardingFeedIntroScreen
+ *
+ * The main container wizard managing the horizontal swiping pager, paging dots indices,
+ * navigation events, and the global safe-area Header/Footer layouts. Integrates modular encapsulated slides.
+ */
 export default function OnboardingFeedIntroScreen() {
   const { colors } = useTheme();
   const navigation = useNavigation<any>();
@@ -66,153 +74,27 @@ export default function OnboardingFeedIntroScreen() {
     }
   }, [activeIndex]);
 
-
+  /**
+   * Renders the corresponding onboarding step inside the pager.
+   */
   const renderItem = ({ item }: { item: Slide }) => {
     const width = getScreenWidth();
 
     switch (item.type) {
       case 'intro':
-        return (
-          <View style={[styles.slide, { width }]}>
-            <View style={styles.illustrationContainer}>
-              <OnboardingFeedIntro width="100%" height="100%" />
-            </View>
-
-            <View style={styles.contentContainer}>
-              <TextView
-                variant="heading"
-                align="center"
-                size={30}
-                weight="800"
-                style={[styles.title, { color: colors.primaryText }]}
-              >
-                The funniest feed on the internet
-              </TextView>
-
-              <TextView
-                variant="subheading"
-                align="center"
-                size={16}
-                weight="500"
-                style={{ color: colors.secondaryText, lineHeight: spacing(22) }}
-              >
-                Built to bring more laughter into your day
-              </TextView>
-            </View>
-          </View>
-        );
-
+        return <IntroSlide width={width} />;
       case 'features':
-        return (
-          <View style={[styles.slide, { width }]}>
-            <View style={styles.featuresHeader}>
-              <TextView
-                variant="heading"
-                size={28}
-                weight="800"
-                style={[styles.featuresTitle, { color: colors.primaryText }]}
-              >
-                On LaughApp, it’s simple:
-              </TextView>
-            </View>
-
-            <View style={styles.featuresList}>
-              <OnboardingFeatureItem
-                Icon={OnboardingWatch}
-                title="Watch"
-                description="Short stand-up clips from comedians"
-              />
-              <OnboardingFeatureItem
-                Icon={LaughIcon1}
-                title="Laugh"
-                description="React when it hits"
-              />
-              <OnboardingFeatureItem
-                Icon={SupporterIcon}
-                title="Support"
-                description="Back the comedians you love"
-              />
-            </View>
-          </View>
-        );
-
+        return <FeaturesSlide width={width} />;
       case 'supporter':
-        return (
-          <View style={[styles.slide, { width }]}>
-            <View style={styles.featuresHeader}>
-              <TextView
-                variant="heading"
-                size={28}
-                weight="800"
-                style={[styles.featuresTitle, { color: colors.primaryText }]}
-              >
-                Become a supporter:
-              </TextView>
-            </View>
-
-            <View style={styles.featuresList}>
-              <OnboardingFeatureItem
-                Icon={SupporterHelp}
-                title="Help comedians to win"
-              />
-              <OnboardingFeatureItem
-                Icon={SupporterPremium}
-                title="Get premium features"
-              />
-              <OnboardingFeatureItem
-                Icon={SupporterLaughs}
-                title="Bring more laughs into the world"
-              />
-            </View>
-          </View>
-        );
-
+        return <SupporterSlide width={width} />;
       case 'coin':
         return (
-          <View style={[styles.slide, { width, paddingBottom: spacing(24) }]}>
-            {/* Centered Coin Icon */}
-            <View style={styles.coinIllustrationContainer}>
-              <OnboardingCoin width={moderateScale(120)} height={moderateScale(120)} />
-            </View>
-
-            {/* Typography Content */}
-            <View style={styles.coinTextContainer}>
-              <TextView
-                variant="heading"
-                align="center"
-                size={28}
-                weight="800"
-                style={[styles.coinTitle, { color: colors.primaryText }]}
-              >
-                Back your first comedian
-              </TextView>
-
-              <TextView
-                variant="subheading"
-                align="center"
-                size={16}
-                weight="500"
-                style={{ color: colors.secondaryText, lineHeight: spacing(22) }}
-              >
-                Get coins to support the sets you love. Keep the laughs going
-              </TextView>
-            </View>
-
-            {/* Action Buttons */}
-            <View style={styles.buttonContainer}>
-              <OnboardingPrimaryButton
-                label="Get coins"
-                onPress={handleFinishOnboarding}
-              />
-              <View style={{ height: spacing(12) }} />
-              <OnboardingSecondaryButton
-                label="Skip for now"
-                onPress={handleFinishOnboarding}
-              />
-            </View>
-          </View>
+          <CoinSlide
+            width={width}
+            onGetCoins={handleFinishOnboarding}
+            onSkip={handleFinishOnboarding}
+          />
         );
-
       default:
         return null;
     }
@@ -261,65 +143,5 @@ const styles = StyleSheet.create({
   },
   flatList: {
     flex: 1,
-  },
-  slide: {
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-  illustrationContainer: {
-    flex: 1.5,
-    width: '100%',
-    maxWidth: spacing(320),
-    aspectRatio: 320 / 260,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-  },
-  contentContainer: {
-    flex: 1,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: spacing(32),
-  },
-  title: {
-    marginBottom: spacing(12),
-    lineHeight: spacing(36),
-  },
-  featuresHeader: {
-    width: '100%',
-    paddingHorizontal: spacing(32),
-    paddingTop: spacing(20),
-    marginBottom: spacing(32),
-  },
-  featuresTitle: {
-    lineHeight: spacing(34),
-  },
-  featuresList: {
-    width: '100%',
-    paddingHorizontal: spacing(32),
-    flex: 1,
-    justifyContent: 'center',
-  },
-  coinIllustrationContainer: {
-    flex: 1.2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: spacing(30),
-  },
-  coinTextContainer: {
-    flex: 1,
-    paddingHorizontal: spacing(32),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  coinTitle: {
-    marginBottom: spacing(12),
-    lineHeight: spacing(34),
-  },
-  buttonContainer: {
-    width: '100%',
-    paddingHorizontal: spacing(32),
-    marginTop: spacing(20),
   },
 });
