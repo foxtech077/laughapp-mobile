@@ -1,0 +1,9 @@
+<svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="27" cy="27" r="25.5" fill="#FEDF6F" stroke="#231F20" stroke-width="3"/>
+  <!-- Heart shape -->
+  <path d="M27 24.5c-2-3.5-6-3.5-7.5-1.5s-.5 4.5 2.5 6.5l5 4.5 5-4.5c3-2 4-4.5 2.5-6.5s-5.5-2-7.5 1.5z" fill="#231F20" stroke="#231F20" stroke-width="1" stroke-linejoin="round"/>
+  <!-- Cradling Hands -->
+  <path d="M16 35c3 4 8 5 11 5s8-1 11-5" stroke="#231F20" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M19 33.5c1.5 2 4.5 2.5 7 1" stroke="#231F20" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <path d="M35 33.5c-1.5 2-4.5 2.5-7 1" stroke="#231F20" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+</svg>

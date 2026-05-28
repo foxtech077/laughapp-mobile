@@ -11,7 +11,7 @@ import {
 import { useTheme, ThemeProvider, useNavigation } from '@react-navigation/native';
 import { CustomLightTheme } from '../../../constants/colors';
 import LinearGradient from 'react-native-linear-gradient';
-import { spacing, fontScale } from '../../../utils/dimensions';
+import { spacing, fontScale, verticalScale, moderateScale } from '../../../utils/dimensions';
 import BaseView from '../../components/BaseView';
 import TextView from '../../components/TextView';
 import ButtonView from '../../components/ButtonView';
@@ -95,8 +95,8 @@ const MOCK_VIDEOS = [
 
 // Dynamically compute grid items sizing based on viewport width
 const screenWidth = Dimensions.get('window').width;
-const gridPadding = spacing(16);
-const columnGap = spacing(8);
+const gridPadding = spacing(20);
+const columnGap = spacing(4);
 const numColumns = 3;
 const ITEM_WIDTH = (screenWidth - (gridPadding * 2) - (columnGap * (numColumns - 1))) / numColumns;
 const ITEM_HEIGHT = ITEM_WIDTH * (178 / 131);
@@ -155,7 +155,7 @@ function ProfileScreenContent() {
             >
               <SupporterIcon width={spacing(16)} height={spacing(16)} />
               <TextView
-                size={14}
+                size={fontScale(14)}
                 weight="700"
                 style={{ color: colors.supporterText, fontFamily: 'Inter', letterSpacing: -0.5 }}
               >
@@ -169,11 +169,11 @@ function ProfileScreenContent() {
       {/* Profile Details */}
       <View style={styles.infoSection}>
         <View style={styles.nameRow}>
-          <TextView size={20} weight="700" align="center" style={{ color: colors.primaryText }}>
+          <TextView size={fontScale(20)} weight="700" align="center" style={{ color: colors.primaryText }}>
             Sandeep Das
           </TextView>
           {isOldUser && (
-            <TextView size={18} weight="600" style={{ color: colors.placeholder, marginLeft: spacing(6), alignSelf: 'center' }}>
+            <TextView size={fontScale(18)} weight="600" style={{ color: colors.placeholder, marginLeft: spacing(6), alignSelf: 'center' }}>
               he/his
             </TextView>
           )}
@@ -186,12 +186,12 @@ function ProfileScreenContent() {
       {/* Bio / Location */}
       {isOldUser && (
         <View style={styles.bioSection}>
-          <TextView size={14} weight="500" align="center" style={{ color: colors.primaryText, lineHeight: spacing(20) }}>
+          <TextView size={fontScale(14)} weight="500" align="center" style={{ color: colors.primaryText, lineHeight: spacing(20) }}>
             Bringing the laughs one short video!! 😹
           </TextView>
           <View style={styles.locationContainer}>
             <LocationIconSvg width={spacing(14)} height={spacing(14)} />
-            <TextView size={13} weight="600" style={{ color: colors.secondaryText, marginLeft: spacing(4) }}>
+            <TextView size={fontScale(13)} weight="600" style={{ color: colors.secondaryText, marginLeft: spacing(4) }}>
               New york, USA
             </TextView>
           </View>
@@ -223,27 +223,27 @@ function ProfileScreenContent() {
       </View>
 
       {/* Following Stats */}
-      <TouchableOpacity 
-        style={styles.followingSection} 
-        activeOpacity={0.7} 
+      <TouchableOpacity
+        style={styles.followingSection}
+        activeOpacity={0.7}
         onPress={() => navigation.navigate('ProfileFollowingScreen' as never)}
       >
-        <TextView size={22} weight="800" align="center" style={{ color: colors.primaryText }}>
+        <TextView size={fontScale(22)} weight="800" align="center" style={{ color: colors.primaryText }}>
           {isOldUser ? '739' : '0'}
         </TextView>
-        <TextView size={14} weight="500" align="center" style={{ color: colors.secondaryText, marginTop: spacing(2) }}>
+        <TextView size={fontScale(14)} weight="500" align="center" style={{ color: colors.secondaryText, marginTop: spacing(2) }}>
           Following
         </TextView>
       </TouchableOpacity>
 
       {/* Section Title */}
       <View style={styles.sectionTitleRow}>
-        <TextView size={20} weight="700" style={{ color: colors.primaryText }}>
+        <TextView size={fontScale(20)} weight="700" style={{ color: colors.primaryText }}>
           Reposted Videos ({isOldUser ? MOCK_VIDEOS.length : 0})
         </TextView>
         {!isOldUser && (
           <TouchableOpacity onPress={() => setIsOldUser(true)} activeOpacity={0.7}>
-            <TextView size={16} weight="700" style={{ color: colors.placeholder }}>
+            <TextView size={fontScale(16)} weight="700" style={{ color: colors.placeholder }}>
               Watch Videos
             </TextView>
           </TouchableOpacity>
@@ -274,10 +274,10 @@ function ProfileScreenContent() {
               width={ITEM_WIDTH}
               height={ITEM_HEIGHT}
               borderRadii={{
-                borderTopLeftRadius: isLeft && isTopRow ? spacing(10) : 0,
-                borderTopRightRadius: isRight && isTopRow ? spacing(10) : 0,
-                borderBottomLeftRadius: isLeft && isBottomRow ? spacing(10) : 0,
-                borderBottomRightRadius: isRight && isBottomRow ? spacing(10) : 0,
+                borderTopLeftRadius: isLeft && isTopRow ? moderateScale(10) : 0,
+                borderTopRightRadius: isRight && isTopRow ? moderateScale(10) : 0,
+                borderBottomLeftRadius: isLeft && isBottomRow ? moderateScale(10) : 0,
+                borderBottomRightRadius: isRight && isBottomRow ? moderateScale(10) : 0,
               }}
             />
           );
@@ -285,8 +285,8 @@ function ProfileScreenContent() {
         keyExtractor={(item) => item.id}
         numColumns={3}
         columnWrapperStyle={{
-          justifyContent: 'space-around',
-          marginBottom: spacing(2),
+          justifyContent: 'space-between',
+          marginBottom: spacing(4),
         }}
         ListHeaderComponent={<ProfileHeader />}
         ListEmptyComponent={
@@ -328,7 +328,7 @@ const styles = StyleSheet.create({
   },
   flatListContent: {
     paddingHorizontal: spacing(20),
-    paddingBottom: spacing(16),
+    paddingBottom: verticalScale(90),
   },
 
   headerContainer: {
@@ -336,7 +336,7 @@ const styles = StyleSheet.create({
   },
   avatarSection: {
     alignItems: 'center',
-    marginBottom: spacing(8),
+    marginBottom: spacing(12),
   },
   avatarWrapper: {
     position: 'relative',
@@ -344,22 +344,22 @@ const styles = StyleSheet.create({
   },
   avatarGradientContainer: {
     width: spacing(102),
-    height: spacing(102),
-    borderRadius: spacing(53),
+    height: verticalScale(102),
+    borderRadius: moderateScale(53),
     justifyContent: 'center',
     alignItems: 'center',
   },
   avatarWhiteRing: {
     width: spacing(96),
-    height: spacing(96),
-    borderRadius: spacing(49),
+    height: verticalScale(96),
+    borderRadius: moderateScale(49),
     justifyContent: 'center',
     alignItems: 'center',
   },
   avatarGrayCircle: {
     width: spacing(90),
-    height: spacing(90),
-    borderRadius: spacing(45),
+    height: verticalScale(90),
+    borderRadius: moderateScale(45),
     backgroundColor: '#C4C4C4',
     justifyContent: 'center',
     alignItems: 'center',
@@ -367,13 +367,14 @@ const styles = StyleSheet.create({
   },
   avatarImage: {
     width: spacing(90),
-    height: spacing(90),
-    borderRadius: spacing(45),
+    height: verticalScale(90),
+    borderRadius: moderateScale(45),
   },
   supporterBadge: {
-    marginTop: -spacing(23),
-    width: spacing(113.3),
-    borderRadius: spacing(20),
+    position: 'absolute',
+    bottom: -spacing(10),
+    alignSelf: 'center',
+    borderRadius: moderateScale(20),
   },
   supporterBadgeContent: {
     gap: spacing(3),
@@ -390,7 +391,7 @@ const styles = StyleSheet.create({
   },
   infoSection: {
     alignItems: 'center',
-    marginBottom: spacing(14),
+    marginBottom: spacing(16),
   },
   nameRow: {
     flexDirection: 'row',
@@ -401,34 +402,35 @@ const styles = StyleSheet.create({
   bioSection: {
     alignItems: 'center',
     paddingHorizontal: spacing(16),
-    marginBottom: spacing(16),
+    marginBottom: spacing(18),
   },
   locationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: spacing(6),
+    marginTop: spacing(8),
   },
   sharedLaughsSection: {
     width: '100%',
-    marginBottom: spacing(18),
+    marginBottom: spacing(24),
   },
   statsCardsRow: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     width: '100%',
+    gap: spacing(8),
   },
   followingSection: {
     alignItems: 'center',
-    marginBottom: spacing(22),
+    marginBottom: spacing(24),
   },
   sectionTitleRow: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: spacing(10),
+    marginBottom: spacing(16),
   },
   footerSpacing: {
-    height: spacing(34),
+    height: verticalScale(34),
   },
 });

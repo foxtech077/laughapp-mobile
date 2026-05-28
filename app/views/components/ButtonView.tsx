@@ -8,7 +8,7 @@ import {
   TextStyle,
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { spacing, fontScale } from '../../utils/dimensions';
+import { spacing, fontScale, moderateScale, verticalScale } from '../../utils/dimensions';
 import TextView from './TextView';
 
 type ButtonVariant = 'normal' | 'secondary' | 'outline' | 'ghost' | 'auth';
@@ -89,10 +89,10 @@ function getContainerStyle(
       return {
         ...base,
         backgroundColor: disabled ? colors.placeholder : colors.buttonEnabled,
-        borderRadius: 30,
-        height: 54,
-        paddingVertical: 16,
-        paddingHorizontal: 60,
+        borderRadius: moderateScale(30),
+        height: verticalScale(54),
+        paddingVertical: spacing(16),
+        paddingHorizontal: spacing(60),
       };
     case 'normal':
     default:
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: spacing(24),
+    borderRadius: moderateScale(24),
     paddingVertical: spacing(14),
     paddingHorizontal: spacing(24),
     gap: spacing(8),
@@ -130,6 +130,8 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: '600',
     fontSize: fontScale(15),
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
 });
 

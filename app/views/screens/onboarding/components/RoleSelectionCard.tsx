@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, View, Image } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import CheckCircle from '../../../../../assets/images/icons/check-contained.svg';
-import { spacing } from '../../../../utils/dimensions';
+import { spacing, moderateScale, verticalScale } from '../../../../utils/dimensions';
 import TextView from '../../../components/TextView';
 
 interface RoleSelectionCardProps {
@@ -70,10 +70,10 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 398,
     alignSelf: 'center',
-    height: 188,
-    borderRadius: 10,
-    padding: 16,
-    gap: 18,
+    height: verticalScale(188),
+    borderRadius: moderateScale(10),
+    padding: spacing(16),
+    gap: spacing(18),
     marginBottom: spacing(16),
   },
   headerRow: {
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     width: spacing(54),
     height: spacing(54),
-    borderRadius: spacing(32),
+    borderRadius: moderateScale(32),
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   radioUnselected: {
     width: spacing(24),
     height: spacing(24),
-    borderRadius: spacing(12),
+    borderRadius: moderateScale(12),
     borderWidth: 1,
     backgroundColor: 'transparent',
   },

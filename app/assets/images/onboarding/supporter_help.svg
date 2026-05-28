@@ -1,0 +1,10 @@
+<svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bar 1 (Short) -->
+  <rect x="10" y="32" width="8" height="12" rx="1.5" fill="#FFFFFF" stroke="#231F20" stroke-width="2.5"/>
+  <!-- Bar 2 (Medium) -->
+  <rect x="23" y="24" width="8" height="20" rx="1.5" fill="#FFFFFF" stroke="#231F20" stroke-width="2.5"/>
+  <!-- Bar 3 (Tall, filled yellow) -->
+  <rect x="36" y="16" width="8" height="28" rx="1.5" fill="#FEDF6F" stroke="#231F20" stroke-width="2.5"/>
+  <!-- Star above Tallest Bar -->
+  <path d="M40 5.5l1 2.5 2.5.5-2 2 .5 2.5-2.5-1.5-2.5 1.5.5-2.5-2-2 2.5-.5z" fill="#231F20" stroke="#231F20" stroke-width="1.2"/>
+</svg>

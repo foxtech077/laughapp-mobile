@@ -11,12 +11,18 @@ import TopActiveIcon from '../../assets/images/icons/topActive.svg';
 import TopInactiveIcon from '../../assets/images/icons/topInactive.svg';
 import ProfileActiveIcon from '../../assets/images/icons/profileActive.svg';
 import ProfileInactiveIcon from '../../assets/images/icons/profileInactive.svg';
+import OnboardingFeedIntro from '../../assets/images/icons/onboarding-feed-intro.svg';
+import OnboardingWatch from '../../assets/images/icons/onboarding-watch.svg';
+import SupporterHelp from '../../assets/images/icons/supporter-help.svg';
+import SupporterPremium from '../../assets/images/icons/supporter-premium.svg';
 import BellIcon from '../../assets/images/icons/bell.svg';
 import FilterIcon from '../../assets/images/icons/filter.svg';
 import ClockIcon from '../../assets/images/icons/clock.svg';
 import InfoIcon from '../../assets/images/icons/info.svg';
 import TrendUpIcon from '../../assets/images/icons/trend-up.svg';
 import TrendDownIcon from '../../assets/images/icons/trend-down.svg';
+import LaughAppLogo from '../../assets/images/icons/laughapp-logo.svg';
+import SupporterOnboarding from '../../assets/images/icons/support-onboard.svg';
 
 export const images = {
     //PNG's
@@ -24,6 +30,8 @@ export const images = {
     logoBgRotation: require('../../assets/images/png/logo_bg_rotation.png'),
     sandeep: require('../../assets/images/png/sandeep.png'),
     tipIcon: require('../../assets/images/png/tip-icon.png'),
+    tipCoin2: require('../../assets/images/png/tipcoin2.png'),
+    supporterLaughs: require('../../assets/images/png/supporter-laugh.png'),
 
     //SVG's
     RoleIcon1,
@@ -39,6 +47,13 @@ export const images = {
     TopInactiveIcon,
     ProfileActiveIcon,
     ProfileInactiveIcon,
+    OnboardingFeedIntro,
+    OnboardingWatch,
+    SupporterHelp,
+    SupporterPremium,
+    SupporterOnboarding,
+    LaughAppLogo,
+
     BellIcon,
     FilterIcon,
     ClockIcon,

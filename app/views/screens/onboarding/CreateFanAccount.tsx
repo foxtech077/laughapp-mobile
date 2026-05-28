@@ -10,7 +10,7 @@ import TextInputView from '../../components/TextInputView';
 import ButtonView from '../../components/ButtonView';
 import BaseView from '../../components/BaseView';
 import TextView from '../../components/TextView';
-import { fontScale, spacing } from '../../../utils/dimensions';
+import { fontScale, spacing, moderateScale } from '../../../utils/dimensions';
 import { routes } from '../../../navigator/routes';
 import { HomeStackParamList } from '../../../navigator/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   suggestionsContainer: {
-    borderRadius: spacing(12),
+    borderRadius: moderateScale(12),
     paddingHorizontal: spacing(16),
     marginTop: spacing(-4),
     shadowColor: '#000',

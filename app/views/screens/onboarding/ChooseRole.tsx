@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 398,
     alignSelf: 'center',
-    gap: 4,
+    gap: spacing(4),
   },
 });
 

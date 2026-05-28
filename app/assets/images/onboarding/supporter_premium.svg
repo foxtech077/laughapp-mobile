@@ -1,0 +1,6 @@
+<svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Premium Shield -->
+  <path d="M27 8c12 0 16 4 16 14 0 10-9 19-16 23-7-4-16-13-16-23 0-10 4-14 16-14z" fill="#FFFFFF" stroke="#231F20" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Shield Emblem (Yellow Star in center) -->
+  <path d="M27 19.5l2.2 4.5 4.8.8-3.5 3.5.8 4.7-4.3-2.5-4.3 2.5.8-4.7-3.5-3.5 4.8-.8z" fill="#FEDF6F" stroke="#231F20" stroke-width="1.8" stroke-linejoin="round"/>
+</svg>

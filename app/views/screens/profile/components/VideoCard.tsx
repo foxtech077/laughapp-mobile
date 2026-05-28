@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, StyleSheet, ViewStyle } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useTheme } from '@react-navigation/native';
-import { fontScale, spacing } from '../../../../utils/dimensions';
+import { fontScale, spacing, moderateScale, verticalScale } from '../../../../utils/dimensions';
 import TextView from '../../../components/TextView';
 import { images } from '../../../../constants/images';
 
@@ -90,7 +90,7 @@ export default function VideoCard({
 
             {/* Top Left laughs badge */}
             <View style={[styles.badgeTopLeft, { backgroundColor: colors.badgeOverlay }]}>
-                <LaughIcon1 width={spacing(12)} height={spacing(12)} style={{ backgroundColor: colors.white, borderRadius: spacing(6) }} />
+                <LaughIcon1 width={spacing(12)} height={spacing(12)} style={{ backgroundColor: colors.white, borderRadius: moderateScale(6) }} />
                 <TextView style={[styles.badgeText, { color: colors.white }]}>{item.laughs}</TextView>
             </View>
 
@@ -115,14 +115,14 @@ const styles = StyleSheet.create({
     badgeTopLeft: {
         position: 'absolute',
         width: spacing(56),
-        height: spacing(22),
+        height: verticalScale(22),
         top: spacing(8),
         left: spacing(8),
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: spacing(6),
         paddingVertical: spacing(2),
-        borderRadius: spacing(12),
+        borderRadius: moderateScale(12),
         gap: spacing(4),
     },
     badgeBottomLeft: {
@@ -130,12 +130,12 @@ const styles = StyleSheet.create({
         bottom: spacing(8),
         left: spacing(8),
         width: spacing(58),
-        height: spacing(22),
+        height: verticalScale(22),
         paddingHorizontal: spacing(6),
         paddingVertical: spacing(2),
         flexDirection: 'row',
         alignItems: 'center',
-        borderRadius: spacing(12),
+        borderRadius: moderateScale(12),
         gap: spacing(4),
     },
     badgeBottomRight: {
