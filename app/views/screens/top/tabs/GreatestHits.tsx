@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
+import ClipsScreen from "./Clips";
 
 const GreatestHitsScreen = () => {
     return (
-        <View style={styles.greatestHitsContainer}>
-            <Text>Greatest Hits</Text>
-        </View>
+        <ClipsScreen />
     )
 }
 
