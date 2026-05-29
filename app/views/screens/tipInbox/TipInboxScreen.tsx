@@ -4,32 +4,30 @@ import {
   View,
   FlatList,
   Alert,
-  KeyboardAvoidingView,
-  Platform,
-  TextInput,
   TouchableOpacity,
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import Svg, { Path } from 'react-native-svg';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BaseView from '../../components/BaseView';
 import TipInboxHeader from './components/TipInboxHeader';
 import TipInboxStatsCard from './components/TipInboxStatsCard';
 import TipInboxFilterTabs from './components/TipInboxFilterTabs';
 import TipInboxListItem from './components/TipInboxListItem';
 import TipInboxEmptyState from './components/TipInboxEmptyState';
+import TipInboxSelectedState from './components/TipInboxSelectedState';
 import { MOCK_TIPS } from './constants/mockData';
 import { TipItem, TipStats, TipStatus } from './types';
 import { fontScale, moderateScale, spacing, verticalScale } from '../../../utils/dimensions';
 
 export default function TipInboxScreen() {
   const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
 
   // State definitions
   const [tips, setTips] = useState<TipItem[]>(MOCK_TIPS);
   const [selectedFilter, setSelectedFilter] = useState<'all' | TipStatus>('all');
   const [selectedTipIds, setSelectedTipIds] = useState<Set<string>>(new Set());
   const [appreciationText, setAppreciationText] = useState('');
-
   // Statistics calculation based on live mock data
   const stats: TipStats = useMemo(() => {
     const totalCoins = tips.reduce((acc, curr) => acc + curr.coins, 0);
@@ -215,7 +213,7 @@ export default function TipInboxScreen() {
     <BaseView
       showHeader={false}
       applyTopInset={true}
-      applyBottomInset={true}
+      applyBottomInset={false}
       style={[styles.container, { backgroundColor: colors.white }]}
     >
       {/* Premium custom top header */}
@@ -240,7 +238,12 @@ export default function TipInboxScreen() {
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.listContent}
+          contentContainerStyle={[
+            styles.listContent,
+            {
+              paddingBottom: selectedTipIds.size > 0 ? spacing(90) : insets.bottom + spacing(16),
+            },
+          ]}
           ListEmptyComponent={
             <TipInboxEmptyState
               title={emptyDetails.title}
@@ -254,72 +257,15 @@ export default function TipInboxScreen() {
         />
       </View>
 
-      {/* Slide-up appreciation text bottom input bar (shown when items are selected) */}
+      {/* Slide-up appreciation text bottom input bar (shown only in selected state) */}
       {selectedTipIds.size > 0 && (
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-          keyboardVerticalOffset={Platform.OS === 'ios' ? spacing(60) : 0}
-        >
-          <View style={[styles.bottomInputBar, { borderTopColor: colors.tipDivider, backgroundColor: colors.white }]}>
-            <View style={[styles.inputContainer, { backgroundColor: colors.gray100 }]}>
-              <TextInput
-                style={[styles.input, { color: colors.primaryText }]}
-                placeholder="Type your appreciation message..."
-                placeholderTextColor={colors.secondaryText}
-                value={appreciationText}
-                onChangeText={setAppreciationText}
-              />
-            </View>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={appreciationText.trim() ? handleSendAppreciation : () => {
-                Alert.alert('Microphone Pressed', 'Voice speech-to-text simulation active. Type to appreciation send.');
-              }}
-              style={[styles.micButton, { backgroundColor: colors.filterTabSelected }]}
-            >
-              {appreciationText.trim() ? (
-                <SendIcon fill={colors.white} />
-              ) : (
-                <MicIcon stroke={colors.white} />
-              )}
-            </TouchableOpacity>
-          </View>
-        </KeyboardAvoidingView>
+        <TipInboxSelectedState
+          appreciationText={appreciationText}
+          setAppreciationText={setAppreciationText}
+          handleSendAppreciation={handleSendAppreciation}
+        />
       )}
     </BaseView>
-  );
-}
-
-// Inline SVGs for pure theme integration and compilation safety
-function MicIcon({ stroke }: { stroke: string }) {
-  return (
-    <Svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <Path
-        d="M12 2a3 3 0 00-3 3v7a3 3 0 006 0V5a3 3 0 00-3-3z"
-        fill={stroke}
-      />
-      <Path
-        d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8"
-        stroke={stroke}
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </Svg>
-  );
-}
-
-function SendIcon({ fill }: { fill: string }) {
-  return (
-    <Svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <Path
-        d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"
-        stroke={fill}
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </Svg>
   );
 }
 
@@ -332,33 +278,5 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingBottom: spacing(32),
-  },
-  bottomInputBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: spacing(16),
-    paddingTop: spacing(8),
-    paddingBottom: spacing(16),
-    borderTopWidth: 1,
-  },
-  inputContainer: {
-    flex: 1,
-    height: verticalScale(40),
-    borderRadius: moderateScale(8),
-    paddingHorizontal: spacing(16),
-    justifyContent: 'center',
-    marginRight: spacing(12),
-  },
-  input: {
-    fontSize: fontScale(14),
-    padding: 0,
-    margin: 0,
-  },
-  micButton: {
-    width: moderateScale(40),
-    height: moderateScale(40),
-    borderRadius: moderateScale(20),
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

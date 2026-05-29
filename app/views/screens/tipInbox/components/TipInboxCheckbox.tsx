@@ -1,9 +1,10 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { moderateScale } from '../../../../utils/dimensions';
+import { moderateScale, spacing } from '../../../../utils/dimensions';
 import Svg, { Path } from 'react-native-svg';
-
+import { images } from '../../../../constants/images';
+const { SelectedCheckMark } = images;
 interface TipInboxCheckboxProps {
   checked: boolean;
   onPress: () => void;
@@ -27,15 +28,7 @@ export default function TipInboxCheckbox({ checked, onPress, disabled = false }:
       ]}
     >
       {checked && (
-        <Svg width="spacing(12)" height="spacing(12)" viewBox="0 0 12 12" fill="none">
-          <Path
-            d="M2.5 6L5 8.5L9.5 3.5"
-            stroke={colors.white}
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </Svg>
+        <SelectedCheckMark width={moderateScale(12)} height={moderateScale(9)} />
       )}
     </TouchableOpacity>
   );

@@ -23,6 +23,10 @@ import TrendDownIcon from '../../assets/images/icons/trend-down.svg';
 import LaughAppLogo from '../../assets/images/icons/laughapp-logo.svg';
 import SupporterOnboarding from '../../assets/images/icons/support-onboard.svg';
 import SortButton from '../../assets/images/icons/sort-button.svg';
+import Microphone from '../../assets/images/icons/microphone.svg';
+import SendIcon from '../../assets/images/icons/send-icon.svg';
+import SelectedCheckMark from '../../assets/images/icons/select-icon.svg';
+
 
 export const images = {
     //PNG's
@@ -54,6 +58,9 @@ export const images = {
     SupporterOnboarding,
     LaughAppLogo,
     SortButton,
+    Microphone,
+    SendIcon,
+    SelectedCheckMark,
 
     BellIcon,
     FilterIcon,

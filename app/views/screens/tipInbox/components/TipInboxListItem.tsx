@@ -125,7 +125,8 @@ const styles = StyleSheet.create({
     marginRight: spacing(8),
   },
   checkboxPlaceholder: {
-    width: moderateScale(22) + spacing(8),
+    width: moderateScale(20),
+    marginRight: spacing(8),
   },
   avatarContainer: {
     position: 'relative',
@@ -170,6 +171,6 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 1,
-    marginHorizontal: spacing(16),
-  },
+    marginHorizontal: spacing(16)
+  }
 });
