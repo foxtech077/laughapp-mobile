@@ -1,0 +1,119 @@
+import React from 'react';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { useTheme, useNavigation } from '@react-navigation/native';
+import TextView from '../../../components/TextView';
+import { fontScale, moderateScale, spacing, verticalScale } from '../../../../utils/dimensions';
+import Svg, { Path } from 'react-native-svg';
+import { images } from '../../../../constants/images';
+const { SortButton } = images;
+
+interface TipInboxHeaderProps {
+  onSortPress: () => void;
+}
+
+export default function TipInboxHeader({ onSortPress }: TipInboxHeaderProps) {
+  const { colors } = useTheme();
+  const navigation = useNavigation();
+
+  const handleBack = () => {
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.leftSection}>
+        <TouchableOpacity
+          onPress={handleBack}
+          activeOpacity={0.7}
+          style={styles.backButton}
+          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+        >
+          <BackArrowIcon stroke={colors.primaryText} />
+        </TouchableOpacity>
+        <TextView
+          size={22}
+          weight="800"
+          style={[styles.title, { color: colors.primaryText }]}
+        >
+          Tip inbox
+        </TextView>
+      </View>
+
+      <TouchableOpacity
+        onPress={onSortPress}
+        activeOpacity={0.8}
+        style={[
+          styles.sortButton,
+          {
+            borderColor: colors.white,
+            backgroundColor: colors.gray100,
+          },
+        ]}
+      >
+        <View style={styles.sortButtonContent}>
+          <SortButton stroke={colors.primaryText} width={spacing(14)} height={spacing(14)} />
+          <TextView
+            size={fontScale(15)}
+            weight="700"
+            style={[styles.sortText, { color: colors.primaryText }]}
+          >
+            Sort by
+          </TextView>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function BackArrowIcon({ stroke }: { stroke: string }) {
+  return (
+    <Svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M19 12H5M5 12L12 19M5 12L12 5"
+        stroke={stroke}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    height: verticalScale(44),
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: spacing(16),
+  },
+  leftSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing(8),
+  },
+  backButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontFamily: 'Inter',
+    letterSpacing: -0.5,
+  },
+  sortButton: {
+    borderWidth: 1,
+    borderRadius: moderateScale(8),
+    paddingHorizontal: spacing(8),
+    paddingVertical: spacing(4),
+  },
+  sortButtonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing(4),
+  },
+  sortText: {
+    letterSpacing: -0.2,
+  },
+});
