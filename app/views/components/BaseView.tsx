@@ -16,6 +16,7 @@ import TextView from './TextView';
 import LinearGradient from 'react-native-linear-gradient';
 import BackArrow from '../../../assets/images/icons/arrow-left.svg';
 
+
 interface BaseViewProps extends ViewProps {
   children?: React.ReactNode;
   showHeader?: boolean;
@@ -88,6 +89,7 @@ function BaseView({
 
                 <TouchableOpacity style={styles.backButton} onPress={handleBack} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
                   <BackArrow width={24} height={24} stroke={colors.primaryText} />
+
                 </TouchableOpacity>
               </View>
             )}
