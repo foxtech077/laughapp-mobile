@@ -62,6 +62,7 @@ declare module '@react-navigation/native' {
       tipInboxGradientEnd: string;
       red_600: string;
       green_600: string;
+      cardShadow: string;
     };
   };
 

@@ -59,6 +59,7 @@ export const CustomLightTheme: Theme | any = {
     tipInboxGradientEnd: '#FFF3C0',
     red_600: "#F31717",
     green_600: "#23AE87",
+    cardShadow: '#9494942E',
   },
 };
 
@@ -121,5 +122,6 @@ export const CustomDarkTheme: Theme | any = {
     tipInboxGradientEnd: '#FFF3C0',
     red_600: "#F31717",
     green_600: "#23AE87",
+    cardShadow: '#9494942E',
   },
 };

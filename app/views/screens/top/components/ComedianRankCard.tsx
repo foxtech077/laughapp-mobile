@@ -141,8 +141,8 @@ const styles = StyleSheet.create({
     gap: spacing(10),
   },
   avatar: {
-    width: spacing(48),
-    height: spacing(48),
+    width: spacing(54),
+    height: spacing(54),
     borderRadius: spacing(24),
   },
   detailsSection: {
