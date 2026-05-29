@@ -8,6 +8,7 @@ import CreateComedianAccount from "../views/screens/onboarding/CreateComedianAcc
 import ProfileScreen from "../views/screens/profile/ProfileScreen";
 import TopScreen from "../views/screens/top/TopScreen";
 import ProfileFollowingScreen from "../views/screens/profile/ProfileFollowingScreen";
+import TipInboxScreen from "../views/screens/tipInbox/TipInboxScreen";
 import FollowingScreen from "../views/screens/following/FollowingScreen";
 import CustomTabBar from "./components/CustomTabBar";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -45,6 +46,7 @@ function HomeNavigator() {
             <Stack.Screen name={routes.CREATE_FAN_ACCOUNT_SCREEN} component={CreateFanAccount} />
             <Stack.Screen name={routes.CREATE_COMEDIAN_ACCOUNT_SCREEN} component={CreateComedianAccount} />
             <Stack.Screen name={routes.HOME_TABS} component={HomeTab} />
+            <Stack.Screen name={routes.TIP_INBOX_SCREEN} component={TipInboxScreen} />
         </Stack.Navigator>
     );
 }
