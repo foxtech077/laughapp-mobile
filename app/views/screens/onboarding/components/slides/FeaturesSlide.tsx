@@ -21,7 +21,7 @@ export default function FeaturesSlide({ width }: FeaturesSlideProps) {
       <View style={styles.featuresHeader}>
         <TextView
           variant="heading"
-          size={fontScale(32)}
+          size={fontScale(30)}
           weight="700"
           style={[styles.featuresTitle, { color: colors.primaryText }]}
         >

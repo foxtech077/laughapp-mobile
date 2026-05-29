@@ -41,7 +41,7 @@ export default function CoinSlide({ width, onGetCoins, onSkip }: CoinSlideProps)
         <TextView
           variant="subheading"
           align="center"
-          size={fontScale(24)}
+          size={fontScale(22)}
           weight="500"
           style={{ color: colors.secondaryText, lineHeight: verticalScale(32) }}
         >

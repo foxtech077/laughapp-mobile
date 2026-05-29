@@ -74,7 +74,7 @@ export default function OnboardingFeatureItem({
       <View style={styles.textContainer}>
         <TextView
           variant="description"
-          size={fontScale(26)}
+          size={fontScale(23)}
           weight="700"
           style={[
             styles.title,
@@ -90,9 +90,9 @@ export default function OnboardingFeatureItem({
         {description ? (
           <TextView
             variant="caption"
-            size={fontScale(21)}
+            size={fontScale(19)}
             weight="500"
-            style={{ color: colors.secondaryText, lineHeight: verticalScale(32), marginTop: spacing(2) }}
+            style={{ color: colors.secondaryText, lineHeight: verticalScale(28), marginTop: spacing(2) }}
           >
             {description}
           </TextView>
