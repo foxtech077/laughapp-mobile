@@ -9,9 +9,10 @@ const { SortButton } = images;
 
 interface TipInboxHeaderProps {
   onSortPress: () => void;
+  hasActiveSort?: boolean;
 }
 
-export default function TipInboxHeader({ onSortPress }: TipInboxHeaderProps) {
+export default function TipInboxHeader({ onSortPress, hasActiveSort = false }: TipInboxHeaderProps) {
   const { colors } = useTheme();
   const navigation = useNavigation();
 
@@ -61,6 +62,22 @@ export default function TipInboxHeader({ onSortPress }: TipInboxHeaderProps) {
           >
             Sort by
           </TextView>
+          {hasActiveSort && (
+            <View
+              style={[
+                styles.badgeContainer,
+                { backgroundColor: colors.buttonEnabled || '#231F20' },
+              ]}
+            >
+              <TextView
+                size={fontScale(11)}
+                weight="700"
+                style={{ color: colors.white }}
+              >
+                1
+              </TextView>
+            </View>
+          )}
         </View>
       </TouchableOpacity>
     </View>
@@ -115,5 +132,13 @@ const styles = StyleSheet.create({
   },
   sortText: {
     letterSpacing: -0.2,
+  },
+  badgeContainer: {
+    width: moderateScale(18),
+    height: moderateScale(18),
+    borderRadius: moderateScale(9),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: spacing(2),
   },
 });

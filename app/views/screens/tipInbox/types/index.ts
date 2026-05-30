@@ -15,3 +15,5 @@ export interface TipStats {
   equivalent: string;
   tippers: string;
 }
+
+export type SortOptionType = 'recency' | 'amountHighToLow' | 'amountLowToHigh';

@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^5.2.14",
     "@react-native/new-app-screen": "0.85.2",
     "@react-navigation/bottom-tabs": "^7.15.10",
     "@react-navigation/elements": "^2.9.15",
@@ -21,13 +22,16 @@
     "react-native-bootsplash": "^7.3.1",
     "react-native-country-flag": "^2.0.2",
     "react-native-country-picker-modal": "^2.0.0",
+    "react-native-gesture-handler": "^3.0.0",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-mmkv": "^4.3.1",
     "react-native-nitro-modules": "^0.35.5",
+    "react-native-reanimated": "^4.4.0",
     "react-native-safe-area-context": "^5.7.0",
     "react-native-screens": "^4.24.0",
     "react-native-svg": "^15.15.5",
     "react-native-video": "^6.19.2",
+    "react-native-worklets": "^0.9.1",
     "rn-international-phone-number": "^0.13.2",
     "yup": "^1.7.1",
     "zustand": "^5.0.13"

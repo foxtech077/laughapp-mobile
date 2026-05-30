@@ -16,7 +16,9 @@ import TipInboxListItem from './components/TipInboxListItem';
 import TipInboxEmptyState from './components/TipInboxEmptyState';
 import TipInboxSelectedState from './components/TipInboxSelectedState';
 import { MOCK_TIPS } from './constants/mockData';
-import { TipItem, TipStats, TipStatus } from './types';
+import { TipItem, TipStats, TipStatus, SortOptionType } from './types';
+import TipInboxSortSheet from './components/TipInboxSortSheet';
+import { useTipInboxSort } from './hooks/useTipInboxSort';
 import { fontScale, moderateScale, spacing, verticalScale } from '../../../utils/dimensions';
 
 export default function TipInboxScreen() {
@@ -28,6 +30,15 @@ export default function TipInboxScreen() {
   const [selectedFilter, setSelectedFilter] = useState<'all' | TipStatus>('all');
   const [selectedTipIds, setSelectedTipIds] = useState<Set<string>>(new Set());
   const [appreciationText, setAppreciationText] = useState('');
+
+  const {
+    selectedSort,
+    bottomSheetRef,
+    openSortSheet,
+    sortTips,
+    handleSelectSort,
+  } = useTipInboxSort(tips);
+
   // Statistics calculation based on live mock data
   const stats: TipStats = useMemo(() => {
     const totalCoins = tips.reduce((acc, curr) => acc + curr.coins, 0);
@@ -47,13 +58,18 @@ export default function TipInboxScreen() {
     };
   }, [tips]);
 
-  // Filtering logic
+  // Filtering and sorting logic
   const filteredTips = useMemo(() => {
-    if (selectedFilter === 'all') {
-      return tips;
+    let result = [...tips];
+
+    // Filter
+    if (selectedFilter !== 'all') {
+      result = result.filter((tip) => tip.status === selectedFilter);
     }
-    return tips.filter((tip) => tip.status === selectedFilter);
-  }, [tips, selectedFilter]);
+
+    // Sort
+    return sortTips(result, selectedSort);
+  }, [tips, selectedFilter, selectedSort, sortTips]);
 
   // List of visible unreplied tips (for checkable selections)
   const visibleUnrepliedTips = useMemo(() => {
@@ -70,12 +86,8 @@ export default function TipInboxScreen() {
 
   // Handle Sort button press
   const handleSortPress = useCallback(() => {
-    Alert.alert(
-      'Sort Tips',
-      'In a production environment, this will trigger a beautiful bottom-sheet modal allowing the user to sort their tips by Date, Coin Amount, or Status.',
-      [{ text: 'Cool', style: 'default' }]
-    );
-  }, []);
+    openSortSheet();
+  }, [openSortSheet]);
 
   // Filter change
   const handleFilterChange = useCallback((newFilter: 'all' | TipStatus) => {
@@ -217,7 +229,10 @@ export default function TipInboxScreen() {
       style={[styles.container, { backgroundColor: colors.white }]}
     >
       {/* Premium custom top header */}
-      <TipInboxHeader onSortPress={handleSortPress} />
+      <TipInboxHeader
+        onSortPress={handleSortPress}
+        hasActiveSort={selectedSort !== 'recency'}
+      />
 
       {/* Filter and selection actions row */}
       <TipInboxFilterTabs
@@ -265,6 +280,13 @@ export default function TipInboxScreen() {
           handleSendAppreciation={handleSendAppreciation}
         />
       )}
+
+      {/* Reusable Sort Bottom Sheet component */}
+      <TipInboxSortSheet
+        sheetRef={bottomSheetRef}
+        selectedOption={selectedSort}
+        onSelectOption={handleSelectSort}
+      />
     </BaseView>
   );
 }
