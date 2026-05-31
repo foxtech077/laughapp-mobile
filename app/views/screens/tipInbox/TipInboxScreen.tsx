@@ -9,7 +9,8 @@ import {
 import { useTheme } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BaseView from '../../components/BaseView';
-import TipInboxHeader from './components/TipInboxHeader';
+import TextView from '../../components/TextView';
+import { images } from '../../../constants/images';
 import TipInboxStatsCard from './components/TipInboxStatsCard';
 import TipInboxFilterTabs from './components/TipInboxFilterTabs';
 import TipInboxListItem from './components/TipInboxListItem';
@@ -20,6 +21,8 @@ import { TipItem, TipStats, TipStatus, SortOptionType } from './types';
 import TipInboxSortSheet from './components/TipInboxSortSheet';
 import { useTipInboxSort } from './hooks/useTipInboxSort';
 import { fontScale, moderateScale, spacing, verticalScale } from '../../../utils/dimensions';
+
+const { SortButton } = images;
 
 export default function TipInboxScreen() {
   const { colors } = useTheme();
@@ -39,12 +42,9 @@ export default function TipInboxScreen() {
     handleSelectSort,
   } = useTipInboxSort(tips);
 
-  // Statistics calculation based on live mock data
   const stats: TipStats = useMemo(() => {
     const totalCoins = tips.reduce((acc, curr) => acc + curr.coins, 0);
-    // Format total coins with commas (e.g. 4,720)
     const earnedCoinsStr = totalCoins.toLocaleString();
-    // Equivalent is $0.025 per coin
     const equivalentVal = (totalCoins * 0.0255).toFixed(2);
     const equivalentStr = `$${Number(equivalentVal).toLocaleString(undefined, {
       minimumFractionDigits: 2,
@@ -58,25 +58,20 @@ export default function TipInboxScreen() {
     };
   }, [tips]);
 
-  // Filtering and sorting logic
   const filteredTips = useMemo(() => {
     let result = [...tips];
 
-    // Filter
     if (selectedFilter !== 'all') {
       result = result.filter((tip) => tip.status === selectedFilter);
     }
 
-    // Sort
     return sortTips(result, selectedSort);
   }, [tips, selectedFilter, selectedSort, sortTips]);
 
-  // List of visible unreplied tips (for checkable selections)
   const visibleUnrepliedTips = useMemo(() => {
     return filteredTips.filter((tip) => tip.status === 'unreplied');
   }, [filteredTips]);
 
-  // Check if "Select All" should be checked
   const selectAllChecked = useMemo(() => {
     if (visibleUnrepliedTips.length === 0) {
       return false;
@@ -84,17 +79,14 @@ export default function TipInboxScreen() {
     return visibleUnrepliedTips.every((tip) => selectedTipIds.has(tip.id));
   }, [visibleUnrepliedTips, selectedTipIds]);
 
-  // Handle Sort button press
   const handleSortPress = useCallback(() => {
     openSortSheet();
   }, [openSortSheet]);
 
-  // Filter change
   const handleFilterChange = useCallback((newFilter: 'all' | TipStatus) => {
     setSelectedFilter(newFilter);
   }, []);
 
-  // Individual checkbox press
   const handleCheckboxPress = useCallback((id: string) => {
     setSelectedTipIds((prevSelected) => {
       const nextSelected = new Set(prevSelected);
@@ -107,19 +99,16 @@ export default function TipInboxScreen() {
     });
   }, []);
 
-  // Select all press
   const handleSelectAllPress = useCallback(() => {
     setSelectedTipIds((prevSelected) => {
       const nextSelected = new Set(prevSelected);
       const allSelected = visibleUnrepliedTips.every((tip) => nextSelected.has(tip.id));
 
       if (allSelected) {
-        // Deselect all visible unreplied tips
         visibleUnrepliedTips.forEach((tip) => {
           nextSelected.delete(tip.id);
         });
       } else {
-        // Select all visible unreplied tips
         visibleUnrepliedTips.forEach((tip) => {
           nextSelected.add(tip.id);
         });
@@ -142,7 +131,6 @@ export default function TipInboxScreen() {
                 setTips((prev) =>
                   prev.map((t) => (t.id === item.id ? { ...t, status: 'replied' } : t))
                 );
-                // Clear selection if it was selected
                 setSelectedTipIds((prev) => {
                   const next = new Set(prev);
                   next.delete(item.id);
@@ -163,7 +151,6 @@ export default function TipInboxScreen() {
     [setTips]
   );
 
-  // Send Bulk Appreciation Message
   const handleSendAppreciation = () => {
     if (!appreciationText.trim()) return;
 
@@ -221,19 +208,8 @@ export default function TipInboxScreen() {
 
   const emptyDetails = getEmptyStateDetails();
 
-  return (
-    <BaseView
-      showHeader={false}
-      applyTopInset={true}
-      applyBottomInset={false}
-      style={[styles.container, { backgroundColor: colors.white }]}
-    >
-      {/* Premium custom top header */}
-      <TipInboxHeader
-        onSortPress={handleSortPress}
-        hasActiveSort={selectedSort !== 'recency'}
-      />
-
+  const renderHeader = useCallback(() => (
+    <View style={{ backgroundColor: colors.white }}>
       {/* Filter and selection actions row */}
       <TipInboxFilterTabs
         selectedFilter={selectedFilter}
@@ -245,41 +221,105 @@ export default function TipInboxScreen() {
 
       {/* Stats horizontal overview card */}
       <TipInboxStatsCard stats={stats} />
+    </View>
+  ), [
+    colors.white,
+    selectedFilter,
+    handleFilterChange,
+    selectAllChecked,
+    handleSelectAllPress,
+    visibleUnrepliedTips.length,
+    stats,
+  ]);
 
-      {/* Optimization-driven FlatList rendering */}
-      <View style={styles.listWrapper}>
-        <FlatList
-          data={filteredTips}
-          keyExtractor={(item) => item.id}
-          renderItem={renderItem}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={[
-            styles.listContent,
+  const renderFooter = useCallback(() => (
+    <View style={{ height: selectedTipIds.size > 0 ? spacing(100) : insets.bottom + spacing(16) }} />
+  ), [selectedTipIds.size, insets.bottom]);
+
+  return (
+    <BaseView
+      showHeader={true}
+      showBackButton={true}
+      headerTitle="Tip inbox"
+      titleAlign="left"
+      headerRight={
+        <TouchableOpacity
+          onPress={handleSortPress}
+          activeOpacity={0.8}
+          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          style={[
+            styles.sortButton,
             {
-              paddingBottom: selectedTipIds.size > 0 ? spacing(90) : insets.bottom + spacing(16),
+              borderColor: colors.white,
+              backgroundColor: colors.gray100,
             },
           ]}
-          ListEmptyComponent={
-            <TipInboxEmptyState
-              title={emptyDetails.title}
-              description={emptyDetails.description}
-            />
-          }
-          removeClippedSubviews={true}
-          initialNumToRender={10}
-          maxToRenderPerBatch={10}
-          windowSize={5}
-        />
-      </View>
+        >
+          <View style={styles.sortButtonContent}>
+            <SortButton stroke={colors.primaryText} width={spacing(14)} height={spacing(14)} />
+            <TextView
+              size={fontScale(15)}
+              weight="700"
+              style={[styles.sortText, { color: colors.primaryText }]}
+            >
+              Sort by
+            </TextView>
+            {selectedSort !== 'recency' && (
+              <View
+                style={[
+                  styles.badgeContainer,
+                  { backgroundColor: colors.buttonEnabled },
+                ]}
+              >
+                <TextView
+                  size={fontScale(11)}
+                  weight="700"
+                  style={{ color: colors.white }}
+                >
+                  1
+                </TextView>
+              </View>
+            )}
+          </View>
+        </TouchableOpacity>
+      }
+      applyTopInset={true}
+      applyBottomInset={false}
+      style={[styles.container, { backgroundColor: colors.white }]}
+    >
+      <View style={{ flex: 1 }}>
+        {/* Optimization-driven FlatList rendering */}
+        <View style={styles.listWrapper}>
+          <FlatList
+            data={filteredTips}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.listContent}
+            ListHeaderComponent={renderHeader}
+            ListFooterComponent={renderFooter}
+            keyboardShouldPersistTaps="handled"
+            ListEmptyComponent={
+              <TipInboxEmptyState
+                title={emptyDetails.title}
+                description={emptyDetails.description}
+              />
+            }
+            removeClippedSubviews={true}
+            initialNumToRender={10}
+            maxToRenderPerBatch={10}
+            windowSize={5}
+          />
+        </View>
 
-      {/* Slide-up appreciation text bottom input bar (shown only in selected state) */}
-      {selectedTipIds.size > 0 && (
-        <TipInboxSelectedState
-          appreciationText={appreciationText}
-          setAppreciationText={setAppreciationText}
-          handleSendAppreciation={handleSendAppreciation}
-        />
-      )}
+        {selectedTipIds.size > 0 && (
+          <TipInboxSelectedState
+            appreciationText={appreciationText}
+            setAppreciationText={setAppreciationText}
+            handleSendAppreciation={handleSendAppreciation}
+          />
+        )}
+      </View>
 
       {/* Reusable Sort Bottom Sheet component */}
       <TipInboxSortSheet
@@ -299,6 +339,27 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContent: {
-    paddingBottom: spacing(32),
+  },
+  sortButton: {
+    borderWidth: 1,
+    borderRadius: moderateScale(8),
+    paddingHorizontal: spacing(8),
+    paddingVertical: spacing(4),
+  },
+  sortButtonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing(4),
+  },
+  sortText: {
+    letterSpacing: -0.2,
+  },
+  badgeContainer: {
+    width: moderateScale(18),
+    height: moderateScale(18),
+    borderRadius: moderateScale(9),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: spacing(2),
   },
 });

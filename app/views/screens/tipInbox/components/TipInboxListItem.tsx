@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import TextView from '../../../components/TextView';
@@ -17,7 +17,7 @@ interface TipInboxListItemProps {
   onPress: () => void;
 }
 
-export default function TipInboxListItem({
+export default memo(function TipInboxListItem({
   item,
   checked,
   onCheckboxPress,
@@ -34,7 +34,6 @@ export default function TipInboxListItem({
         style={styles.rowContainer}
       >
         <View style={styles.leftWrapper}>
-          {/* Conditional checkbox - only rendered for unreplied tippers */}
           {isUnreplied ? (
             <View style={styles.checkboxWrapper}>
               <TipInboxCheckbox
@@ -46,7 +45,6 @@ export default function TipInboxListItem({
             <View style={styles.checkboxPlaceholder} />
           )}
 
-          {/* Avatar container with optional gold coin overlay badge */}
           <View style={styles.avatarContainer}>
             <Image
               source={{ uri: item.avatar }}
@@ -106,7 +104,7 @@ export default function TipInboxListItem({
       <View style={[styles.separator, { backgroundColor: colors.tipDivider }]} />
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   rowContainer: {

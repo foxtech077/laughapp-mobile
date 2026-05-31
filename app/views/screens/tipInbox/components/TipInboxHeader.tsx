@@ -3,8 +3,9 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import TextView from '../../../components/TextView';
 import { fontScale, moderateScale, spacing, verticalScale } from '../../../../utils/dimensions';
-import Svg, { Path } from 'react-native-svg';
 import { images } from '../../../../constants/images';
+// import BackArrow from '../../../../../assets/images/icons/arrow-left.svg';
+
 const { SortButton } = images;
 
 interface TipInboxHeaderProps {
@@ -31,7 +32,7 @@ export default function TipInboxHeader({ onSortPress, hasActiveSort = false }: T
           style={styles.backButton}
           hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
         >
-          <BackArrowIcon stroke={colors.primaryText} />
+          {/* <BackArrow width={24} height={24} stroke={colors.primaryText} /> */}
         </TouchableOpacity>
         <TextView
           size={22}
@@ -45,6 +46,7 @@ export default function TipInboxHeader({ onSortPress, hasActiveSort = false }: T
       <TouchableOpacity
         onPress={onSortPress}
         activeOpacity={0.8}
+        hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
         style={[
           styles.sortButton,
           {
@@ -66,7 +68,7 @@ export default function TipInboxHeader({ onSortPress, hasActiveSort = false }: T
             <View
               style={[
                 styles.badgeContainer,
-                { backgroundColor: colors.buttonEnabled || '#231F20' },
+                { backgroundColor: colors.buttonEnabled },
               ]}
             >
               <TextView
@@ -81,20 +83,6 @@ export default function TipInboxHeader({ onSortPress, hasActiveSort = false }: T
         </View>
       </TouchableOpacity>
     </View>
-  );
-}
-
-function BackArrowIcon({ stroke }: { stroke: string }) {
-  return (
-    <Svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <Path
-        d="M19 12H5M5 12L12 19M5 12L12 5"
-        stroke={stroke}
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </Svg>
   );
 }
 

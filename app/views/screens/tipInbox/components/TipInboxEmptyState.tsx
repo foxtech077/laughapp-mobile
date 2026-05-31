@@ -16,14 +16,14 @@ export default function TipInboxEmptyState({ title, description }: TipInboxEmpty
 
   return (
     <View style={[styles.container, { backgroundColor: colors.white }]}>
-      <View style={[styles.iconWrapper, { backgroundColor: colors.emptyStateBackground || '#F9F9F9' }]}>
+      <View style={[styles.iconWrapper, { backgroundColor: colors.emptyStateBackground }]}>
         <SupporterOnboarding width={spacing(36)} height={spacing(36)} />
       </View>
       <TextView
         size={18}
         weight="800"
         align="center"
-        style={[styles.title, { color: colors.primaryText || '#231F20' }]}
+        style={[styles.title, { color: colors.primaryText }]}
       >
         {title}
       </TextView>
@@ -31,7 +31,7 @@ export default function TipInboxEmptyState({ title, description }: TipInboxEmpty
         size={14}
         weight="500"
         align="center"
-        style={[styles.description, { color: colors.secondaryText || '#5A5656' }]}
+        style={[styles.description, { color: colors.secondaryText }]}
       >
         {description}
       </TextView>
