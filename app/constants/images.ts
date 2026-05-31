@@ -26,6 +26,7 @@ import SortButton from '../../assets/images/icons/sort-button.svg';
 import Microphone from '../../assets/images/icons/microphone.svg';
 import SendIcon from '../../assets/images/icons/send-icon.svg';
 import SelectedCheckMark from '../../assets/images/icons/select-icon.svg';
+import TrashIcon from '../../assets/images/icons/trash-icon.svg';
 
 
 export const images = {
@@ -61,6 +62,7 @@ export const images = {
     Microphone,
     SendIcon,
     SelectedCheckMark,
+    TrashIcon,
 
     BellIcon,
     FilterIcon,
