@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
-  KeyboardAvoidingView,
-  Platform,
   TextInput,
   TouchableOpacity,
-  Alert,
+  Keyboard,
+  Platform,
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Svg, { Path } from 'react-native-svg';
 import { fontScale, moderateScale, spacing, verticalScale } from '../../../../utils/dimensions';
 import { images } from '../../../../constants/images';
+import VoiceMessageRecorder from './VoiceMessageRecorder';
+import { useKeyboardHeight } from '../../../../hooks/useKeyboardHeight';
+
 const { Microphone, SendIcon } = images;
+
 interface TipInboxSelectedStateProps {
   appreciationText: string;
   setAppreciationText: (text: string) => void;
@@ -28,12 +30,37 @@ export default function TipInboxSelectedState({
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const [isFocused, setIsFocused] = useState(false);
+  const [isRecordingVoice, setIsRecordingVoice] = useState(false);
+  const keyboardHeight = useKeyboardHeight();
+
+  const isKeyboardOpen = keyboardHeight > 0;
+  const bottomOffset = Platform.OS === 'ios' ? keyboardHeight : 0;
+
+  const paddingBottom = isKeyboardOpen
+    ? spacing(16)
+    : insets.bottom > 0
+      ? insets.bottom
+      : spacing(16);
+
+  if (isRecordingVoice) {
+    return (
+      <View
+        style={[
+          styles.absoluteContainer,
+          { bottom: bottomOffset },
+        ]}
+      >
+        <VoiceMessageRecorder onTrashPress={() => setIsRecordingVoice(false)} />
+      </View>
+    );
+  }
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? spacing(60) : 0}
-      style={styles.absoluteContainer}
+    <View
+      style={[
+        styles.absoluteContainer,
+        { bottom: bottomOffset },
+      ]}
     >
       <View
         style={[
@@ -41,7 +68,8 @@ export default function TipInboxSelectedState({
           {
             borderTopColor: colors.tipDivider,
             backgroundColor: colors.white,
-            paddingBottom: insets.bottom > 0 ? insets.bottom : spacing(16),
+            paddingBottom,
+            shadowColor: colors.cardShadow,
           },
         ]}
       >
@@ -50,9 +78,10 @@ export default function TipInboxSelectedState({
             styles.inputContainer,
             {
               backgroundColor: colors.gray100,
-              borderWidth: 1, borderColor: isFocused
-                ? '#231F20'
-                : colors.inputBorder || '#DADADA',
+              borderWidth: 1,
+              borderColor: isFocused
+                ? colors.cardSelectedBorder
+                : colors.inputBorder,
             },
           ]}
         >
@@ -72,17 +101,15 @@ export default function TipInboxSelectedState({
             appreciationText.trim()
               ? handleSendAppreciation
               : () => {
-                Alert.alert(
-                  'Microphone Pressed',
-                  'Voice speech-to-text simulation active. Type to appreciation send.'
-                );
+                Keyboard.dismiss();
+                setIsRecordingVoice(true);
               }
           }
           style={[styles.micButton, { backgroundColor: colors.filterTabSelected }]}
         >
           {appreciationText.trim() ? (
             <SendIcon
-              fill={colors.white}
+              stroke={colors.white}
               width={spacing(18)}
               height={spacing(18)}
             />
@@ -95,35 +122,30 @@ export default function TipInboxSelectedState({
           )}
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   absoluteContainer: {
     position: 'absolute',
-    bottom: 0,
     left: 0,
     right: 0,
+    elevation: 12,
   },
   bottomInputBar: {
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-
-    paddingTop: spacing(20),
+    paddingTop: spacing(17),
     paddingHorizontal: spacing(16),
-
     borderTopWidth: 1,
-
-    shadowColor: '#0D0D0D',
     shadowOffset: {
       width: 0,
       height: -8,
     },
     shadowOpacity: 0.12,
     shadowRadius: 25,
-
-    elevation: 12,
   },
   inputContainer: {
     flex: 1,
