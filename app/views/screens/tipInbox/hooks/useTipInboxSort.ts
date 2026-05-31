@@ -15,12 +15,11 @@ export function useTipInboxSort(initialTips: TipItem[]) {
     if (sortOption === 'amountLowToHigh') {
       return result.sort((a, b) => a.coins - b.coins);
     }
-    // 'recency' returns default mock order
     return result;
   }, []);
 
   const openSortSheet = useCallback(() => {
-    bottomSheetRef.current?.expand();
+    bottomSheetRef.current?.snapToIndex(0);
   }, []);
 
   const closeSortSheet = useCallback(() => {

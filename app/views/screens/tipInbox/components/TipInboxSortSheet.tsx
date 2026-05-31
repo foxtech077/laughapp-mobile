@@ -4,7 +4,7 @@ import { useTheme } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetView } from '@gorhom/bottom-sheet';
 import TextView from '../../../components/TextView';
-import { fontScale, moderateScale, spacing } from '../../../../utils/dimensions';
+import { fontScale, moderateScale, spacing, verticalScale } from '../../../../utils/dimensions';
 import TipInboxSortOption from './TipInboxSortOption';
 import { SortOptionType } from '../types';
 
@@ -24,6 +24,8 @@ export default function TipInboxSortSheet({
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
 
+  const snapPoints = React.useMemo(() => [verticalScale(240)], []);
+
   const renderBackdrop = useCallback(
     (props: any) => (
       <BottomSheetBackdrop
@@ -41,10 +43,15 @@ export default function TipInboxSortSheet({
     <BottomSheet
       ref={sheetRef}
       index={-1}
+      snapPoints={snapPoints}
       enablePanDownToClose={true}
-      enableDynamicSizing={true}
+      enableDynamicSizing={false}
       backdropComponent={renderBackdrop}
-      handleComponent={null}
+      handleIndicatorStyle={{
+        backgroundColor: colors.borderLight,
+        width: spacing(40),
+        height: spacing(4),
+      }}
       onChange={(index) => {
         if (index === -1 && onClose) {
           onClose();
