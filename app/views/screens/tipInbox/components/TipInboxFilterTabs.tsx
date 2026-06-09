@@ -2,7 +2,11 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import TextView from '../../../components/TextView';
-import { fontScale, moderateScale, spacing } from '../../../../utils/dimensions';
+import {
+  fontScale,
+  moderateScale,
+  spacing,
+} from '../../../../utils/dimensions';
 import TipInboxCheckbox from './TipInboxCheckbox';
 import { TipStatus } from '../types';
 
@@ -35,7 +39,10 @@ export default function TipInboxFilterTabs({
         activeOpacity={0.7}
         onPress={onSelectAllPress}
         disabled={selectAllDisabled}
-        style={[styles.selectAllContainer, selectAllDisabled && styles.disabledSelectAll]}
+        style={[
+          styles.selectAllContainer,
+          selectAllDisabled && styles.disabledSelectAll,
+        ]}
       >
         <View style={styles.checkboxWrapper}>
           <TipInboxCheckbox
@@ -54,7 +61,7 @@ export default function TipInboxFilterTabs({
       </TouchableOpacity>
 
       <View style={styles.pillsContainer}>
-        {filters.map((filter) => {
+        {filters.map(filter => {
           const isSelected = selectedFilter === filter.key;
           return (
             <TouchableOpacity
@@ -74,12 +81,10 @@ export default function TipInboxFilterTabs({
               ]}
             >
               <TextView
-                size={fontScale(15)}
+                size={fontScale(13)}
                 weight="700"
                 style={{
-                  color: isSelected
-                    ? colors.white
-                    : colors.secondaryText,
+                  color: isSelected ? colors.white : colors.secondaryText,
                 }}
               >
                 {filter.label}

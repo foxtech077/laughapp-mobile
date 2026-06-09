@@ -20,7 +20,12 @@ import { MOCK_TIPS } from './constants/mockData';
 import { TipItem, TipStats, TipStatus, SortOptionType } from './types';
 import TipInboxSortSheet from './components/TipInboxSortSheet';
 import { useTipInboxSort } from './hooks/useTipInboxSort';
-import { fontScale, moderateScale, spacing, verticalScale } from '../../../utils/dimensions';
+import {
+  fontScale,
+  moderateScale,
+  spacing,
+  verticalScale,
+} from '../../../utils/dimensions';
 
 const { SortButton } = images;
 
@@ -30,7 +35,9 @@ export default function TipInboxScreen() {
 
   // State definitions
   const [tips, setTips] = useState<TipItem[]>(MOCK_TIPS);
-  const [selectedFilter, setSelectedFilter] = useState<'all' | TipStatus>('all');
+  const [selectedFilter, setSelectedFilter] = useState<'all' | TipStatus>(
+    'all',
+  );
   const [selectedTipIds, setSelectedTipIds] = useState<Set<string>>(new Set());
   const [appreciationText, setAppreciationText] = useState('');
 
@@ -62,21 +69,21 @@ export default function TipInboxScreen() {
     let result = [...tips];
 
     if (selectedFilter !== 'all') {
-      result = result.filter((tip) => tip.status === selectedFilter);
+      result = result.filter(tip => tip.status === selectedFilter);
     }
 
     return sortTips(result, selectedSort);
   }, [tips, selectedFilter, selectedSort, sortTips]);
 
   const visibleUnrepliedTips = useMemo(() => {
-    return filteredTips.filter((tip) => tip.status === 'unreplied');
+    return filteredTips.filter(tip => tip.status === 'unreplied');
   }, [filteredTips]);
 
   const selectAllChecked = useMemo(() => {
     if (visibleUnrepliedTips.length === 0) {
       return false;
     }
-    return visibleUnrepliedTips.every((tip) => selectedTipIds.has(tip.id));
+    return visibleUnrepliedTips.every(tip => selectedTipIds.has(tip.id));
   }, [visibleUnrepliedTips, selectedTipIds]);
 
   const handleSortPress = useCallback(() => {
@@ -88,7 +95,7 @@ export default function TipInboxScreen() {
   }, []);
 
   const handleCheckboxPress = useCallback((id: string) => {
-    setSelectedTipIds((prevSelected) => {
+    setSelectedTipIds(prevSelected => {
       const nextSelected = new Set(prevSelected);
       if (nextSelected.has(id)) {
         nextSelected.delete(id);
@@ -100,16 +107,18 @@ export default function TipInboxScreen() {
   }, []);
 
   const handleSelectAllPress = useCallback(() => {
-    setSelectedTipIds((prevSelected) => {
+    setSelectedTipIds(prevSelected => {
       const nextSelected = new Set(prevSelected);
-      const allSelected = visibleUnrepliedTips.every((tip) => nextSelected.has(tip.id));
+      const allSelected = visibleUnrepliedTips.every(tip =>
+        nextSelected.has(tip.id),
+      );
 
       if (allSelected) {
-        visibleUnrepliedTips.forEach((tip) => {
+        visibleUnrepliedTips.forEach(tip => {
           nextSelected.delete(tip.id);
         });
       } else {
-        visibleUnrepliedTips.forEach((tip) => {
+        visibleUnrepliedTips.forEach(tip => {
           nextSelected.add(tip.id);
         });
       }
@@ -128,10 +137,12 @@ export default function TipInboxScreen() {
             {
               text: 'Mark as Replied',
               onPress: () => {
-                setTips((prev) =>
-                  prev.map((t) => (t.id === item.id ? { ...t, status: 'replied' } : t))
+                setTips(prev =>
+                  prev.map(t =>
+                    t.id === item.id ? { ...t, status: 'replied' } : t,
+                  ),
                 );
-                setSelectedTipIds((prev) => {
+                setSelectedTipIds(prev => {
                   const next = new Set(prev);
                   next.delete(item.id);
                   return next;
@@ -142,13 +153,15 @@ export default function TipInboxScreen() {
               text: 'Cancel',
               style: 'cancel',
             },
-          ]
+          ],
         );
       } else {
-        Alert.alert('Tip Details', `You already replied to ${item.name}!`, [{ text: 'OK' }]);
+        Alert.alert('Tip Details', `You already replied to ${item.name}!`, [
+          { text: 'OK' },
+        ]);
       }
     },
-    [setTips]
+    [setTips],
   );
 
   const handleSendAppreciation = () => {
@@ -162,14 +175,16 @@ export default function TipInboxScreen() {
           text: 'Awesome',
           onPress: () => {
             // Mark all selected tips as replied and clear the selection
-            setTips((prev) =>
-              prev.map((t) => (selectedTipIds.has(t.id) ? { ...t, status: 'replied' } : t))
+            setTips(prev =>
+              prev.map(t =>
+                selectedTipIds.has(t.id) ? { ...t, status: 'replied' } : t,
+              ),
             );
             setSelectedTipIds(new Set());
             setAppreciationText('');
           },
         },
-      ]
+      ],
     );
   };
 
@@ -183,7 +198,7 @@ export default function TipInboxScreen() {
         onPress={() => handleItemPress(item)}
       />
     ),
-    [selectedTipIds, handleCheckboxPress, handleItemPress]
+    [selectedTipIds, handleCheckboxPress, handleItemPress],
   );
 
   const getEmptyStateDetails = () => {
@@ -196,45 +211,60 @@ export default function TipInboxScreen() {
       case 'replied':
         return {
           title: 'No replied tips yet',
-          description: "Tippers will show up here once you've sent them a reply.",
+          description:
+            "Tippers will show up here once you've sent them a reply.",
         };
       default:
         return {
           title: 'Your Tip Inbox is empty',
-          description: 'Keep creating awesome content to earn tips from your viewers!',
+          description:
+            'Keep creating awesome content to earn tips from your viewers!',
         };
     }
   };
 
   const emptyDetails = getEmptyStateDetails();
 
-  const renderHeader = useCallback(() => (
-    <View style={{ backgroundColor: colors.white }}>
-      {/* Filter and selection actions row */}
-      <TipInboxFilterTabs
-        selectedFilter={selectedFilter}
-        onFilterChange={handleFilterChange}
-        selectAllChecked={selectAllChecked}
-        onSelectAllPress={handleSelectAllPress}
-        selectAllDisabled={visibleUnrepliedTips.length === 0}
+  const renderHeader = useCallback(
+    () => (
+      <View style={{ backgroundColor: colors.white }}>
+        {/* Filter and selection actions row */}
+        <TipInboxFilterTabs
+          selectedFilter={selectedFilter}
+          onFilterChange={handleFilterChange}
+          selectAllChecked={selectAllChecked}
+          onSelectAllPress={handleSelectAllPress}
+          selectAllDisabled={visibleUnrepliedTips.length === 0}
+        />
+
+        {/* Stats horizontal overview card */}
+        <TipInboxStatsCard stats={stats} />
+      </View>
+    ),
+    [
+      colors.white,
+      selectedFilter,
+      handleFilterChange,
+      selectAllChecked,
+      handleSelectAllPress,
+      visibleUnrepliedTips.length,
+      stats,
+    ],
+  );
+
+  const renderFooter = useCallback(
+    () => (
+      <View
+        style={{
+          height:
+            selectedTipIds.size > 0
+              ? spacing(100)
+              : insets.bottom + spacing(16),
+        }}
       />
-
-      {/* Stats horizontal overview card */}
-      <TipInboxStatsCard stats={stats} />
-    </View>
-  ), [
-    colors.white,
-    selectedFilter,
-    handleFilterChange,
-    selectAllChecked,
-    handleSelectAllPress,
-    visibleUnrepliedTips.length,
-    stats,
-  ]);
-
-  const renderFooter = useCallback(() => (
-    <View style={{ height: selectedTipIds.size > 0 ? spacing(100) : insets.bottom + spacing(16) }} />
-  ), [selectedTipIds.size, insets.bottom]);
+    ),
+    [selectedTipIds.size, insets.bottom],
+  );
 
   return (
     <BaseView
@@ -256,7 +286,11 @@ export default function TipInboxScreen() {
           ]}
         >
           <View style={styles.sortButtonContent}>
-            <SortButton stroke={colors.primaryText} width={spacing(14)} height={spacing(14)} />
+            <SortButton
+              stroke={colors.primaryText}
+              width={spacing(14)}
+              height={spacing(14)}
+            />
             <TextView
               size={fontScale(15)}
               weight="700"
@@ -292,7 +326,7 @@ export default function TipInboxScreen() {
         <View style={styles.listWrapper}>
           <FlatList
             data={filteredTips}
-            keyExtractor={(item) => item.id}
+            keyExtractor={item => item.id}
             renderItem={renderItem}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.listContent}
@@ -338,8 +372,7 @@ const styles = StyleSheet.create({
   listWrapper: {
     flex: 1,
   },
-  listContent: {
-  },
+  listContent: {},
   sortButton: {
     borderWidth: 1,
     borderRadius: moderateScale(8),
