@@ -1,5 +1,5 @@
 import { memo, useCallback, useEffect, useRef, useState } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
 import Video from "react-native-video";
 import ReelInteractionOverlay from "./ReelInteractionOverlay";
 
@@ -53,6 +53,7 @@ const ReelVideoPlayer = memo(({ item, width, height, isActive }: ReelVideoPlayer
                 rate={playbackRate}
                 playInBackground={false}
                 playWhenInactive={false}
+                useTextureView={Platform.OS === 'android'}
             />
             <ReelInteractionOverlay
                 isActive={isActive}
