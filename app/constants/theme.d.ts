@@ -50,6 +50,18 @@ declare module '@react-navigation/native' {
       yellow_600: string;
       gray100: string;
       primaryYellow: string;
+      tipInboxCard: string;
+      repliedGreen: string;
+      unrepliedRed: string;
+      filterTabBorder: string;
+      filterTabSelected: string;
+      tipDivider: string;
+      badgeGreenBg: string;
+      badgeRedBg: string;
+      tipInboxGradientStart: string;
+      tipInboxGradientEnd: string;
+      red_600: string;
+      green_600: string;
       cardShadow: string;
     };
   };

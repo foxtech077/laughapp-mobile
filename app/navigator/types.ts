@@ -30,4 +30,5 @@ export type HomeStackParamList = {
   [routes.ONBOARDING_CHOOSE_ROLE_SCREEN]: undefined;
   [routes.CREATE_FAN_ACCOUNT_SCREEN]: undefined;
   [routes.CREATE_COMEDIAN_ACCOUNT_SCREEN]: undefined;
+  [routes.TIP_INBOX_SCREEN]: undefined;
 };

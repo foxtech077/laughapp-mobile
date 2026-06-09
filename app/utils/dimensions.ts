@@ -61,6 +61,9 @@ export const scale = (size: number): number => {
   return (shortDimension / BASE_SCREEN_WIDTH) * size;
 };
 
+export const horizontalScale = (size: number): number => {
+  return (longDimension / BASE_SCREEN_WIDTH) * size;
+};
 export const verticalScale = (size: number): number => {
   return (longDimension / BASE_SCREEN_HEIGHT) * size;
 };

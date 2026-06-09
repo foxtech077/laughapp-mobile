@@ -7,7 +7,7 @@ import TextView from '../../../components/TextView';
 import { images } from '../../../../constants/images';
 
 
-const { LaughIcon1, tipIcon } = images;
+const { laughIcon1, tipIcon } = images;
 
 export interface VideoData {
     id: string;
@@ -36,19 +36,7 @@ interface VideoCardProps {
     style?: ViewStyle;
 }
 
-/**
- * Reusable video card component for rendering a thumbnail with a cinematic
- * gradient overlay and statistical badges (laughs, tips, duration).
- * 
- * Supports dynamic border radii to cleanly integrate into row-based layouts.
- *
- * @param item - The video data containing image URL and stats
- * @param width - The exact width of the card
- * @param height - The exact height of the card
- * @param borderRadii - Configurable border radiuses for grid placement
- * @param style - Additional container styles
- * @returns {JSX.Element} The rendered video card
- */
+
 export default function VideoCard({
     item,
     width,
@@ -90,7 +78,14 @@ export default function VideoCard({
 
             {/* Top Left laughs badge */}
             <View style={[styles.badgeTopLeft, { backgroundColor: colors.badgeOverlay }]}>
-                <LaughIcon1 width={spacing(12)} height={spacing(12)} style={{ backgroundColor: colors.white, borderRadius: moderateScale(6) }} />
+                <Image
+                    source={images.laughIcon1}
+                    style={{
+                        width: spacing(14),
+                        height: spacing(14),
+                        resizeMode: 'contain',
+                    }}
+                />
                 <TextView style={[styles.badgeText, { color: colors.white }]}>{item.laughs}</TextView>
             </View>
 

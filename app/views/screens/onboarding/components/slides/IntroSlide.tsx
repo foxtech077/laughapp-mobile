@@ -29,14 +29,14 @@ export default function IntroSlide({ width }: IntroSlideProps) {
             styles.title,
             {
               color: colors.primaryText,
-              fontSize: fontScale(44),
-              lineHeight: fontScale(50),
+              fontSize: fontScale(40),
+              lineHeight: fontScale(48),
               letterSpacing: -0.5,
               fontWeight: '700',
             },
           ]}
         >
-          {"The funniest feed\non the internet"}
+          {"The funniest feed on the internet"}
         </TextView>
 
         <TextView
@@ -44,13 +44,13 @@ export default function IntroSlide({ width }: IntroSlideProps) {
           align="center"
           style={{
             color: colors.secondaryText,
-            fontSize: fontScale(24),
-            lineHeight: fontScale(32),
+            fontSize: fontScale(22),
+            lineHeight: fontScale(28),
             letterSpacing: -0.5,
             fontWeight: '500',
           }}
         >
-          {"Built to bring more laughter into\nyour day"}
+          {"Built to bring more laughter into your day"}
         </TextView>
       </View>
     </View>
