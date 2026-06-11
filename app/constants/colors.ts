@@ -47,7 +47,7 @@ export const CustomLightTheme: Theme | any = {
     yellow_700_transparent: 'rgba(232, 151, 0, 0)',
     cardPatternStroke: '#FFE9C9',
     yellow_600: '#FFF3D0',
-    yellow_500: '#D0AB0C',
+    yellow_500: '#C38300',
     gray100: '#F2F2F2',
     primaryYellow: '#FDD940',
     tipInboxCard: '#FFF5E9',

@@ -3,7 +3,7 @@ import { StyleSheet, View, Image } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { spacing, fontScale } from '../../../utils/dimensions';
 import { routes } from '../../../navigator/routes';
-import BaseView from '../../components/BaseView';
+import BaseView from '../../hoc/BaseView';
 import TextView from '../../components/TextView';
 import ButtonView from '../../components/ButtonView';
 import RoleSelectionCard from './components/RoleSelectionCard';

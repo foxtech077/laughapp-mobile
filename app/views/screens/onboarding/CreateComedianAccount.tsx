@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import TextInputView from '../../components/TextInputView';
 import ButtonView from '../../components/ButtonView';
-import BaseView from '../../components/BaseView';
+import BaseView from '../../hoc/BaseView';
 import TextView from '../../components/TextView';
 import { fontScale, spacing } from '../../../utils/dimensions';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';

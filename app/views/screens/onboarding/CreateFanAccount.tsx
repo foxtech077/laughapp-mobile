@@ -8,7 +8,7 @@ import CloseCircle from '../../../../assets/images/icons/x-circle-contained.svg'
 import CheckCircle from '../../../../assets/images/icons/check-contained.svg';
 import TextInputView from '../../components/TextInputView';
 import ButtonView from '../../components/ButtonView';
-import BaseView from '../../components/BaseView';
+import BaseView from '../../hoc/BaseView';
 import TextView from '../../components/TextView';
 import { fontScale, spacing, moderateScale } from '../../../utils/dimensions';
 import { routes } from '../../../navigator/routes';

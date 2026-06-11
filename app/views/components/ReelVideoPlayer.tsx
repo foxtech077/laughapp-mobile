@@ -8,9 +8,10 @@ type ReelVideoPlayerProps = {
     width: number;
     height: number;
     isActive: boolean;
+    onTipPress?: () => void;
 };
 
-const ReelVideoPlayer = memo(({ item, width, height, isActive }: ReelVideoPlayerProps) => {
+const ReelVideoPlayer = memo(({ item, width, height, isActive, onTipPress }: ReelVideoPlayerProps) => {
     const [isManuallyPaused, setIsManuallyPaused] = useState(false);
     const [playbackRate, setPlaybackRate] = useState(1);
     const isPaused = !isActive || isManuallyPaused;
@@ -60,6 +61,7 @@ const ReelVideoPlayer = memo(({ item, width, height, isActive }: ReelVideoPlayer
                 onTogglePlayback={handleTogglePlayback}
                 onRightLongPressStart={handleRightLongPressStart}
                 onRightLongPressEnd={handleRightLongPressEnd}
+                onTipPress={onTipPress}
             />
         </View>
     );

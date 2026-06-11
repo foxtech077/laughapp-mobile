@@ -12,7 +12,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '@react-navigation/native';
 import { fontScale, spacing } from '../../utils/dimensions';
-import TextView from './TextView';
+import TextView from '../components/TextView';
 import LinearGradient from 'react-native-linear-gradient';
 import BackArrow from '../../../assets/images/icons/arrow-left.svg';
 

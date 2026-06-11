@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, FlatList, View } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import BaseView from '../../components/BaseView';
+import BaseView from '../../hoc/BaseView';
 import ProfileFollowingUserCard, { ProfileFollowingUserData } from './components/ProfileFollowingUserCard';
 import { spacing } from '../../../utils/dimensions';
 

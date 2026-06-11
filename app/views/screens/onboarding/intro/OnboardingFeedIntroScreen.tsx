@@ -3,7 +3,7 @@ import { StyleSheet, FlatList, NativeSyntheticEvent, NativeScrollEvent } from 'r
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { getScreenWidth } from '../../../../utils/dimensions';
 import { routes } from '../../../../navigator/routes';
-import BaseView from '../../../components/BaseView';
+import BaseView from '../../../hoc/BaseView';
 
 // Components
 import OnboardingHeader from './components/OnboardingHeader';

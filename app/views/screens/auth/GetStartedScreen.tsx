@@ -1,7 +1,7 @@
 import { View, StyleSheet, Image, Dimensions, Animated, Easing } from "react-native";
 import { useEffect, useRef } from "react";
 import { scale, spacing } from "../../../utils/dimensions";
-import BaseView from "../../components/BaseView";
+import BaseView from "../../hoc/BaseView";
 import ButtonView from "../../components/ButtonView";
 import TextView from "../../components/TextView";
 import { useTheme } from "@react-navigation/native";

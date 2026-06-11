@@ -12,6 +12,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { CustomDarkTheme, CustomLightTheme } from './app/constants/colors';
 import { useEffect } from 'react';
 import BootSplash from 'react-native-bootsplash';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -27,7 +28,9 @@ function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer theme={isDarkMode ? CustomDarkTheme : CustomLightTheme}>
-        <RootNavigator />
+        <BottomSheetModalProvider>
+          <RootNavigator />
+        </BottomSheetModalProvider>
       </NavigationContainer>
     </GestureHandlerRootView>
   );

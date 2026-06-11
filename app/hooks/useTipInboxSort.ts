@@ -1,10 +1,10 @@
 import { useState, useMemo, useRef, useCallback } from 'react';
-import BottomSheet from '@gorhom/bottom-sheet';
-import { TipItem, SortOptionType } from '../types';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import { TipItem, SortOptionType } from '../views/screens/tipInbox/types';
 
 export function useTipInboxSort(initialTips: TipItem[]) {
   const [selectedSort, setSelectedSort] = useState<SortOptionType>('recency');
-  const bottomSheetRef = useRef<BottomSheet>(null);
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
 
   // Sorting method
   const sortTips = useCallback((data: TipItem[], sortOption: SortOptionType): TipItem[] => {
@@ -19,11 +19,11 @@ export function useTipInboxSort(initialTips: TipItem[]) {
   }, []);
 
   const openSortSheet = useCallback(() => {
-    bottomSheetRef.current?.snapToIndex(0);
+    bottomSheetRef.current?.present();
   }, []);
 
   const closeSortSheet = useCallback(() => {
-    bottomSheetRef.current?.close();
+    bottomSheetRef.current?.dismiss();
   }, []);
 
   const handleSelectSort = useCallback((option: SortOptionType) => {

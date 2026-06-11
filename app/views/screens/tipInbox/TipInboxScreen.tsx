@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import BaseView from '../../components/BaseView';
+import BaseView from '../../hoc/BaseView';
 import TextView from '../../components/TextView';
 import { images } from '../../../constants/images';
 import TipInboxStatsCard from './components/TipInboxStatsCard';
@@ -18,8 +18,8 @@ import TipInboxEmptyState from './components/TipInboxEmptyState';
 import TipInboxSelectedState from './components/TipInboxSelectedState';
 import { MOCK_TIPS } from './constants/mockData';
 import { TipItem, TipStats, TipStatus, SortOptionType } from './types';
-import TipInboxSortSheet from './components/TipInboxSortSheet';
-import { useTipInboxSort } from './hooks/useTipInboxSort';
+import TipInboxSortSheet from '../../bottomSheets/TipInboxSortSheet';
+import { useTipInboxSort } from '../../../hooks/useTipInboxSort';
 import {
   fontScale,
   moderateScale,

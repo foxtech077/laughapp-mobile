@@ -49,6 +49,7 @@ declare module '@react-navigation/native' {
       yellow_700: string;
       yellow_700_transparent: string;
       cardPatternStroke: string;
+      yellow_500: string;
       yellow_600: string;
       yellow_500: string;
       gray100: string;
