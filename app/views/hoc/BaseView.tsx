@@ -17,7 +17,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import BackArrow from '../../../assets/images/icons/arrow-left.svg';
 import NotificationIcon from '../../../assets/images/icons/notification.svg';
 
-
 interface BaseViewProps extends ViewProps {
   children?: React.ReactNode;
   showHeader?: boolean;
@@ -70,12 +69,25 @@ function BaseView({
   };
 
   return (
-    <LinearGradient style={styles.container} colors={gradientBackground ? gradientColors : [colors.background, colors.background]} locations={gradientLocations} start={gradientStart} end={gradientEnd}>
+    <LinearGradient
+      style={styles.container}
+      colors={
+        gradientBackground
+          ? gradientColors
+          : [colors.background, colors.background]
+      }
+      locations={gradientLocations}
+      start={gradientStart}
+      end={gradientEnd}
+    >
       <View
         style={[
           styles.container,
           applyTopInset && { paddingTop: insets.top },
-          applyBottomInset && { paddingBottom: insets.bottom + (Platform.OS === 'android' ? spacing(10) : 0) },
+          applyBottomInset && {
+            paddingBottom:
+              insets.bottom + (Platform.OS === 'android' ? spacing(10) : 0),
+          },
           style,
         ]}
         onStartShouldSetResponder={() => {
@@ -85,7 +97,9 @@ function BaseView({
         {...rest}
       >
         <StatusBar
-          barStyle={colors.background === '#FFFFFF' ? 'dark-content' : 'light-content'}
+          barStyle={
+            colors.background === '#FFFFFF' ? 'dark-content' : 'light-content'
+          }
           backgroundColor={colors.background}
         />
 
@@ -93,35 +107,73 @@ function BaseView({
           <View style={[styles.header]}>
             {showBackButton && (
               <View style={styles.headerLeft}>
-
-                <TouchableOpacity style={styles.backButton} onPress={handleBack} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
-                  <BackArrow width={24} height={24} stroke={colors.primaryText} />
-
+                <TouchableOpacity
+                  style={styles.backButton}
+                  onPress={handleBack}
+                  hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                >
+                  <BackArrow
+                    width={24}
+                    height={24}
+                    stroke={colors.primaryText}
+                  />
                 </TouchableOpacity>
               </View>
             )}
 
             <View style={styles.headerCenter}>
               {headerTitle ? (
-                <TextView size={fontScale(20)} weight='800' align={titleAlign || 'center'} numberOfLines={1}>
+                <TextView
+                  size={fontScale(20)}
+                  weight="800"
+                  align={titleAlign || 'center'}
+                  numberOfLines={1}
+                >
                   {headerTitle}
                 </TextView>
               ) : null}
             </View>
 
             <View style={styles.headerRight}>
-              {headerRight ?? (showNotification ? (
-                <TouchableOpacity activeOpacity={0.7} style={styles.notificationContainer} onPress={onNotificationPress}>
-                  <NotificationIcon width={spacing(18)} height={spacing(21)} stroke={colors.primaryText} strokeWidth={0.6} />
-                  {notificationCount !== undefined && notificationCount > 0 ? (
-                    <View style={[styles.notificationBadge, { backgroundColor: colors.unrepliedRed || colors.error || 'red' }]}>
-                      <TextView size={fontScale(10)} weight="700" style={{ color: colors.white }}>
-                        {notificationCount}
-                      </TextView>
-                    </View>
-                  ) : null}
-                </TouchableOpacity>
-              ) : null)}
+              {headerRight ??
+                (showNotification ? (
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    style={styles.notificationContainer}
+                    onPress={onNotificationPress}
+                  >
+                    <NotificationIcon
+                      width={spacing(20)}
+                      height={spacing(20)}
+                      stroke={colors.primaryText}
+                      strokeWidth={0}
+                    />
+                    {notificationCount !== undefined &&
+                      notificationCount > 0 ? (
+                      <View
+                        style={[
+                          styles.notificationBadge,
+                          {
+                            backgroundColor:
+                              colors.unrepliedRed || colors.error || 'red',
+                          },
+                        ]}
+                      >
+                        <TextView
+                          size={fontScale(10)}
+                          weight="600"
+                          style={{
+                            color: colors.white,
+
+                            marginTop: Platform.OS === 'ios' ? spacing(-3) : spacing(-1.5),
+                          }}
+                        >
+                          {notificationCount}
+                        </TextView>
+                      </View>
+                    ) : null}
+                  </TouchableOpacity>
+                ) : null)}
             </View>
           </View>
         )}
@@ -166,10 +218,10 @@ const styles = StyleSheet.create({
   },
   notificationBadge: {
     position: 'absolute',
-    top: -spacing(4),
-    right: -spacing(4),
-    width: spacing(16),
-    height: spacing(16),
+    top: -spacing(6),
+    right: -spacing(6),
+    width: spacing(17),
+    height: spacing(17),
     borderRadius: moderateScale(8),
     alignItems: 'center',
     justifyContent: 'center',
