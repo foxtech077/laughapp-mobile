@@ -33,7 +33,6 @@ export const images = {
     //PNG's
     logo: require('../../assets/images/png/logo.png'),
     logoBgRotation: require('../../assets/images/png/logo_bg_rotation.png'),
-    sandeep: require('../../assets/images/png/sandeep.png'),
     tipIcon: require('../../assets/images/png/tip-icon.png'),
     tipCoin2: require('../../assets/images/png/tipcoin2.png'),
     supporterLaughs: require('../../assets/images/png/supporter-laugh.png'),
