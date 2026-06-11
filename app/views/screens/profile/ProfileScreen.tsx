@@ -264,24 +264,27 @@ function ProfileScreenContent() {
       headerTitle="Profile"
       titleAlign="left"
       headerRight={
-        <TouchableOpacity
-          onPress={() => navigation.navigate(routes.TIP_INBOX_SCREEN as never)}
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            backgroundColor: colors.yellow_600 || '#FFF3D0',
-            paddingVertical: spacing(4),
-            paddingHorizontal: spacing(10),
-            borderRadius: moderateScale(15),
-            gap: spacing(4),
-          }}
-          activeOpacity={0.7}
-        >
-          <Image source={images.tipIcon} style={{ width: spacing(14), height: spacing(14), resizeMode: 'contain' }} />
-          <TextView size={13} weight="700" style={{ color: colors.yellow_700 || '#E89700' }}>
-            Tips
-          </TextView>
-        </TouchableOpacity>
+        <View style={styles.headerRightContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(routes.PAYOUT_HISTORY_SCREEN as never)}
+            style={[styles.payoutButton, { backgroundColor: colors.gray100 || '#F2F2F2' }]}
+            activeOpacity={0.7}
+          >
+            <TextView size={13} weight="700" style={{ color: colors.primaryText }}>
+              Payouts
+            </TextView>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(routes.TIP_INBOX_SCREEN as never)}
+            style={[styles.tipsButton, { backgroundColor: colors.yellow_600 || '#FFF3D0' }]}
+            activeOpacity={0.7}
+          >
+            <Image source={images.tipIcon} style={styles.tipsIcon} />
+            <TextView size={13} weight="700" style={{ color: colors.yellow_700 || '#E89700' }}>
+              Tips
+            </TextView>
+          </TouchableOpacity>
+        </View>
       }
       style={[styles.container, { backgroundColor: colors.white }]}
     >
@@ -457,5 +460,30 @@ const styles = StyleSheet.create({
   },
   footerSpacing: {
     height: verticalScale(34),
+  },
+  headerRightContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing(8),
+  },
+  payoutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: spacing(4),
+    paddingHorizontal: spacing(10),
+    borderRadius: moderateScale(15),
+  },
+  tipsButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: spacing(4),
+    paddingHorizontal: spacing(10),
+    borderRadius: moderateScale(15),
+    gap: spacing(4),
+  },
+  tipsIcon: {
+    width: spacing(14),
+    height: spacing(14),
+    resizeMode: 'contain',
   },
 });

@@ -12,6 +12,8 @@ import TipInboxScreen from "../views/screens/tipInbox/TipInboxScreen";
 import FollowingScreen from "../views/screens/following/FollowingScreen";
 import CustomTabBar from "./components/CustomTabBar";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import PayoutHistoryScreen from "../views/screens/payoutHistory/PayoutHistoryScreen";
+
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 const Tab = createBottomTabNavigator<HomeTabParamList>();
@@ -47,6 +49,7 @@ function HomeNavigator() {
             <Stack.Screen name={routes.CREATE_COMEDIAN_ACCOUNT_SCREEN} component={CreateComedianAccount} />
             <Stack.Screen name={routes.HOME_TABS} component={HomeTab} />
             <Stack.Screen name={routes.TIP_INBOX_SCREEN} component={TipInboxScreen} />
+            <Stack.Screen name={routes.PAYOUT_HISTORY_SCREEN} component={PayoutHistoryScreen} />
         </Stack.Navigator>
     );
 }

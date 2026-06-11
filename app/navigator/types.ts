@@ -16,6 +16,7 @@ export type AuthStackParamList = {
 export type ProfileStackParamList = {
   [routes.PROFILE_SCREEN_MAIN]: undefined;
   [routes.PROFILE_FOLLOWING_SCREEN]: undefined;
+  [routes.PAYOUT_HISTORY_SCREEN]: undefined;
 };
 
 export type HomeTabParamList = {
