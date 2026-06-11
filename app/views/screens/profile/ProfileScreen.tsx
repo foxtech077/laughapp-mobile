@@ -140,7 +140,7 @@ function ProfileScreenContent() {
           >
             <View style={[styles.avatarWhiteRing, { backgroundColor: colors.white }]}>
               <View style={[styles.avatarGrayCircle, { backgroundColor: colors.avatarInnerCircle }]}>
-                <Image source={images.sandeep} style={styles.avatarImage} />
+                <Image source={{uri: "https://i.pravatar.cc/180?u=6"}} style={styles.avatarImage} />
               </View>
             </View>
           </LinearGradient>

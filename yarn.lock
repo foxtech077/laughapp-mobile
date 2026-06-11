@@ -1026,6 +1026,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@callstack/liquid-glass@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@callstack/liquid-glass/-/liquid-glass-0.8.0.tgz#466b66622b83dee4694be3b413baa459dac52e92"
+  integrity sha512-yRtZamuf0WaNkqgqzjeuM8EpzpxLsjx8o+8yzhmFVqxiIMM5KJ9nYwKpicNHZ7+JTv5mJCxfQ62jSvC3VrUTSA==
+
 "@callstack/react-theme-provider@3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@callstack/react-theme-provider/-/react-theme-provider-3.0.3.tgz#f964dda28cd6e731c3fbcf916b0579c6f9fb2db7"
@@ -1611,6 +1616,11 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
+
+"@react-native-community/blur@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/blur/-/blur-4.4.1.tgz#72cbc0be5a84022c33091683ec6888925ebcca6e"
+  integrity sha512-XBSsRiYxE/MOEln2ayunShfJtWztHwUxLFcSL20o+HNNRnuUDv+GXkF6FmM2zE8ZUfrnhQ/zeTqvnuDPGw6O8A==
 
 "@react-native-community/cli-clean@20.1.0":
   version "20.1.0"
@@ -5283,6 +5293,11 @@ lru-cache@^5.1.1:
   integrity sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
   dependencies:
     yallist "^3.0.2"
+
+lucide-react-native@^1.17.0:
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/lucide-react-native/-/lucide-react-native-1.17.0.tgz#7e0eb165f932562502d0856b2d7398125c379724"
+  integrity sha512-H5eM7dZkXJbYcrsjczlDC6Sq1/siWcM5O5BLLx6ljT0XDIGorZFjul+AdThuMs0I614nwowv5qbDivuQ+349Xw==
 
 make-dir@^4.0.0:
   version "4.0.0"

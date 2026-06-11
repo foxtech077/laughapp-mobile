@@ -2,18 +2,24 @@ import React, { useCallback, useState } from "react";
 import { FlatList, StyleSheet, useWindowDimensions, View } from "react-native";
 import { tempVideoSources } from "../../../../utils/tempVideoSorces";
 import ReelVideoPlayer from "../../../components/ReelVideoPlayer";
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useIsFocused } from '@react-navigation/native';
 
 const ClipsScreen = () => {
   const { width, height } = useWindowDimensions();
+  const bottomTabBarHeight = useBottomTabBarHeight();
+  const adjustedHeight = height - bottomTabBarHeight;
+  const isScreenFocused = useIsFocused();
+
   const [activeIndex, setActiveIndex] = useState(0);
   const items = tempVideoSources;
 
   const handleMomentumScrollEnd = useCallback(
     (event: { nativeEvent: { contentOffset: { y: number } } }) => {
-      const nextIndex = Math.round(event.nativeEvent.contentOffset.y / height);
+      const nextIndex = Math.round(event.nativeEvent.contentOffset.y / adjustedHeight);
       setActiveIndex(nextIndex);
     },
-    [height],
+    [adjustedHeight],
   );
   const handleViewableItemsChanged = useCallback(
     ({ viewableItems }: { viewableItems: Array<{ index: number | null }> }) => {
@@ -36,19 +42,19 @@ const ClipsScreen = () => {
           <ReelVideoPlayer
             item={item}
             width={width}
-            height={height}
-            isActive={index === activeIndex}
+            height={adjustedHeight}
+            isActive={index === activeIndex && isScreenFocused}
           />
         )}
         getItemLayout={(_, index) => ({
-          length: height,
-          offset: height * index,
+          length: adjustedHeight,
+          offset: adjustedHeight * index,
           index,
         })}
         removeClippedSubviews={false}
         pagingEnabled
         decelerationRate="fast"
-        snapToInterval={height}
+        snapToInterval={adjustedHeight}
         snapToAlignment="start"
         disableIntervalMomentum
         bounces={false}

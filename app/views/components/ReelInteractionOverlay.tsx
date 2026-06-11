@@ -1,5 +1,6 @@
 import { memo, useCallback, useRef } from "react";
 import { View, Pressable, StyleSheet } from "react-native";
+import ReelInteractionComponent from "./ReelInteractionComponent";
 
 type ReelInteractionOverlayProps = {
     isActive: boolean;
@@ -43,6 +44,7 @@ const ReelInteractionOverlay = memo(
                     onPressOut={handleRightPressOut}
                     delayLongPress={220}
                 />
+                <ReelInteractionComponent />
             </View>
         );
     }

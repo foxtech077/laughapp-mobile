@@ -1,10 +1,11 @@
 import BaseView from "../../components/BaseView";
 import TextView from "../../components/TextView";
+import ClipsScreen from "../top/tabs/Clips";
 
 function FollowingScreen() {
     return (
-        <BaseView>
-            <TextView>Following Screen</TextView>
+        <BaseView applyTopInset={false}>
+            <ClipsScreen />
         </BaseView>
     )
 }

@@ -9,7 +9,7 @@ const MOCK_COMEDIAN_RANKS: ComedianRankItem[] = [
     {
       id: '1',
       name: 'Sarah Jeeper',
-      avatar: images.sandeep,
+      avatar: {uri: "https://i.pravatar.cc/180?u=1"},
       supportedCount: 4819,
       trendDirection: 'up',
       trendValue: 3,
@@ -19,7 +19,7 @@ const MOCK_COMEDIAN_RANKS: ComedianRankItem[] = [
     {
       id: '2',
       name: 'Mark Chen',
-      avatar: images.sandeep,
+      avatar: {uri: "https://i.pravatar.cc/180?u=2"},
       supportedCount: 3871,
       trendDirection: 'up',
       trendValue: 2,
@@ -29,7 +29,7 @@ const MOCK_COMEDIAN_RANKS: ComedianRankItem[] = [
     {
       id: '3',
       name: 'Linta Rixon',
-      avatar: images.sandeep,
+      avatar: {uri: "https://i.pravatar.cc/180?u=3"},
       supportedCount: 3617,
       trendDirection: 'down',
       trendValue: 8,
@@ -39,7 +39,7 @@ const MOCK_COMEDIAN_RANKS: ComedianRankItem[] = [
     {
       id: '4',
       name: 'David Geller',
-      avatar: images.sandeep,
+      avatar: {uri: "https://i.pravatar.cc/180?u=4"},
       supportedCount: 2910,
       trendDirection: 'up',
       trendValue: 3,
@@ -49,7 +49,7 @@ const MOCK_COMEDIAN_RANKS: ComedianRankItem[] = [
     {
       id: '5',
       name: 'Nivin Pauly',
-      avatar: images.sandeep,
+      avatar: {uri: "https://i.pravatar.cc/180?u=5"},
       supportedCount: 2678,
       trendDirection: 'down',
       trendValue: 10,
@@ -59,7 +59,7 @@ const MOCK_COMEDIAN_RANKS: ComedianRankItem[] = [
     {
       id: '6',
       name: 'Nivin Pauly',
-      avatar: images.sandeep,
+      avatar: {uri: "https://i.pravatar.cc/180?u=6"},
       supportedCount: 2678,
       trendDirection: 'down',
       trendValue: 10,
@@ -69,7 +69,7 @@ const MOCK_COMEDIAN_RANKS: ComedianRankItem[] = [
     {
       id: '7',
       name: 'Nivin Pauly',
-      avatar: images.sandeep,
+      avatar: {uri: "https://i.pravatar.cc/180?u=7"},
       supportedCount: 2678,
       trendDirection: 'down',
       trendValue: 10,
@@ -79,7 +79,7 @@ const MOCK_COMEDIAN_RANKS: ComedianRankItem[] = [
     {
       id: '8',
       name: 'Nivin Pauly',
-      avatar: images.sandeep,
+      avatar: {uri: "https://i.pravatar.cc/180?u=8"},
       supportedCount: 2678,
       trendDirection: 'down',
       trendValue: 10,
@@ -89,7 +89,7 @@ const MOCK_COMEDIAN_RANKS: ComedianRankItem[] = [
     {
       id: '9',
       name: 'Nivin Pauly',
-      avatar: images.sandeep,
+      avatar: {uri: "https://i.pravatar.cc/180?u=9"},
       supportedCount: 2678,
       trendDirection: 'down',
       trendValue: 10,
@@ -99,7 +99,7 @@ const MOCK_COMEDIAN_RANKS: ComedianRankItem[] = [
     {
       id: '10',
       name: 'Nivin Pauly',
-      avatar: images.sandeep,
+      avatar: {uri: "https://i.pravatar.cc/180?u=10"},
       supportedCount: 2678,
       trendDirection: 'down',
       trendValue: 10,
@@ -109,7 +109,7 @@ const MOCK_COMEDIAN_RANKS: ComedianRankItem[] = [
     {
       id: '11',
       name: 'Nivin Pauly (You)',
-      avatar: images.sandeep,
+      avatar: {uri: "https://i.pravatar.cc/180?u=11"},
       supportedCount: 2678,
       trendDirection: 'down',
       trendValue: 10,
