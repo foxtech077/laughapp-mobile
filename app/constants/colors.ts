@@ -44,7 +44,10 @@ export const CustomLightTheme: Theme | any = {
     inputLabelBlurred: '#888888',
     inputLabelInactive: '#AAAAAA',
     yellow_700: '#E89700',
+    yellow_700_transparent: 'rgba(232, 151, 0, 0)',
+    cardPatternStroke: '#FFE9C9',
     yellow_600: '#FFF3D0',
+    yellow_500: '#D0AB0C',
     gray100: '#F2F2F2',
     primaryYellow: '#FDD940',
     tipInboxCard: '#FFF5E9',
@@ -60,6 +63,10 @@ export const CustomLightTheme: Theme | any = {
     red_600: '#F31717',
     green_600: '#23AE87',
     cardShadow: '#9494942E',
+    background_red: '#FFF1F1',
+    yellow_800: '#FFF6D7',
+    red_700: '#FF5A5A',
+
   },
 };
 
@@ -107,7 +114,10 @@ export const CustomDarkTheme: Theme | any = {
     inputLabelBlurred: '#888888',
     inputLabelInactive: '#AAAAAA',
     yellow_700: '#E89700',
+    yellow_700_transparent: 'rgba(232, 151, 0, 0)',
+    cardPatternStroke: '#FFE9C9',
     yellow_600: '#FFF3D0',
+    yellow_500: '#D0AB0C',
     gray100: '#F2F2F2',
     primaryYellow: '#FDD940',
     tipInboxCard: '#FFF5E9',
@@ -123,5 +133,8 @@ export const CustomDarkTheme: Theme | any = {
     red_600: '#F31717',
     green_600: '#23AE87',
     cardShadow: '#9494942E',
+    background_red: '#FFF1F1',
+    yellow_800: '#FFF6D7',
+    red_700: '#FF5A5A',
   },
 };

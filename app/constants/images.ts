@@ -27,6 +27,11 @@ import Microphone from '../../assets/images/icons/microphone.svg';
 import SendIcon from '../../assets/images/icons/send-icon.svg';
 import SelectedCheckMark from '../../assets/images/icons/select-icon.svg';
 import TrashIcon from '../../assets/images/icons/trash-icon.svg';
+import NotificationIcon from '../../assets/images/icons/notification.svg';
+import WarningIcon from '../../assets/images/icons/warning-icon.svg';
+import LinkExternalIcon from '../../assets/images/icons/link-external.svg';
+import VerificationIcon from '../../assets/images/icons/verification-icon.svg';
+
 
 
 export const images = {
@@ -63,6 +68,11 @@ export const images = {
     SendIcon,
     SelectedCheckMark,
     TrashIcon,
+    NotificationIcon,
+    WarningIcon,
+    LinkExternalIcon,
+    VerificationIcon,
+
 
     BellIcon,
     FilterIcon,

@@ -47,7 +47,10 @@ declare module '@react-navigation/native' {
       inputLabelBlurred: string;
       inputLabelInactive: string;
       yellow_700: string;
+      yellow_700_transparent: string;
+      cardPatternStroke: string;
       yellow_600: string;
+      yellow_500: string;
       gray100: string;
       primaryYellow: string;
       tipInboxCard: string;
@@ -63,6 +66,9 @@ declare module '@react-navigation/native' {
       red_600: string;
       green_600: string;
       cardShadow: string;
+      background_red: string;
+      yellow_800: string;
+      red_700: string;
     };
   };
 
