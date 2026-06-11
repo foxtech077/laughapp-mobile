@@ -45,6 +45,7 @@ export const CustomLightTheme: Theme | any = {
     inputLabelInactive: '#AAAAAA',
     yellow_700: '#E89700',
     yellow_600: '#FFF3D0',
+    yellow_500: '#C38300',
     gray100: '#F2F2F2',
     primaryYellow: '#FDD940',
     tipInboxCard: '#FFF5E9',

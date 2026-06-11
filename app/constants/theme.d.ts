@@ -47,6 +47,7 @@ declare module '@react-navigation/native' {
       inputLabelBlurred: string;
       inputLabelInactive: string;
       yellow_700: string;
+      yellow_500: string;
       yellow_600: string;
       gray100: string;
       primaryYellow: string;

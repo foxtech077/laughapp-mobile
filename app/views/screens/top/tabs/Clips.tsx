@@ -1,15 +1,20 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { FlatList, StyleSheet, useWindowDimensions, View } from "react-native";
 import { tempVideoSources } from "../../../../utils/tempVideoSorces";
 import ReelVideoPlayer from "../../../components/ReelVideoPlayer";
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useIsFocused } from '@react-navigation/native';
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import SendTipBottomSheet from "../../../bottomSheets/SendTipBottomSheet";
+import BuyCoinsBottomSheet from "../../../bottomSheets/BuyCoinsBottomSheet";
 
 const ClipsScreen = () => {
   const { width, height } = useWindowDimensions();
   const bottomTabBarHeight = useBottomTabBarHeight();
   const adjustedHeight = height - bottomTabBarHeight;
   const isScreenFocused = useIsFocused();
+  const sendTipSheetRef = useRef<BottomSheetModal | null>(null);
+  const buyCoinsSheetRef = useRef<BottomSheetModal | null>(null);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const items = tempVideoSources;
@@ -44,6 +49,7 @@ const ClipsScreen = () => {
             width={width}
             height={adjustedHeight}
             isActive={index === activeIndex && isScreenFocused}
+            onTipPress={() => sendTipSheetRef.current?.present()}
           />
         )}
         getItemLayout={(_, index) => ({
@@ -63,6 +69,8 @@ const ClipsScreen = () => {
         viewabilityConfig={{ itemVisiblePercentThreshold: 80 }}
         showsVerticalScrollIndicator={false}
       />
+      <SendTipBottomSheet sheetRef={sendTipSheetRef} buyCoinsSheetRef={buyCoinsSheetRef} />
+      <BuyCoinsBottomSheet sheetRef={buyCoinsSheetRef} />
     </View>
   );
 }
