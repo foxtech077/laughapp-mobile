@@ -11,10 +11,11 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '@react-navigation/native';
-import { fontScale, spacing } from '../../utils/dimensions';
+import { fontScale, spacing, moderateScale } from '../../utils/dimensions';
 import TextView from '../components/TextView';
 import LinearGradient from 'react-native-linear-gradient';
 import BackArrow from '../../../assets/images/icons/arrow-left.svg';
+import NotificationIcon from '../../../assets/images/icons/notification.svg';
 
 
 interface BaseViewProps extends ViewProps {
@@ -32,6 +33,8 @@ interface BaseViewProps extends ViewProps {
   gradientEnd?: { x: number; y: number };
   dismissKeyboardOnTap?: boolean;
   titleAlign?: 'left' | 'center' | 'right';
+  showNotification?: boolean;
+  onNotificationPress?: () => void;
 }
 
 function BaseView({
@@ -50,11 +53,15 @@ function BaseView({
   gradientEnd = { x: 1, y: 1 },
   dismissKeyboardOnTap = false,
   titleAlign,
+  showNotification = false,
+  onNotificationPress,
   ...rest
 }: BaseViewProps) {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const { colors } = useTheme();
+
+  const notificationCount = 3;
 
   const handleBack = () => {
     if (navigation.canGoBack()) {
@@ -103,7 +110,18 @@ function BaseView({
             </View>
 
             <View style={styles.headerRight}>
-              {headerRight ?? null}
+              {headerRight ?? (showNotification ? (
+                <TouchableOpacity activeOpacity={0.7} style={styles.notificationContainer} onPress={onNotificationPress}>
+                  <NotificationIcon width={spacing(18)} height={spacing(21)} stroke={colors.primaryText} strokeWidth={0.6} />
+                  {notificationCount !== undefined && notificationCount > 0 ? (
+                    <View style={[styles.notificationBadge, { backgroundColor: colors.unrepliedRed || colors.error || 'red' }]}>
+                      <TextView size={fontScale(10)} weight="700" style={{ color: colors.white }}>
+                        {notificationCount}
+                      </TextView>
+                    </View>
+                  ) : null}
+                </TouchableOpacity>
+              ) : null)}
             </View>
           </View>
         )}
@@ -141,6 +159,20 @@ const styles = StyleSheet.create({
   backButton: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  notificationContainer: {
+    position: 'relative',
+    marginRight: spacing(4),
+  },
+  notificationBadge: {
+    position: 'absolute',
+    top: -spacing(4),
+    right: -spacing(4),
+    width: spacing(16),
+    height: spacing(16),
+    borderRadius: moderateScale(8),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
