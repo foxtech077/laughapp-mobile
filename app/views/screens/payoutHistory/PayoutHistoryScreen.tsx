@@ -2,9 +2,9 @@ import React from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { routes } from '../../../navigator/routes';
-import BaseView from '../../components/BaseView';
 import TextView from '../../components/TextView';
 import ButtonView from '../../components/ButtonView';
+import { ChevronRight } from 'lucide-react-native'
 import {
   fontScale,
   moderateScale,
@@ -14,8 +14,9 @@ import {
 import { images } from '../../../constants/images';
 import Svg, { Circle, Path } from 'react-native-svg';
 import LinearGradient from 'react-native-linear-gradient';
+import BaseView from '../../hoc/BaseView';
 
-const { NotificationIcon, WarningIcon } = images;
+const { WarningIcon } = images;
 
 interface PayoutItem {
   id: string;
@@ -36,42 +37,6 @@ const MOCK_PAYOUTS: PayoutItem[] = [
   { id: '9', amount: '$827.01', date: 'Jan 09, 2026', status: 'failed' },
 ];
 
-interface CardPatternProps {
-  strokeColor?: string;
-}
-
-const CardPattern = ({ strokeColor }: CardPatternProps) => {
-  const { colors } = useTheme();
-  const stroke = strokeColor || colors.cardPatternStroke;
-  return (
-    <View style={styles.patternContainer}>
-      <Svg width="100%" height="100%" viewBox="0 0 350 140" style={styles.patternSvg}>
-        <Circle cx="300" cy="40" r="50" stroke={stroke} strokeWidth="1.5" fill="none" />
-        <Circle cx="300" cy="40" r="30" stroke={stroke} strokeWidth="1.5" fill="none" />
-        <Circle cx="120" cy="120" r="60" stroke={stroke} strokeWidth="1.5" fill="none" />
-        <Path d="M 200 0 L 200 140" stroke={stroke} strokeWidth="1.5" />
-        <Path d="M 200 40 A 40 40 0 0 0 160 80" stroke={stroke} strokeWidth="1.5" fill="none" />
-        <Path d="M 300 90 A 50 50 0 0 1 250 140" stroke={stroke} strokeWidth="1.5" fill="none" />
-      </Svg>
-    </View>
-  );
-};
-
-const ChevronRight = ({ stroke }: { stroke?: string }) => {
-  const { colors } = useTheme();
-  return (
-    <Svg width={12} height={12} viewBox="0 0 12 12" fill="none">
-      <Path
-        d="M4.5 9L7.5 6L4.5 3"
-        stroke={stroke || colors.primaryText}
-        strokeWidth={1.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </Svg>
-  );
-};
-
 export default function PayoutHistoryScreen() {
   const { colors } = useTheme();
   const navigation = useNavigation();
@@ -86,7 +51,7 @@ export default function PayoutHistoryScreen() {
         return {
           text: 'Paid',
           color: colors.green_600,
-          backgroundColor: colors.green_600,
+          backgroundColor: colors.verificationCompletedBg,
         };
       case 'pending':
         return {
@@ -118,12 +83,12 @@ export default function PayoutHistoryScreen() {
         </View>
 
         <View style={styles.rowRight}>
-          <View style={[styles.statusBadge, { borderColor: config.color }]}>
+          <View style={[styles.statusBadge, { borderColor: config.color, backgroundColor: config.backgroundColor }]}>
             <TextView size={fontScale(12)} weight="600" style={{ color: config.color }}>
               {config.text}
             </TextView>
           </View>
-          <ChevronRight />
+          <ChevronRight size={spacing(18)} />
         </View>
       </View>
     );
@@ -135,16 +100,7 @@ export default function PayoutHistoryScreen() {
       showBackButton
       headerTitle="Payout history"
       titleAlign="left"
-      headerRight={
-        <TouchableOpacity activeOpacity={0.7} style={styles.notificationContainer}>
-          <NotificationIcon width={spacing(18)} height={spacing(21)} stroke={colors.primaryText} />
-          <View style={[styles.notificationBadge, { backgroundColor: colors.unrepliedRed || colors.error }]}>
-            <TextView size={fontScale(10)} weight="700" style={{ color: colors.white }}>
-              3
-            </TextView>
-          </View>
-        </TouchableOpacity>
-      }
+      showNotification
       style={[styles.container, { backgroundColor: colors.white }]}
     >
       <View style={styles.content}>
@@ -166,19 +122,18 @@ export default function PayoutHistoryScreen() {
           <TextView size={fontScale(13)} weight="600" style={{ color: colors.red_600, flex: 1 }}>
             Verification incomplete. Please complete your profile.
           </TextView>
-          <ChevronRight stroke={colors.red_600} />
+          <ChevronRight size={spacing(18)} stroke={colors.red_600} />
         </TouchableOpacity>
 
         {/* Summary Card */}
-        <View style={[styles.cardContainer, { backgroundColor: colors.tipInboxCard }]}>
+        <View style={[styles.cardContainer]}>
           <LinearGradient
-            colors={[colors.yellow_700, colors.yellow_700_transparent]}
-            locations={[0.044, 0.5227]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0.22 }}
+            colors={[colors.tipInboxGradientStart, colors.tipInboxGradientEnd]}
+            start={{ x: 1, y: 0 }}
+            end={{ x: 0, y: 1 }}
             style={StyleSheet.absoluteFill}
           />
-          <CardPattern />
+          {/* <CardPattern /> */}
           <View style={styles.cardContent}>
             <TextView size={fontScale(16)} weight="500" style={{ color: colors.primaryText }}>
               Total payout to date
@@ -221,22 +176,20 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(8),
     overflow: 'hidden',
     marginTop: spacing(8),
-    marginBottom: spacing(20),
+    marginBottom: spacing(16),
     position: 'relative',
   },
   cardContent: {
-    padding: spacing(20),
+    padding: spacing(16),
     zIndex: 1,
   },
   amountText: {
     marginTop: spacing(6),
-    marginBottom: spacing(16),
+    marginBottom: spacing(10),
     lineHeight: spacing(38)
   },
   stripeButton: {
-    height: verticalScale(48),
-    borderRadius: moderateScale(30),
-
+    paddingVertical: verticalScale(10),
   },
   patternContainer: {
     ...StyleSheet.absoluteFill,
@@ -247,6 +200,7 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   listContent: {
+    paddingHorizontal: spacing(10),
     paddingBottom: spacing(30),
   },
   rowItem: {
@@ -268,32 +222,18 @@ const styles = StyleSheet.create({
   rowRight: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing(10),
+    gap: spacing(5),
   },
   statusBadge: {
-    paddingHorizontal: spacing(10),
-    paddingVertical: spacing(4),
-    borderRadius: moderateScale(12),
+    paddingHorizontal: spacing(6),
+    borderRadius: moderateScale(20),
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   separator: {
     height: 1,
-  },
-  notificationContainer: {
-    position: 'relative',
-    marginRight: spacing(4),
-  },
-  notificationBadge: {
-    position: 'absolute',
-    top: -spacing(4),
-    right: -spacing(4),
-    width: spacing(16),
-    height: spacing(16),
-    borderRadius: moderateScale(8),
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginHorizontal: spacing(-10)
   },
   verificationWarningBanner: {
     flexDirection: 'row',
