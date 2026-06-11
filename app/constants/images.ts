@@ -31,6 +31,7 @@ import NotificationIcon from '../../assets/images/icons/notification.svg';
 import WarningIcon from '../../assets/images/icons/warning-icon.svg';
 import LinkExternalIcon from '../../assets/images/icons/link-external.svg';
 import VerificationIcon from '../../assets/images/icons/verification-icon.svg';
+import StripeIcon from '../../assets/images/icons/stripe-icon.svg';
 
 
 
@@ -71,6 +72,7 @@ export const images = {
     WarningIcon,
     LinkExternalIcon,
     VerificationIcon,
+    StripeIcon,
 
 
     BellIcon,

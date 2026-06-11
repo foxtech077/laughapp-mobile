@@ -17,7 +17,7 @@ export type ProfileStackParamList = {
   [routes.PROFILE_SCREEN_MAIN]: undefined;
   [routes.PROFILE_FOLLOWING_SCREEN]: undefined;
   [routes.PAYOUT_HISTORY_SCREEN]: undefined;
-  [routes.VERIFICATION_STATUS_SCREEN]: undefined;
+  [routes.VERIFICATION_STATUS_SCREEN]: { status?: 'pending' | 'completed' | 'failed' };
 };
 
 export type HomeTabParamList = {
@@ -33,5 +33,5 @@ export type HomeStackParamList = {
   [routes.CREATE_FAN_ACCOUNT_SCREEN]: undefined;
   [routes.CREATE_COMEDIAN_ACCOUNT_SCREEN]: undefined;
   [routes.TIP_INBOX_SCREEN]: undefined;
-  [routes.VERIFICATION_STATUS_SCREEN]: undefined;
+  [routes.VERIFICATION_STATUS_SCREEN]: { status?: 'pending' | 'completed' | 'failed' };
 };

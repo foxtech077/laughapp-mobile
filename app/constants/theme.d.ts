@@ -70,6 +70,11 @@ declare module '@react-navigation/native' {
       background_red: string;
       yellow_800: string;
       red_700: string;
+      verificationGradientStart: string;
+      verificationGradientEnd: string;
+      verificationCompletedBg: string;
+      verificationCompletedBorder: string;
+      verificationCompletedText: string;
     };
   };
 

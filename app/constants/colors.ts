@@ -66,6 +66,11 @@ export const CustomLightTheme: Theme | any = {
     background_red: '#FFF1F1',
     yellow_800: '#FFF6D7',
     red_700: '#FF5A5A',
+    verificationGradientStart: '#FFE372',
+    verificationGradientEnd: '#FEC091',
+    verificationCompletedBg: '#EDFFFA',
+    verificationCompletedBorder: '#23AE87',
+    verificationCompletedText: '#23AE87',
 
   },
 };
@@ -136,5 +141,10 @@ export const CustomDarkTheme: Theme | any = {
     background_red: '#FFF1F1',
     yellow_800: '#FFF6D7',
     red_700: '#FF5A5A',
+    verificationGradientStart: '#FFE372',
+    verificationGradientEnd: '#FEC091',
+    verificationCompletedBg: '#EDFFFA',
+    verificationCompletedBorder: '#23AE87',
+    verificationCompletedText: '#23AE87',
   },
 };
