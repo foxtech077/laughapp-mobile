@@ -1,4 +1,4 @@
-import BaseView from "../../components/BaseView";
+import BaseView from "../../hoc/BaseView";
 import TextView from "../../components/TextView";
 import ClipsScreen from "../top/tabs/Clips";
 

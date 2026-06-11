@@ -1,6 +1,6 @@
 import { View, StyleSheet, Image, FlatList, TouchableOpacity } from "react-native";
 import { useEffect, useMemo, useState } from "react";
-import BaseView from "../../components/BaseView";
+import BaseView from "../../hoc/BaseView";
 import TextView from "../../components/TextView";
 import ButtonView from "../../components/ButtonView";
 import TextInputView from "../../components/TextInputView";

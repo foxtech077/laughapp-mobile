@@ -1,5 +1,5 @@
 import { View, StyleSheet, Image } from "react-native";
-import BaseView from "../../components/BaseView";
+import BaseView from "../../hoc/BaseView";
 import TextView from "../../components/TextView";
 import ButtonView from "../../components/ButtonView";
 import { spacing, fontScale, scale, verticalScale } from "../../../utils/dimensions";

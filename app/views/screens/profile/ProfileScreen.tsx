@@ -12,7 +12,7 @@ import { useTheme, ThemeProvider, useNavigation } from '@react-navigation/native
 import { CustomLightTheme } from '../../../constants/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import { spacing, fontScale, verticalScale, moderateScale } from '../../../utils/dimensions';
-import BaseView from '../../components/BaseView';
+import BaseView from '../../hoc/BaseView';
 import TextView from '../../components/TextView';
 import ButtonView from '../../components/ButtonView';
 

@@ -7,10 +7,11 @@ type ReelInteractionOverlayProps = {
     onTogglePlayback: () => void;
     onRightLongPressStart: () => void;
     onRightLongPressEnd: () => void;
+    onTipPress?: () => void;
 };
 
 const ReelInteractionOverlay = memo(
-    ({ isActive, onTogglePlayback, onRightLongPressStart, onRightLongPressEnd }: ReelInteractionOverlayProps) => {
+    ({ isActive, onTogglePlayback, onRightLongPressStart, onRightLongPressEnd, onTipPress }: ReelInteractionOverlayProps) => {
         const longPressHandledRef = useRef(false);
 
         const handlePress = useCallback(() => {
@@ -44,7 +45,7 @@ const ReelInteractionOverlay = memo(
                     onPressOut={handleRightPressOut}
                     delayLongPress={220}
                 />
-                <ReelInteractionComponent />
+                <ReelInteractionComponent onTipPress={onTipPress} />
             </View>
         );
     }

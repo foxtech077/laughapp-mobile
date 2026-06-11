@@ -1,29 +1,36 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, Pressable } from "react-native";
 import { images } from "../../constants/images";
 import GlassCard from "./GlassCard";
 import TextView from "./TextView";
 import { spacing, moderateScale, verticalScale } from "../../utils/dimensions";
 
-const ReelInteractionComponent = () => {
+interface ReelInteractionComponentProps {
+    onTipPress?: () => void;
+}
+
+const ReelInteractionComponent = ({ onTipPress }: ReelInteractionComponentProps) => {
     return (
         <>
             <View style={styles.tipLaughContainer}>
-                <GlassCard style={styles.tipView} interactive={true} effect={"clear"}>
-                    <Image
-                        source={images.tipCoin2}
-                        style={styles.tipIcon}
-                    />
-                    <TextView color={'white'}>1.67 M</TextView>
-                </GlassCard>
+                <Pressable onPress={onTipPress}>
+                    <GlassCard style={styles.tipView} interactive={true} effect={"clear"}>
+                        <Image
+                            source={images.tipCoin2}
+                            style={styles.tipIcon}
+                        />
+                        <TextView color={'white'} style={styles.overlayTextShadow} size={14} weight={"600"}>1.67 M</TextView>
+                    </GlassCard>
+                </Pressable>
+
                 <GlassCard style={styles.tipView} interactive={true} effect={"clear"}>
                     <Image
                         source={images.laughIcon1}
                         style={styles.tipIcon}
                     />
-                    <TextView color={'white'}>1.3K</TextView>
+                    <TextView color={'white'} style={styles.overlayTextShadow} size={14} weight={"600"}>1.3K</TextView>
                 </GlassCard>
-                <TextView color={'white'} size={32} weight="600">...</TextView>
-                <TextView color={'white'} size={14} weight="600">
+                <TextView color={'white'} size={32} weight="600" style={styles.overlayTextShadow}>...</TextView>
+                <TextView color={'white'} size={14} weight="600" style={styles.overlayTextShadow}>
                     More
                 </TextView>
             </View>
@@ -38,16 +45,16 @@ const ReelInteractionComponent = () => {
                 </View>
                 <View style={styles.profileInforContainer}>
                     <View style={styles.profileNameFollowContainer}>
-                        <TextView color={'white'} size={18} weight="700">
+                        <TextView color={'white'} size={18} weight="700" style={styles.overlayTextShadow}>
                             Laughing Lucy
                         </TextView>
                         <GlassCard style={styles.followButton} interactive={true} effect={"clear"}>
-                            <TextView color={'white'} size={14} weight="700">
+                            <TextView color={'white'} size={14} weight="700" style={styles.overlayTextShadow}>
                                 Following
                             </TextView>
                         </GlassCard>
                     </View>
-                    <TextView color={'white'} size={14} weight="400" numberOfLines={1} ellipsizeMode="tail" style={{ width: '50%' }}>
+                    <TextView color={'white'} size={14} weight="400" numberOfLines={1} ellipsizeMode="tail" style={[styles.overlayTextShadow, { width: '50%' }]}>
                         My first stand-up gig nervous but funny !
                     </TextView>
                 </View>
@@ -57,6 +64,11 @@ const ReelInteractionComponent = () => {
 };
 
 const styles = StyleSheet.create({
+    overlayTextShadow: {
+        textShadowColor: 'rgba(0, 0, 0, 0.75)',
+        textShadowOffset: { width: 0, height: 1 },
+        textShadowRadius: 4,
+    },
     tipView: {
         paddingHorizontal: spacing(10),
         paddingVertical: spacing(14),
@@ -85,6 +97,7 @@ const styles = StyleSheet.create({
         gap: spacing(8),
         width: "80%",
         overflow: "hidden",
+        alignItems: "flex-end",
     },
     avatarContainer: {
 

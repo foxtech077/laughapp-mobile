@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import BaseView from '../../components/BaseView';
+import BaseView from '../../hoc/BaseView';
 import { useTheme } from '@react-navigation/native';
 import TopTabBar, { TopTab } from './components/TopTabBar';
 import { useState } from 'react';
