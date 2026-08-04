@@ -15,6 +15,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import PayoutHistoryScreen from "../views/screens/payoutHistory/PayoutHistoryScreen";
 import VerificationStatusScreen from "../views/screens/verificationStatus/VerificationStatusScreen";
 
+import EarningsDashboardScreen from "../views/screens/earnings/EarningsDashboardScreen";
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 const Tab = createBottomTabNavigator<HomeTabParamList>();
@@ -52,6 +53,7 @@ function HomeNavigator() {
             <Stack.Screen name={routes.TIP_INBOX_SCREEN} component={TipInboxScreen} />
             <Stack.Screen name={routes.PAYOUT_HISTORY_SCREEN} component={PayoutHistoryScreen} />
             <Stack.Screen name={routes.VERIFICATION_STATUS_SCREEN} component={VerificationStatusScreen} />
+            <Stack.Screen name={routes.EARNINGS_DASHBOARD_SCREEN} component={EarningsDashboardScreen} />
         </Stack.Navigator>
     );
 }

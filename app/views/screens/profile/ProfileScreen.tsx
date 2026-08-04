@@ -22,6 +22,7 @@ import GradientBadge from './components/GradientBadge';
 import StatsCard from './components/StatsCard';
 import VideoCard from './components/VideoCard';
 import EmptyState from './components/EmptyState';
+import HeaderRight from '../../components/HeaderRight';
 
 const { laughIcon1, SupporterIcon, LocationIconSvg, RepostIconSvg } = images;
 
@@ -264,27 +265,7 @@ function ProfileScreenContent() {
       headerTitle="Profile"
       titleAlign="left"
       headerRight={
-        <View style={styles.headerRightContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate(routes.PAYOUT_HISTORY_SCREEN as never)}
-            style={[styles.payoutButton, { backgroundColor: colors.gray100 || '#F2F2F2' }]}
-            activeOpacity={0.7}
-          >
-            <TextView size={13} weight="700" style={{ color: colors.primaryText }}>
-              Payouts
-            </TextView>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate(routes.TIP_INBOX_SCREEN as never)}
-            style={[styles.tipsButton, { backgroundColor: colors.yellow_600 || '#FFF3D0' }]}
-            activeOpacity={0.7}
-          >
-            <Image source={images.tipIcon} style={styles.tipsIcon} />
-            <TextView size={13} weight="700" style={{ color: colors.yellow_700 || '#E89700' }}>
-              Tips
-            </TextView>
-          </TouchableOpacity>
-        </View>
+        <HeaderRight />
       }
       style={[styles.container, { backgroundColor: colors.white }]}
     >

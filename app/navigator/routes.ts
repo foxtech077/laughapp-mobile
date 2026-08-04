@@ -19,4 +19,5 @@ export const routes = {
     TIP_INBOX_SCREEN: "TipInboxScreen",
     PAYOUT_HISTORY_SCREEN: "PayoutHistoryScreen",
     VERIFICATION_STATUS_SCREEN: "VerificationStatusScreen",
+    EARNINGS_DASHBOARD_SCREEN: "EarningsDashboardScreen",
 }
