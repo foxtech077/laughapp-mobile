@@ -22,6 +22,7 @@ import GradientBadge from './components/GradientBadge';
 import StatsCard from './components/StatsCard';
 import VideoCard from './components/VideoCard';
 import EmptyState from './components/EmptyState';
+import HeaderRight from '../../components/HeaderRight';
 
 const { laughIcon1, SupporterIcon, LocationIconSvg, RepostIconSvg } = images;
 
@@ -264,24 +265,7 @@ function ProfileScreenContent() {
       headerTitle="Profile"
       titleAlign="left"
       headerRight={
-        <TouchableOpacity
-          onPress={() => navigation.navigate(routes.TIP_INBOX_SCREEN as never)}
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            backgroundColor: colors.yellow_600 || '#FFF3D0',
-            paddingVertical: spacing(4),
-            paddingHorizontal: spacing(10),
-            borderRadius: moderateScale(15),
-            gap: spacing(4),
-          }}
-          activeOpacity={0.7}
-        >
-          <Image source={images.tipIcon} style={{ width: spacing(14), height: spacing(14), resizeMode: 'contain' }} />
-          <TextView size={13} weight="700" style={{ color: colors.yellow_700 || '#E89700' }}>
-            Tips
-          </TextView>
-        </TouchableOpacity>
+        <HeaderRight />
       }
       style={[styles.container, { backgroundColor: colors.white }]}
     >
