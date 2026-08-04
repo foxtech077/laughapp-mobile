@@ -442,4 +442,29 @@ const styles = StyleSheet.create({
   footerSpacing: {
     height: verticalScale(34),
   },
+  headerRightContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing(8),
+  },
+  payoutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: spacing(4),
+    paddingHorizontal: spacing(10),
+    borderRadius: moderateScale(15),
+  },
+  tipsButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: spacing(4),
+    paddingHorizontal: spacing(10),
+    borderRadius: moderateScale(15),
+    gap: spacing(4),
+  },
+  tipsIcon: {
+    width: spacing(14),
+    height: spacing(14),
+    resizeMode: 'contain',
+  },
 });

@@ -17,5 +17,7 @@ export const routes = {
     PROFILE_SCREEN_MAIN: "ProfileScreenMain",
     PROFILE_FOLLOWING_SCREEN: "ProfileFollowingScreen",
     TIP_INBOX_SCREEN: "TipInboxScreen",
+    PAYOUT_HISTORY_SCREEN: "PayoutHistoryScreen",
+    VERIFICATION_STATUS_SCREEN: "VerificationStatusScreen",
     EARNINGS_DASHBOARD_SCREEN: "EarningsDashboardScreen",
 }
