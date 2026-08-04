@@ -14,10 +14,10 @@ export default function EarningsDashboardScreen() {
 
     const items = [
         { name: "Earnings Overview", icon: Banknote, navigationRoute: null },
-        { name: "Payout History", icon: Landmark, navigationRoute: null },
+        { name: "Payout History", icon: Landmark, navigationRoute: routes.PAYOUT_HISTORY_SCREEN },
         { name: "Tip Inbox", icon: MailOpen, navigationRoute: routes.TIP_INBOX_SCREEN },
         { name: "Account Settings", icon: Settings, navigationRoute: null },
-        { name: "Verification Status", icon: ShieldCheck, navigationRoute: null },
+        { name: "Verification Status", icon: ShieldCheck, navigationRoute: routes.VERIFICATION_STATUS_SCREEN },
     ];
 
     return (

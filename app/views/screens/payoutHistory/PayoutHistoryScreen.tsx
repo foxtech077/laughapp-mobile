@@ -102,6 +102,7 @@ export default function PayoutHistoryScreen() {
       titleAlign="left"
       showNotification
       style={[styles.container, { backgroundColor: colors.white }]}
+      applyBottomInset
     >
       <View style={styles.content}>
         {/* Verification Warning Banner */}
